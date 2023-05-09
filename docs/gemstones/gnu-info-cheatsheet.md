@@ -11,31 +11,35 @@ tags:
 ---
 
 # GNU Info Cheatsheet
-Quick reference sheet for using GNU's `info` program. GNU Info was designed to replace the standard `man` Manpages system to allow for more
-flexibility in navigation and formatting. These key bindings also work in `pinfo`.
+Quick reference sheet for using GNU's `info`[^1] program. These key bindings also work in `pinfo`.
 
 The default keybindings for navigation used are the same as the well known emacs bindings, which are also used for the bash shell by default.
-You can start `info` with [`info --vi-keys <topic>`](https://www.gnu.org/software/texinfo/manual/info-stnd/html_node/Invoking-Info.html#g_t_002d_002dvi_002dkeys)
-option if you prefer the VI key bindings, but this document does not currently cover using them.
+You can start it with [`info --vi-keys <topic>`](https://www.gnu.org/software/texinfo/manual/info-stnd/html_node/Invoking-Info.html#g_t_002d_002dvi_002dkeys)
+option if you prefer the VI key bindings.
 
 [//]: TODO: Add the vi keybindings
 
 
 !!! note "Accessibility Option"
 
-    It also supports screen reading for the hearing impaired by starting with the [`info --speech-friendly <topic>`](https://www.gnu.org/software/texinfo/manual/info-stnd/html_node/Invoking-Info.html#index-_002d_002dspeech_002dfriendly-_0028_002db_0029-command-line-option)
-    option but only the in MS-DOS/MS-Windows install according to the GNU docs; that seems ironic :)
+    It also supports screen reading for the visualy impaired by starting it as [`info --speech-friendly <topic>`](https://www.gnu.org/software/texinfo/manual/info-stnd/html_node/Invoking-Info.html#index-_002d_002dspeech_002dfriendly-_0028_002db_0029-command-line-option)but this only the in MS-DOS/MS-Windows install according to the GNU docs; that seems ironic :)
 
 
-- You can read info on `info` by entering `info info`.
-- You can go thru an interactive tutorial, similar to the `vim-tutorial` in vim, by typing `h` within the `info` program.
+- Launch by entering `info <topic>` at the command line.
+- You can also use `pinfo <topic>` to view info and man pages; it supports colors and hyperlinks
+- You can read info on `info` by entering `info info` at the command prompt.
+- Entering `h` within `info` itself will open an `info` "window" with help.
 - Remember that `info` ***IS*** case-sensitive: `h` and `H` are ***NOT*** the same command.
 - If you get confused you can always enter `q` to quit and start over.
 
-|    Key binding    |    Action                                                                     |
-|---------------------------------------------------------------------------------------------------|
+=== "Default Bindings (Emacs)"
+
+The <kbd>Meta</kbd> usually = <kbd>ALT</kbd> key; <kbd>ESC</kbd> key, which is the same as <kbd>ctrl</kbd>+<kbd>[</kbd> works. So <kbd>ctrl</kbd>+<kbd>[</kbd>  <kbd>v</kbd> is an equivalent.
+
+|    Key binding                           |    Action                                              |
+|:-----------------------------------------|:-------------------------------------------------------|
 |<kbd>q</kbd>                              | Quit, exit back to shell prompt                        |
-|<kbd>Ctrl</kbd>+<kbd>h</kbd>              | Help (`l` ("el" *not* "one") will exit help and return you to the previous location like the BACK btn in a web browser) |
+|<kbd>Ctrl</kbd>+<kbd>h</kbd>              | Help (`l` ("el" *not* "one") exits help and returns to the previous location |
 |<kbd>H</kbd>                              | Split screen and show basic key bindings               |
 |<kbd>h</kbd>                              | Start the builtin tutorial                             |
 |                                          |                                                        |
@@ -48,11 +52,10 @@ option if you prefer the VI key bindings, but this document does not currently c
 |                                                     |                                             |
 |<kbd>Spacebar</kbd>                                  | Scroll forward (down) one screen; advance to next screen if at the bottom of current one |
 |<kbd>Ctrl</kbd>+<kbd>v</kbd>, <kbd>Page-Down</kbd>   | Scroll forward (down) one screen            |
-|<kbd>Meta-V</kbd>, <kbd>Page-Up</kbd>		            | Scroll backward (up) one screen.                       |
-|    (The <kbd>Meta</kbd> usually = <kbd>ALT</kbd> key, but <kbd>ESC</kbd> key can work as well; you don't have to hold down the <kbd>ESC</kbd> key, in fact <kbd>ctrl</kbd>+<kbd>[</kbd> <kbd>v</kbd> works too) |
+|<kbd>Meta-V</kbd>, <kbd>Page-Up</kbd>		          | Scroll backward (up) one screen.            |           |
 |                                          |                                                        |
 |<kbd>b</kbd>, <kbd>HOME</kbd>             | Move cursor to beginning of current node               |
-|<kbd>e</kbd>, <kbd>END</kbd>			         | Move cursor to end of current node                     |
+|<kbd>e</kbd>, <kbd>END</kbd>			   | Move cursor to end of current node                     |
 |<kbd>l</kbd>                              | Move to last/previous node in the current window       |
 |<kbd>n</kbd>                              | Move to next node on this level                        |
 |<kbd>]</kbd>                              | Move to next node in the document                      |
@@ -76,4 +79,12 @@ option if you prefer the VI key bindings, but this document does not currently c
 |                                          |                                                        |
 |<kbd>TAB</kbd>                            | Skip to next hyperlink                                 |
 |<kbd>RET</kbd>, <kbd>ENTER</kbd>          | Follow hypertext link under cursor                     |
-|---------------------------------------------------------------------------------------------------|
+
+=== "VI Bindings"
+
+|    Key binding                           |    Action                                              |
+|:-----------------------------------------|:-------------------------------------------------------|
+|<kbd>q</kbd>                              | Quit, exit back to shell prompt                        |
+
+
+[^1]: [Info: An Introduction](https://www.gnu.org/software/emacs/manual/html_mono/info.html)
