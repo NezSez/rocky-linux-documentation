@@ -58,7 +58,7 @@ Tra gli interpreti di comando esistenti, la **Bourne-Again Shell** (`/bin/bash`)
 
 La directory di accesso dell'utente è per convenzione memorizzata nella directory `/home` della workstation. Conterrà i dati personali dell'utente e i file di configurazione delle sue applicazioni. Per impostazione predefinita, al login, la directory di accesso è selezionata come directory corrente.
 
-Un'installazione di tipo workstation (con interfaccia grafica) avvia questa interfaccia sul terminale 1. Essendo Linux multiutente, è possibile connettere più utenti più volte, su diversi **terminali fisici** (TTY) o **terminali virtuali** (PTS). I terminali virtuali sono disponibili all'interno di un ambiente grafico. Un utente passa da un terminale fisico ad un altro usando <kbd>Alt</kbd> + <kbd>Fx</kbd> dalla riga di comando o utilizzando <kbd>CTRL</kbd> + <kbd>Alt</kbd> + <kbd>Fx</kbd> in modalità grafica.
+Un'installazione di tipo workstation (con interfaccia grafica) avvia questa interfaccia sul terminale 1. Essendo Linux multiutente, è possibile connettere più utenti più volte, su diversi **terminali fisici** (TTY) o **terminali virtuali** (PTS). I terminali virtuali sono disponibili in un ambiente grafico. Un utente passa da un terminale fisico a un altro usando <kbd>Alt</kbd> + <kbd>Fx</kbd> o dalla riga di comando utilizzando <kbd>CTRL</kbd> + <kbd>Alt</kbd> + <kbd>Fx</kbd>.
 
 ### La shell
 
@@ -247,11 +247,11 @@ Per manipolare la history, i seguenti comandi immessi dal prompt dei comandi per
 
 | Chiavi             | Funzione                                                                              |
 | ------------------ | ------------------------------------------------------------------------------------- |
-| <kdb>!!</kdb>      | Richiama l'ultimo comando eseguito.                                                   |
-| <kdb>!n</kdb>      | Richiama il comando per il suo numero nell'elenco.                                    |
-| <kdb>!string</kdb> | Richiama il comando più recente che inizia con la stringa.                            |
-| <kdb>↑</kdb>       | Naviga nella cronologia andando indietro nel tempo a partire dal comando più recente. |
-| <kdb>↓</kdb>       | Naviga nella cronologia andando avanti nel tempo.                                     |
+| <kbd>!!</kbd>      | Richiama l'ultimo comando eseguito.                                                   |
+| <kbd>!n</kbd>      | Richiama il comando per il suo numero nell'elenco.                                    |
+| <kbd>!string</kbd> | Richiama il comando più recente che inizia con la stringa.                            |
+| <kbd>↑</kbd>       | Naviga nella cronologia andando indietro nel tempo a partire dal comando più recente. |
+| <kbd>↓</kbd>       | Naviga nella cronologia andando avanti nel tempo.                                     |
 
 ### Autocompletamento
 
@@ -309,7 +309,7 @@ Tra le sequenze usate frequentemente, possiamo menzionare:
 Il comando `date` visualizza la data e l'ora. Il comando ha la seguente sintassi:
 
 ```bash
-date [-d AAAAMMJJ] [format]
+date [-d yyyyMMdd] [format]
 ```
 
 Esempi:
@@ -358,7 +358,7 @@ Il comando `date` consente anche di modificare la data e l'ora del sistema. In q
 Il formato da utilizzare usando l'opzione `-s` è il seguente:
 
 ```bash
-date -s "[AA]AA-MM-JJ hh:mm:[ss]"
+date -s "yyyy-MM-dd hh:mm[:ss]"
 ```
 
 ### comando `id`, `who` e `whoami`

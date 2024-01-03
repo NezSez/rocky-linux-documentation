@@ -1,8 +1,8 @@
 ---
 title: Imparare bash con Rocky
 author: Antoine Le Morvan
-contributors: Steven Spencer, Franco Colussi
-tested with: 8.5
+contributors: Steven Spencer, Ganna Zhyrnova
+tested_with: 8.5
 tags:
   - education
   - bash scripting

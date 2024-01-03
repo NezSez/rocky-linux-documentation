@@ -1,7 +1,7 @@
 ---
 title: Style Guide
 author: Ezequiel Bruni, Krista Burdine
-contributors: Steven Spencer
+contributors: Steven Spencer, Ganna Zhyrnova
 tags:
   - contribute
   - style guide
@@ -27,8 +27,8 @@ This guide outlines English-language style standards to **improve readability, h
 For a more complete understanding of contributing, please consult our related guides:
 
 * [Rocky Linux Contribution Guide](https://docs.rockylinux.org/guides/contribute/) for system and software requirements for getting started.
-* [Rocky Linux First Time Contributors Guide](../beginners/) for an orientation to GitHub, our documentation home base.
-* [Rocky Docs Formatting](../rockydocs_formatting/) for Markdown structure.
+* [Rocky Linux First Time Contributors Guide](beginners.md) for an orientation to GitHub, our documentation home base.
+* [Rocky Docs Formatting](rockydocs_formatting.md) for Markdown structure.
 
 ## Style Guidelines
 
@@ -42,8 +42,9 @@ For a more complete understanding of contributing, please consult our related gu
 * Periods and commas go inside quotation marks “like this,” rather than “like this”.
 * The em dash {shift}+{option}+{-} has no spaces before or after—like this—and is preferred for parenthetical phrases.
 * Use a serial comma before the “and” in a list of three items: “Peas, mustard, and carrots.”
-* Headings should be generally made in headline-style capitalization: Capitalize the first and last words, as well as all nouns, pronouns, verbs, and adverbs. If your document works better with sentence-style capitalization, perhaps because you make frequent references to acronyms, just make it consistent within the entire document.
+* Headings should be generally made in headline-style capitalization: Capitalize the first and last words, as well as all nouns, pronouns, verbs, and adverbs. If your document works better with sentence-style capitalization, perhaps because you frequently reference acronyms, make it consistent within the entire document. 
 * Headings do not need a period or semicolon at the end, even with sentence-style capitalization, unless ending in an abbreviation.
+* Bulleted and numbered lists: Avoid beginning capitalization or ending punctuation, unless the item is a complete sentence.
 
 ### Voice and Tone
 
@@ -52,8 +53,8 @@ For a more complete understanding of contributing, please consult our related gu
     * Say what you mean in as few words as possible.
     * Identify and avoid unnecessarily technical terms. Consider that your audience is mostly people who have some familiarity with the subject matter, but may not be subject-matter experts.
     * Exceptions to plain language:
-        * For documentation addressed to newcomers or beginners, or for writing content such as a blog post, a more conversational style is appropriate.
-        * For documentation addressed to advanced users or API (Application Programming Interface) documentation, a more formal or terse wording style is appropriate.
+        * A more conversational style is appropriate for documentation addressed to newcomers or beginners or for writing content like blog posts. 
+        * A more formal or terse wording style is appropriate for documentation addressed to advanced users or API (Application Programming Interface) documentation. 
 * **Inclusive language.**
     * Language use evolves over time. Certain words have evolved to carry negative connotations so documentation should be rewritten to use new words.
         * *Master/slave* becomes *primary/secondary* or an agreed upon organizational standard.
@@ -61,13 +62,13 @@ For a more complete understanding of contributing, please consult our related gu
         * You may think of other relevant examples as you create documentation.
     * When speaking of a person of *unknown* or *non-binary* gender, it is now considered acceptable to use “they” as a singular pronoun.
     * When speaking of one’s capabilities, frame answers as *abilities* rather than *limitations.* For example, if you are wondering whether we have documentation about running Steam on Rocky Linux, the answer is not just “no.” Rather, “Sounds like that’s a great place for you to create something to add to our tree!”
-* **Avoid contractions.** This assists with translation efforts. The exception to this is when writing something in a more conversational tone, such as blog posts or welcome instructions for new members of the community.
+* **Avoid contractions.** This assists with translation efforts. The exception to this is when writing something in a more conversational tone, such as blog posts or welcome instructions for new community members.
 
 ## Formatting
 
 ### Dates
 
-When possible use the name of the month in the format {day} {Month} {year}. However, {Month} {day}, {year} is also acceptable to resolve clarity or appearance issues. Either way, to avoid creating confusion, write out month names rather than using a series of numbers.  For example: 24 January 2023, but January 24, 2023 is also acceptable—with both preferable over 1/24/2023 or 24/01/2023.
+When possible use the name of the month in the format {day} {Month} {year}. However, {Month} {day}, {year} is also acceptable to resolve clarity or appearance issues. Either way, to avoid confusion, write out month names rather than a series of numbers. For example: 24 January 2023, but January 24, 2023 is also acceptable—with both preferable over 1/24/2023 or 24/01/2023.
 
 ### Single-step Procedures
 
@@ -99,7 +100,7 @@ If you have a procedure with only one step, use a bullet rather than a number. F
 
 ### Admonitions
 
-Within Markdown, admonitions are a way to put information into a box to highlight it. They are not essential to documentation, but they are a tool you may find useful. Learn more about admonitions from our [Rocky Formatting doc](../rockydocs_formatting/).
+Within Markdown, admonitions are a way to put information into a box to highlight it. They are not essential to documentation, but they are a tool you may find useful. Learn more about admonitions from our [Rocky Formatting doc](rockydocs_formatting.md).
 
 ## Accessibility
 
@@ -113,7 +114,7 @@ Within Markdown, admonitions are a way to put information into a box to highligh
 
 ### Links
 
-* Make links descriptive, so it is obvious where they will lead either from the text itself or from context. Avoid hyperlinks with names like “click here.”
+* Make links descriptive, so it is obvious where they will lead from the text or context. Avoid hyperlinks with names like “click here.”
 * Verify that all links work as described.
 
 ### Tables
@@ -126,7 +127,7 @@ Within Markdown, admonitions are a way to put information into a box to highligh
 
 * Some elements in Markdown, such as admonitions, have an assigned color to assist with visual comprehension. In general they also have an assigned name; for example, the “danger” admonition displays a red box but also has the descriptor “danger” built into the description. But when creating a custom admonition, be aware that color cannot be the only means of communicating a command or level of warning.
 * Any command that includes a sensory direction, such as *above* or *below*, *color*, *size*, *visual location* on the page, etc., should also include a direction that is communicable by only text description.
-* When creating a graphical element, make sure that there is enough contrast between the foreground and background colors to be easy for a screen reader to interpret.
+* When creating a graphical element, ensure that there is enough contrast between the foreground and background colors to be easy for a screen reader to interpret.
 
 ### Headings
 
@@ -138,6 +139,6 @@ Within Markdown, admonitions are a way to put information into a box to highligh
 
 This document lays out our contribution standards, including **style guidelines,** how to **structure** your document, and ways to incorporate **inclusivity** and **accessibility** into the text. These are the standards to which we aspire. As you are able, keep these standards in mind when creating and modifying documentation.
 
-However—and do not miss this caveat—**treat these standards as a tool, not an obstacle.** In the spirit of inclusivity and accessibility, we want to make sure your contribution has a smooth entry into the Rocky family tree. We are a friendly and helpful team of documentarians and stylists, and we will help shepherd your document into its final form.
+However—and do not miss this caveat—**treat these standards as a tool, not an obstacle.** In the spirit of inclusivity and accessibility, we want to ensure your contribution has a smooth entry into the Rocky family tree. We are a friendly and helpful team of documentarians and stylists, and we will help shepherd your document into its final form.
 
 Are you ready? Let’s get started!

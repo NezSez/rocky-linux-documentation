@@ -1,8 +1,8 @@
 ---
 title: Usare NvChad
 author: Franco Colussi
-contributors: Steven Spencer, Franco Colussi
-tested with: 8.6, 9.0
+contributors: Steven Spencer, Ganna Zhyrnova
+tested_with: 8.6, 9.0
 tags:
   - nvchad
   - coding

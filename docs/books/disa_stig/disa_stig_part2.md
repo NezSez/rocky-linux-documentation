@@ -1,8 +1,8 @@
 ---
 title: Verifying DISA STIG Compliance with OpenSCAP - Part 2
 author: Scott Shinn
-contributors: Steven Spencer
-tested with: 8.6
+contributors: Steven Spencer, Ganna Zhyrnova
+tested_with: 8.6
 tags:
   - DISA
   - STIG

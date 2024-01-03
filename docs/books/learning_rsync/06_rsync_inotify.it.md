@@ -1,7 +1,7 @@
 ---
 title: inotify-tools installazione e uso
 author: tianci li
-contributors: Steven Spencer, Franco Colussi
+contributors: Steven Spencer, Ganna Zhyrnova
 update: 2021-12-26
 ---
 
@@ -91,7 +91,7 @@ I tipi di eventi sono i seguenti:
 | move_self      | Il file o la directory monitorati sono stati spostati                                   |
 | create         | Ci sono file o directory create nella directory monitorata                              |
 | delete         | Viene eliminato un file o una directory nella directory monitorata                      |
-| delete_self    | File o directory ed eliminazione                                                        |
+| delete_self    | Il file o la directory sono stati eliminati                                             |
 | unmount        | File system contenente file o directory non montati                                     |
 
 Esempio: `[root@Rocky ~]# inotifywait -mrq -e create,delete /rsync/`

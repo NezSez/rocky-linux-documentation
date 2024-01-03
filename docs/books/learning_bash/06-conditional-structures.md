@@ -1,8 +1,8 @@
 ---
 title: Bash - Conditional structures if and case
 author: Antoine Le Morvan
-contributors: Steven Spencer
-tested with: 8.5
+contributors: Steven Spencer, Ganna Zhyrnova
+tested_with: 8.5
 tags:
   - education
   - bash scripting
