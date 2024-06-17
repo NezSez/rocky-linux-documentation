@@ -1,7 +1,7 @@
 ---
 title: inotify-tools installation and use
 author: tianci li
-contributors: Steven Spencer
+contributors: Steven Spencer, Ganna Zhyrnova
 update: 2021-11-04
 ---
 
@@ -62,8 +62,10 @@ fs.inotify.max_user_watches = 1048576
 ## Related commands
 
 The inotify-tools tool has two commands, namely:
-* **inotifywait**-For continuous monitoring, real-time output results. It is generally used with the rsync incremental backup tool. Because it is a file system monitoring, it can be used with a script. We will introduce the specific script writing later.
-* **inotifywatch**-for short-term monitoring, output results after the task is completed.
+
+* **inotifywait**: for continuous monitoring, real-time output results. It is generally used with the rsync incremental backup tool. Because it is a file system monitoring, it can be used with a script. We will introduce the specific script writing later.
+
+* **inotifywatch**: for short-term monitoring, output results after the task is completed.
 
 `inotifywait` mainly has the following options:
 
@@ -91,7 +93,7 @@ The event types are as follows:
 | move_self | The monitored file or directory has been moved |
 | create | There are files or directories created in the monitored directory |
 | delete | A file or directory in the monitored directory is deleted |
-| delete_self | File or directory and delete |
+| delete_self | The file or directory has been deleted |
 | unmount | File system containing unmounted files or directories |
 
 Example: `[root@Rocky ~]# inotifywait -mrq -e create,delete /rsync/`

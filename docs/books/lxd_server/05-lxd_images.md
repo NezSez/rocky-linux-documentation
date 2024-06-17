@@ -1,37 +1,37 @@
 ---
 title: 5 Setting Up and Managing Images
 author: Steven Spencer
-contributors: Ezequiel Bruni
-tested with: 8.5, 8.6, 9.0
+contributors: Ezequiel Bruni, Ganna Zhyrnova
+tested_with: 8.8, 9.2
 tags:
   - lxd
   - enterprise
   - lxd images
 ---
 
-# Chapter 5: Setting Up and Managing Images
+# Chapter 5: Setting up and managing images
 
-Throughout this chapter you will need to execute commands as your unprivileged user ("lxdadmin" if you have been following this book from the beginning).
+Throughout this chapter you will need to run commands as your unprivileged user ("lxdadmin" if you have been following this book from the beginning).
 
-## List Available Images
+## List available images
 
-Once you have your server environment set up, you'll probably be itching to get started with a container. There are a _lot_ of container OS possibilities. To get a feel for how many possibilities, enter this command:
+You probably can not wait to get started with a container. There are many container operating system possibilities. To get a feel for how many possibilities, enter this command:
 
-```
+```bash
 lxc image list images: | more
 ```
 
-Hit the space bar to page through the list. This list of containers and virtual machines continues to grow. For now, we are sticking with containers.
+Enter the space bar to page through the list. This list of containers and virtual machines continues to grow.
 
-The last thing you want to do is to page through looking for a container image to install, particularly if you know the image that you want to create. Let's modify the command above to show only Rocky Linux install options:
+The **last** thing you want to do is to page through looking for a container image to install, particularly if you know the image that you want to create. Change the command to show only Rocky Linux install options:
 
-```
+```bash
 lxc image list images: | grep rocky
 ```
 
 This brings up a much more manageable list:
 
-```
+```bash
 | rockylinux/8 (3 more)                    | 0ed2f148f7c6 | yes    | Rockylinux 8 amd64 (20220805_02:06)          | x86_64       | CONTAINER       | 128.68MB  | Aug 5, 2022 at 12:00am (UTC)  |
 | rockylinux/8 (3 more)                    | 6411a033fdf1 | yes    | Rockylinux 8 amd64 (20220805_02:06)          | x86_64       | VIRTUAL-MACHINE | 643.15MB  | Aug 5, 2022 at 12:00am (UTC)  |
 | rockylinux/8/arm64 (1 more)              | e677777306cf | yes    | Rockylinux 8 arm64 (20220805_02:29)          | aarch64      | CONTAINER       | 124.06MB  | Aug 5, 2022 at 12:00am (UTC)  |
@@ -46,31 +46,31 @@ This brings up a much more manageable list:
 | rockylinux/9/cloud/arm64                 | db3ce70718e3 | yes    | Rockylinux 9 arm64 (20220805_02:06)          | aarch64      | CONTAINER       | 119.27MB  | Aug 5, 2022 at 12:00am (UTC)  |
 ```
 
-## Installing, Renaming, And Listing Images
+## Installing, renaming, and listing images
 
-For the first container, we are going to choose rockylinux/8. To install it, we *could* use:
+For the first container, you are going to use "rockylinux/8". To install it, you *might* use:
 
-```
+```bash
 lxc launch images:rockylinux/8 rockylinux-test-8
 ```
 
-That will create a Rocky Linux-based containter named "rockylinux-test-8". You can rename a container after it has been created, but you first need to stop the container, which starts automatically when it is launched.
+That will create a Rocky Linux-based container named "rockylinux-test-8". You can rename a container after creating it, but you first need to stop the container, which starts automatically when created.
 
 To start the container manually, use:
 
-```
+```bash
 lxc start rockylinux-test-8
 ```
 
-To rename this image (we aren't going to do this here, but this is how it is done) first stop the container:
+To Rename the image (we are not going to do this here, but this is how to do it) first stop the container:
 
-```
+```bash
 lxc stop rockylinux-test-8
 ```
 
-Then simply move the container to a new name:
+Use the `move` command to change the container's name:
 
-```
+```bash
 lxc move rockylinux-test-8 rockylinux-8
 ```
 
@@ -78,25 +78,25 @@ If you followed this instruction anyway, stop the container and move it back to 
 
 For the purposes of this guide, go ahead and install two more images for now:
 
-```
+```bash
 lxc launch images:rockylinux/9 rockylinux-test-9
 ```
 
 and
 
-```
+```bash
 lxc launch images:ubuntu/22.04 ubuntu-test
 ```
 
-Now let's take a look at what we have so far by listing our images:
+Examine what you have by listing your images:
 
-```
+```bash
 lxc list
 ```
 
-which should return something like this:
+which will return this:
 
-```
+```bash
 +-------------------+---------+----------------------+------+-----------+-----------+
 |       NAME        |  STATE  |         IPV4         | IPV6 |   TYPE    | SNAPSHOTS |
 +-------------------+---------+----------------------+------+-----------+-----------+
@@ -106,6 +106,4 @@ which should return something like this:
 +-------------------+---------+----------------------+------+-----------+-----------+
 | ubuntu-test       | RUNNING | 10.146.84.181 (eth0) |      | CONTAINER | 0         |
 +-------------------+---------+----------------------+------+-----------+-----------+
-
 ```
-

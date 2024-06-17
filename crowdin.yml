@@ -1,10 +1,13 @@
 files:
   - source: /docs/**/*.md
     ignore:
-      - '*.de.md'  
+      - '*.af.md'
+      - '*.de.md'
+      - '*.cs.md'
       - '*.en.md'
       - '*.es.md'
       - '*.fr.md'
+      - '*.id.md'
       - '*.it.md'
       - '*.ja.md'
       - '*.ko.md'
@@ -13,6 +16,7 @@ files:
       - '*.pt-BR.md'
       - '*.ru.md'
       - '*.sv.md'
+      - '*.tr.md'
       - '*.uk.md'
       - '*.zh.md'
       - '/docs/release_notes/8.5.md'

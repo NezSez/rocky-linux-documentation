@@ -1,7 +1,7 @@
 ---
 title: rsync demo 01
 author: tianci li
-contributors: Steven Spencer, Franco Colussi
+contributors: Steven Spencer, Ganna Zhyrnova
 update: 2021-12-25
 ---
 
@@ -90,6 +90,7 @@ total size is 0 speedup is 0.00
 [root@fedora ~]# ls
 aabbcc
 ```
+
 Trasferimento effettuato con successo.
 
 !!! tip "Suggerimento"

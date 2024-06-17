@@ -1,8 +1,8 @@
 ---
 title: Bash - Check your knowledge
 author: Antoine Le Morvan
-contributors: Steven Spencer
-tested with: 8.5
+contributors: Steven Spencer, Ganna Zhyrnova
+tested_with: 8.5
 tags:
   - education
   - bash scripting
@@ -13,7 +13,7 @@ tags:
 
 :heavy_check_mark: Among these 4 shells, which one does not exist:
 
-- [ ] Bash   
+- [ ] Bash
 - [ ] Ksh
 - [ ] Tsh
 - [ ] Csh

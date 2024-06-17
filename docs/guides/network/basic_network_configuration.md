@@ -1,8 +1,7 @@
 ---
 title: Network Configuration
-author: unknown
-contributors: Steven Spencer, Hayden Young
-tested with: 8.5, 8.6, 9.0
+contributors: Steven Spencer, Hayden Young, Ganna Zhyrnova
+tested_with: 8.5, 8.6, 9.0
 tags:
   - networking
   - configuration
@@ -15,21 +14,21 @@ You can't do much with a computer these days without network connectivity. Wheth
 
 ## Prerequisites
 
-* A certain amount of comfort operating from the command line
-* Elevated or administrative privileges on the system (For example root, `sudo` and so on)
-* Optional: familiarity with networking concepts
+- A certain amount of comfort operating from the command line
+- Elevated or administrative privileges on the system (for example root, `sudo` and so on)
+- Optional: familiarity with networking concepts
 
 === "9"
-    
+
     ## Network Configuration - Rocky Linux 9
 
     A lot has changed with network configuration as of Rocky Linux 9. One of the major changes is the move from Network-Scripts (still available to install-but effectively deprecated) to the use of Network Manager and key files, rather than `ifcfg` based files. `NetworkManager` as of 9, prioritizes `keyfiles` over the previous `ifcfg` files. Since this is now the default, the act of configuring the network should now take the default as the proper way of doing things, given that other changes over the years have meant the eventual deprecation and removal of older utilities. This guide will attempt to walk you through the use of Network Manager and the latest changes within Rocky Linux 9. 
 
     ## Prerequisites
 
-    * A certain amount of comfort operating from the command line
-    * Elevated or administrative privileges on the system (For example root, `sudo` and so on)
-    * Optional: familiarity with networking concepts
+    - A certain amount of comfort operating from the command line
+    - Elevated or administrative privileges on the system (for example root, `sudo` and so on)
+    - Optional: familiarity with networking concepts
 
     ## Using NetworkManager service
 
@@ -68,7 +67,7 @@ You can't do much with a computer these days without network connectivity. Wheth
     # no-auto-default file "/var/lib/NetworkManager/no-auto-default.state"
     ```
 
-    Note at the top of the configuration file the reference to `keyfile` followed by `ifcfg-rh`. This means that `keyfile` is the default. Any time you run any of the `NetworkManager` tools to configure an interface (example: `nmcli` or `nmtui`), it will automatically build or update key files.
+    Note at the top of the configuration file the reference to `keyfile` followed by `ifcfg-rh`. This means that the default is the `keyfile`. Any time you run any of the `NetworkManager` tools to configure an interface (example: `nmcli` or `nmtui`), it will automatically build or update key files.
 
     !!! tip "Configuration Storage Location"
 
@@ -107,7 +106,7 @@ You can't do much with a computer these days without network connectivity. Wheth
         
         The static IP configuration scheme is very popular on server class systems or networks.
 
-        The dynamic IP approach is popular on home and office networks or workstation and desktop class systems in a business environment.  The dynamic scheme usually needs _something_ extra that is locally available and that can supply proper IP configuration information to requesting workstations and desktops. This _something_ is called the Dynamic Host Configuration Protocol (DHCP). On a home network, and even on most business networks, this service is provided by a DHCP Server configured for the purpose. This can be a separate server or part of a router configuration.
+        The dynamic IP approach is popular on home and office networks or workstation and desktop class systems in a business environment.  The dynamic scheme usually needs *something* extra that is locally available and that can supply proper IP configuration information to requesting workstations and desktops. This *something* is called the Dynamic Host Configuration Protocol (DHCP). On a home network, and even on most business networks, this service is provided by a DHCP Server configured for the purpose. This can be a separate server or part of a router configuration.
 
     ## IP Address
 
@@ -117,25 +116,25 @@ You can't do much with a computer these days without network connectivity. Wheth
     
         ![nmtui](images/nmtui_first.png)
 
-    2. It's already on the selection we need "Edit a connection" so hit the <kbd>TAB</kbd> key so that "OK" is highlighted and hit <kbd>ENTER</kbd>
+    2. It's already on the selection we need "Edit a connection" so hit the ++tab++ key so that "OK" is highlighted and hit ++enter++
 
-    3. This will bring up a screen showing the Ethernet connections on the machine and allow you to choose one. In our case, there is *ONLY* one, so it is already highlighted, we simply need to hit the <kbd>TAB</kbd> key until "Edit" is highlighted and then hit <kbd>ENTER</kbd>
+    3. This will bring up a screen showing the Ethernet connections on the machine and allow you to choose one. In our case, there is *ONLY* one, so it is already highlighted, we simply need to hit the ++tab++ key until "Edit" is highlighted and then hit ++enter++
 
         ![nmtui_edit](images/nmtui_edit.png)
 
-    4. Once we've done this, we will be to the screen that shows our current configuration. What we need to do is switch from "Manual" to "Automatic" so hit the <kbd>TAB</kbd> key several times until you get to where "Manual" is highlighted and then hit <kbd>ENTER</kbd>.
+    4. Once we have done this, we will be on the screen showing our current configuration. What we need to do is switch from "Manual" to "Automatic" so hit the ++tab++ key several times until you get to where "Manual" is highlighted and then hit ++enter++.
 
         ![nmtui_manual](images/nmtui_manual.png)
 
-    5. Arrow up until "Automatic" is highlighted and then hit <kbd>ENTER</kbd>
+    5. Arrow up until "Automatic" is highlighted and then hit ++enter++
     
         ![nmtui_automatic](images/nmtui_automatic.png)
 
-    6. Once we have switched the interface over to "Automatic" we need to remove the statically assigned IP so hit the <kbd>TAB</kbd> key until the "Remove" is highlighted next to the IP address and hit <kbd>ENTER</kbd>.
+    6. Once we have switched the interface over to "Automatic" we need to remove the statically assigned IP so hit the ++tab++ key until the "Remove" is highlighted next to the IP address and hit ++enter++.
 
         ![nmtui_remove](images/nmtui_remove.png)
 
-    7. Finally, hit the <kbd>TAB</kbd> key several times until you get to the bottom of the `nmtui` screen and the "OK" is highlighted and hit <kbd>ENTER</kbd>
+    7. Finally, hit the ++tab++ key several times until you get to the bottom of the `nmtui` screen and the "OK" is highlighted and hit ++enter++
 
     You can deactivate and reactivate your interface with `nmtui` as well, but instead let's do this with `nmcli`. In this way we can string the deactivation of the interface and the reactivation of the interface so that the interface is never down for long:
 
@@ -164,16 +163,16 @@ You can't do much with a computer these days without network connectivity. Wheth
 
     ### IP Address Changing with `nmcli`
 
-    Using the `nmtui` is nice, but if you just want to quickly reconfigure the network interface without all of the time between screens, you probably will want to use `nmcli` by itself. Let's take a look at our example above of a statically assigned IP and what the steps are to reconfigure the interface to DHCP using only `nmcli`.
+    Using the `nmtui` is nice, but if you just want to quickly reconfigure the network interface without all of the time between screens, you probably will want to use `nmcli` by itself. Let us look at the example above of a statically assigned IP and the steps to reconfigure the interface to DHCP using only `nmcli`.
 
     Before we start, be aware that to reconfigure the interface to DHCP we need to: 
 
-    * Remove the IPv4 Gateway 
-    * Remove the IPv4 Address that we statically assigned
-    * Change the IPv4 Method to automatic
-    * Down and Up the interface
+    - Remove the IPv4 Gateway 
+    - Remove the IPv4 Address that we statically assigned
+    - Change the IPv4 Method to automatic
+    - Down and Up the interface
 
-    Note too, that we are not using examples that tell you to use -ipv4.address etc. These do not change the interface completely. In order to do that we need to set the ipv4.address and the ipv4.gateway to an empty string. Again, to save as much time as possible with our command, we are going to string them all together in one line:
+    Note too, that we are not using examples that tell you to use -ipv4.address etc. These do not change the interface completely. To do that we must set the ipv4.address and the ipv4.gateway to an empty string. Again, to save as much time as possible with our command, we are going to string them all together in one line:
 
     ```
     nmcli con mod enp0s3 ipv4.gateway '' && nmcli con mod enp0s3 ipv4.address '' && nmcli con mod enp0s3 ipv4.method auto && nmcli con down enp0s3 && nmcli con up enp0s3
@@ -183,10 +182,10 @@ You can't do much with a computer these days without network connectivity. Wheth
 
     ## DNS resolution
 
-    Setting DNS servers can be done with either `nmtui` or `nmcli`. While the `nmtui` interface is easy to navigate and much more intuitive, it makes the process a lot slower. Doing this with the `nmcli` is much faster. In the case of the DHCP assigned address, it's not usually necessary to set DNS servers as they normally are forwarded on from the DHCP server. That said, you *can* statically add DNS servers to a DHCP interface. In the case of the statically assigned interface, you will *HAVE* to do this as it will need to know how to get DNS resolution and will not have an automatically assigned method.
+    Setting DNS servers can be done with either `nmtui` or `nmcli`. While the `nmtui` interface is easy to navigate and much more intuitive, the process is much slower. Doing this with the `nmcli` is much faster. In the case of the DHCP assigned address, it's not usually necessary to set DNS servers as they normally are forwarded on from the DHCP server. That said, you *can* statically add DNS servers to a DHCP interface. In the case of the statically assigned interface, you will *HAVE* to do this as it will need to know how to get DNS resolution and will not have an automatically assigned method.
 
-    Since the best example for all of this is a statically assigned IP, let's return to our original statically assigned address in our example interface (enp0s3). Before we can change the DNS values, we need to see what they are currently set to. 
-    To get proper name resolution, let's start by removing our already set DNS servers and adding in different ones. Currently the `ipv4.dns` is set to `8.8.8.8,8.8.4.4,192.168.1.1`. In this case, we don't need to first set the ipv4.dns to an empty string. We can simply use the following command to replace our values: 
+    Since the best example for all of this is a statically assigned IP, let's return to our original statically assigned address in our example interface (enp0s3). Before changing the DNS values, we need to see what they are currently. 
+    To get proper name resolution, remove the already set DNS servers and add different ones. Currently the `ipv4.dns` is set to `8.8.8.8,8.8.4.4,192.168.1.1`. In this case, we do not need to set the ipv4.dns to an empty string. We can simply use the following command to replace our values: 
 
     ```
     nmcli con mod enp0s3 ipv4.dns '208.67.222.222,208.67.220.220,192.168.1.1'
@@ -198,7 +197,7 @@ You can't do much with a computer these days without network connectivity. Wheth
     nmcli con down enp0s3 && nmcli con up enp0s3
     ```
 
-    To test that we *do* in fact have name resolution, try pinging a known host. We will use google.com as an example:
+    To test that we *do* have name resolution, try pinging a known host. We will use google.com as an example:
 
     ```bash
     ping google.com
@@ -215,10 +214,10 @@ You can't do much with a computer these days without network connectivity. Wheth
 
     In this example, we will assume the following parameters:
 
-    * interface name: enp0s3
-    * ip address: 192.168.1.151
-    * subnet mask: 24
-    * gateway: 192.168.1.1
+    - interface name: enp0s3
+    - ip address: 192.168.1.151
+    - subnet mask: 24
+    - gateway: 192.168.1.1
 
     ### Get general information
 
@@ -231,13 +230,13 @@ You can't do much with a computer these days without network connectivity. Wheth
     !!! tip "**Pro tips:**"
 
         * use the `-c` flag to get a more readable coloured output: `ip -c a`.
-	    * `ip` accepts abbreviation so `ip a`, `ip addr` and `ip address` are equivalent
+        * `ip` accepts abbreviation so `ip a`, `ip addr` and `ip address` are equivalent
 
     ### Bring interface up or down
 
     !!! note 
 
-        While it is still possible to use this method for bringing the interface up and down in Rocky Linux 9, the command reacts a great deal slower than simply using the `nmcli` command in our previous examples.
+        While it is still possible to use this method to bring the interface up and down in Rocky Linux 9, the command reacts much slower than simply using the `nmcli` command.
 
     To bring the *enp0s3* down and up again we can simply use: 
 
@@ -283,7 +282,7 @@ You can't do much with a computer these days without network connectivity. Wheth
     ### Gateway configuration
 
 
-    Now that the interface has an address, we have to set its default route, this can be done with:
+    Now that the interface has an address, we have to set its default route. This can be done with:
 
     ```bash
     ip route add default via 192.168.1.1 dev enp0s3
@@ -325,7 +324,7 @@ You can't do much with a computer these days without network connectivity. Wheth
     64 bytes from 192.168.1.10: icmp_seq=3 ttl=255 time=0.676 ms
     ```
 
-    Now test to make sure we can see a reachable host external of your network. For the test below, we are using Google's open DNS server:
+    Test to ensure we can see a reachable host external to your network. For the test below, we are using Google's open DNS server:
 
     ```bash
     ping -c3 8.8.8.8
@@ -335,7 +334,7 @@ You can't do much with a computer these days without network connectivity. Wheth
     64 bytes from 8.8.8.8: icmp_seq=3 ttl=119 time=20.1 ms
     ```
 
-    The final test, is to make sure that DNS resolution is working. For this example, we are using google.com:
+    The final test is to ensure that DNS resolution is working. For this example, we are using google.com:
 
     ```bash
     ping -c3 google.com
@@ -351,9 +350,9 @@ You can't do much with a computer these days without network connectivity. Wheth
     ping -I enp0s3 -c3 192.168.1.10
     ```
 
-    ## Conclusions
+    ## Conclusion
 
-    There are a great deal of changes to the networking stack in Rocky Linux 9. Among these are the prioritization of `keyfile` over the formerly used `ifcfg` files found in Network-Scripts. Since it is evident that the direction of movement here in future versions of Rocky Linux will completely deprecate and remove Network-Scripts as an option, it's best to focus attention on methodologies such as `nmcli`, `nmtui`, and in some cases `ip`, for network configuration.
+    There are many changes to the networking stack in Rocky Linux 9. Among these is the prioritization of `keyfile` over the formerly used `ifcfg` files found in Network-Scripts. Since the direction of movement here in future versions of Rocky Linux will deprecate and remove Network-Scripts, it is best to focus attention on methodologies such as `nmcli`, `nmtui`, and in some cases `ip`, for network configuration.
 
 === "8"
 
@@ -370,7 +369,7 @@ You can't do much with a computer these days without network connectivity. Wheth
     ### Configuration files
 
     NetworkManager simply applies a configuration read from the files found in `/etc/sysconfig/network-scripts/ifcfg-<IFACE_NAME>`.
-    Each network interface has its configuration file. The following shows an example for the default configuration of a server:
+    Each network interface has its configuration file. The following shows an example of the default configuration of a server:
 
     ```bash
     TYPE=Ethernet
@@ -400,15 +399,15 @@ You can't do much with a computer these days without network connectivity. Wheth
 
         The static IP configuration scheme is very popular on server class systems or networks.
 
-        The dynamic IP approach is popular on home and office networks - or workstation and desktop class systems.  The dynamic scheme usually needs _something_ extra that is locally available that can supply proper IP configuration information to requesting workstations and desktops. This _something_ is called the Dynamic Host Configuration Protocol (DHCP).
+        The dynamic IP approach is popular on home and office networks - or workstation and desktop class systems.  The dynamic scheme usually needs *something* extra that is locally available that can supply proper IP configuration information to requesting workstations and desktops. This *something* is called the Dynamic Host Configuration Protocol (DHCP).
 
-        Very often, home/office users don't have to worry or know about DHCP. This is because the somebody or something else is automagically taking care of that in the background. The only thing that the end user needs to do is to physically or wirelessly connect to the right network (and of course make sure that their systems are powered on)!
+       Home or office users often do not have to worry about DHCP. This is because the something else automatically takes care of that in the background. The end user needs to physically or wirelessly connect to the right network (and of course make sure that their systems are powered on)!
     
     ### IP Address
 
-    In the previous `/etc/sysconfig/network-scripts/ifcfg-enp1s0` listing, we see that the value of the `BOOTPROTO` parameter or key is set to `none`. This means that the system being configured is set to a static IP address scheme.
+    In the previous `/etc/sysconfig/network-scripts/ifcfg-enp1s0` listing, we see that the value of the `BOOTPROTO` parameter or key is set to `none`. The configured system is set to a static IP address scheme.
 
-    If instead you want to configure the system to use a dynamic IP address scheme, you will have to change the value of the `BOOTPROTO` parameter from `none` to `dhcp` and also remove the `IPADDR`, `PREFIX` and `GATEWAY` lines. This is necessary because all of that information will be automaically obtained from any available DHCP server.
+    If instead you want to configure the system to use a dynamic IP address scheme, you will have to change the value of the `BOOTPROTO` parameter from `none` to `dhcp` and also remove the `IPADDR`, `PREFIX` and `GATEWAY` lines. This is necessary because all that information will be automatically obtained from any available DHCP server.
 
     To configure a static IP address attribution, set the following:
 
@@ -468,9 +467,9 @@ You can't do much with a computer these days without network connectivity. Wheth
 
     !!! tip "Connection name"
 
-        In this example, both the connection and device share the same name, but this may not always be the case. It is common to see a connection called `System eth0` that maps to a device called `eth0`, for example.
+        In this example, the connection and device share the same name, but this may not always be true. It is common to see a connection called `System eth0` that maps to a device called `eth0`, for example.
 
-    Now that we know the name of our connection, we can view the settings for it. To do this, use the `nmcli connection show [connection]` command, which will print out all of the settings NetworkManager registers for the given connection.
+    Now that we know the name of our connection, we can view its settings. To do this, use the `nmcli connection show [connection]` command, which will print out all of the settings NetworkManager registers for the given connection.
 
     ```bash
     [user@server ~]$ sudo nmcli connection show enp1s0
@@ -499,8 +498,8 @@ You can't do much with a computer these days without network connectivity. Wheth
 
     For example, we can see that the `ipv4.method` here is currently set to `auto`. There are many allowed values for the `ipv4.method` setting, but the main two you will most likely see are:
 
-    * `auto`: the appropriate automatic method (DHCP, PPP, etc) is used for the interface and most other properties can be left unset.
-    * `manual`: static IP addressing is used and at least one IP address must be given in the 'addresses' property.
+    - `auto`: the appropriate automatic method (DHCP, PPP, etc) is used for the interface and most other properties can be left unset.
+    - `manual`: static IP addressing is used and at least one IP address must be given in the 'addresses' property.
 
     If instead you want to configure the system to use a static IP address scheme, you will have to change the value of `ipv4.method` to `manual`, and also specify the `ipv4.gateway` and `ipv4.addresses`.
 
@@ -517,7 +516,7 @@ You can't do much with a computer these days without network connectivity. Wheth
     [user@server ~]$ sudo nmcli connection modify enp1s0 ipv4.method manual
     ```
 
-    !!!tip "When does the connection get updated?"
+    !!! tip "When does the connection get updated?"
 
         `nmcli connection modify` will not modify the *runtime* configuration, but update the `/etc/sysconfig/network-scripts` configuration files with the appropriate values based on what you have told `nmcli` to configure.
 
@@ -558,10 +557,10 @@ You can't do much with a computer these days without network connectivity. Wheth
 
     In this example, we will assume the following parameters:
 
-    * interface name: ens19
-    * ip address: 192.168.20.10
-    * subnet mask: 24
-    * gateway: 192.168.20.254
+    - interface name: ens19
+    - ip address: 192.168.20.10
+    - subnet mask: 24
+    - gateway: 192.168.20.254
 
     ### Get general information
 
@@ -573,8 +572,8 @@ You can't do much with a computer these days without network connectivity. Wheth
 
     !!! tip "**Pro tips:**"
 
-        * use the `-c` flag to get a more readable coloured output: `ip -c a`.
-	    * `ip` accepts abbreviation so `ip a`, `ip addr` and `ip address` are equivalent
+        - use the `-c` flag to get a more readable coloured output: `ip -c a`.
+        - `ip` accepts abbreviation so `ip a`, `ip addr` and `ip address` are equivalent
 
     ### Bring interface up or down
 
@@ -603,13 +602,13 @@ You can't do much with a computer these days without network connectivity. Wheth
     will output:
 
     ```bash
-	3: ens19: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
-		link/ether 4a:f2:f5:b6:aa:9f brd ff:ff:ff:ff:ff:ff
-		inet 192.168.20.10/24 scope global ens19
-		valid_lft forever preferred_lft forever
+    3: ens19: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+        link/ether 4a:f2:f5:b6:aa:9f brd ff:ff:ff:ff:ff:ff
+        inet 192.168.20.10/24 scope global ens19
+        valid_lft forever preferred_lft forever
     ```
 
-    Our interface is up and configured, but is still lacking something!
+    Our interface is up and configured, but it is still lacking something!
 
     ### Using ifcfg utility
 
@@ -625,7 +624,7 @@ You can't do much with a computer these days without network connectivity. Wheth
     ifcfg ens19 del 192.168.20.10/24
     ```
 
-    To completely disable IP addressing on this interface:
+    To altogether turn off the IP address on this interface:
 
     ```bash
     ifcfg ens19 stop
@@ -678,13 +677,13 @@ You can't do much with a computer these days without network connectivity. Wheth
     ping -c3 8.8.8.8
     ```
 
-    If your machine has several network interface and you want to make ICMP request via a specific interface, you can use the `-I` flag:
+    If your machine has several network interfaces and you want to make ICMP request via a specific interface, you can use the `-I` flag:
 
     ```bash
     ping -I ens19 -c3 192.168.20.42
     ```
 
-    It is now time to make sure that DNS resolution is working correctly. As a reminder, DNS resolution is a mechanism used to convert human friendly machine names into their IP addresses and the other way round (reverse DNS).
+    It is now time to ensure that DNS resolution is working correctly. As a reminder, DNS resolution is a mechanism used to convert human friendly machine names into their IP addresses and the other way round (reverse DNS).
 
     If the `/etc/resolv.conf` file indicates a reachable DNS server, then the following should work:
 
@@ -698,6 +697,6 @@ You can't do much with a computer these days without network connectivity. Wheth
     rockylinux.org has address 76.76.21.21
     ```
 
-    ## Conclusions
+    ## Conclusion
 
-    Rocky Linux 8 has the tools to configure your network from the command line. This document should get you up and running with those tools in no time.
+    Rocky Linux 8 has the tools to configure your network from the command line. This document should get you up and running with those tools quickly.

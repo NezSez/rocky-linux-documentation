@@ -1,8 +1,8 @@
 ---
 title: Mirroring Solution - lsyncd
 author: Steven Spencer
-contributors: Ezequiel Bruni, tianci li
-tested with: 8.5, 8.6, 9.0
+contributors: Ezequiel Bruni, tianci li, Ganna Zhyrnova
+tested_with: 8.5, 8.6, 9.0
 tags:
   - lsyncd
   - synchronization
@@ -14,14 +14,14 @@ tags:
 
 This is everything you'll need to understand and follow along with this guide:
 
-* A computer running Rocky Linux
-* A comfort level with modifying configuration files from the command-line
-* Knowledge of how to use a command line editor (we use vi here, but you could use your favorite editor)
-* You will need root access, and ideally be signed in as the root user in your terminal
-* Public and Private SSH key pairs
-* The EPEL repositories from Fedora
-* You will need to be familiar with *inotify*, an event monitor interface
-* Optional: familiarity with *tail*
+- A computer running Rocky Linux
+- A comfort level with modifying configuration files from the command-line
+- Knowledge of how to use a command line editor (we use vi here, but you could use your favorite editor)
+- You will need root access, and ideally be signed in as the root user in your terminal
+- Public and Private SSH key pairs
+- The EPEL repositories from Fedora
+- You will need to be familiar with *inotify*, an event monitor interface
+- Optional: familiarity with *tail*
 
 ## Introduction
 
@@ -39,7 +39,7 @@ For remote syncing, you will also want to set up [Rocky Linux SSH Public Private
 
 ## Installing `lsyncd`
 
-There are actually two ways to install `lsyncd`. We will include them both here. The RPM tends to lag behind the source packages by a little, but only by a little. The version installed by the RPM method at the time of this writing is 2.2.2-9, whereas the source code version is now at 2.2.3. That said, we want to give you both options and let you choose.
+There are actually two ways to install `lsyncd`. We will include them both here. The RPM tends to lag behind the source packages by a little, but only by a little. The version installed by the RPM method at the time of this writing is 2.2.2-9, whereas the source code version is now 2.2.3. That said, we want to give you both options and let you choose.
 
 ## Installing `lsyncd` - RPM Method
 
@@ -59,7 +59,7 @@ That's it!
 
 ## Installing `lsyncd` - Source Method
 
-Installing from source is not as bad is it sounds. Just follow this guide and you will be up and running in no time!
+Installing from the source is not as bad as it sounds. Just follow this guide and you will be up and running in no time!
 
 ### Install Dependencies
 
@@ -105,7 +105,7 @@ Now change directories again so that you are in the build directory:
 
 Now run these commands:
 
-```
+```bash
 cmake ..
 make
 make install
@@ -115,19 +115,19 @@ When done, you will have the `lsyncd` binary installed and ready for use in */us
 
 ### `lsyncd` Systemd Service
 
-With the RPM install method, the systemd service will be installed for you, but if you choose to install from source, you will need to create the systemd service. While you can start the binary without the systemd service, we want to ensure that it *does* start on boot. If not, a server reboot would stop your synchronization effort and if you forgot to start it again, which is highly likely. That could be very embarrassing for any systems administrator!
+With the RPM install method, the systemd service will be installed for you, but if you choose to install from source, you will need to create the systemd service. While you can start the binary without the systemd service, we want to ensure that it *does* start on boot. If not, a server reboot would stop your synchronization effort. If you forgot to start it again, which is highly likely, that would be a problem for any systems administrator!
 
 Creating the systemd service is not terribly difficult, though, and will save you time in the long run.
 
 #### Create The `lsyncd` Service File
 
-This file can be created anywhere, even in the root directory of your server. When created, you can move it the right location.
+This file can be created anywhere, even in the root directory of your server. When created, you can move it to the right location.
 
 `vi /root/lsyncd.service`
 
 The contents of this file should be:
 
-```
+```bash
 [Unit]
 Description=Live Syncing (Mirror) Daemon
 After=network.target
@@ -143,6 +143,7 @@ PIDFile=/run/lsyncd.pid
 [Install]
 WantedBy=multi-user.target
 ```
+
 Now let's install the file you just made to the correct location:
 
 `install -Dm0644 /root/lsyncd.service /usr/lib/systemd/system/lsyncd.service`
@@ -159,7 +160,7 @@ Whichever method you choose for installing `lsyncd`, you will need a configurati
 
 Here's an example of a simplistic configuration file that synchronizes */home* to another computer. Our target computer is going to be a local IP address: *192.168.1.40*
 
-```
+```bash
   settings {
    logfile = "/var/log/lsyncd.log",
    statusFile = "/var/log/lsyncd-status.log",
@@ -186,28 +187,28 @@ sync {
 
 Breaking down this file a bit:
 
-* The "logfile" and "statusFile" will be automatically created when the service starts.
-* The "statusInterval" is the number of seconds to wait before writing to the statusFile.
-* "maxProcesses" is the number of processes `lsyncd` is allowed to spawn. Honestly, unless you are running this on a super busy computer, 1 process is enough.
-* In the sync section "default.rsyncssh" says to use rsync over SSH
-* The "source=" is the directory path we are syncing from.
-* The "host=" is our target computer that we are syncing to.
-* The "excludeFrom=" tells `lsyncd` where the exclusions file is. It must exist, but can be empty.
-* The "targetdir=" is the target directory we are sending files to. In most cases this will be equal to the source, but not always.
-* Then we have the "rsync =" section, and these are the options that we are running rsync with.
-* Finally we have the "ssh =" section, and this specifies the SSH port that is listening on the target computer.
+- The `logfile` and `statusFile` will be automatically created when the service starts.
+- The `statusInterval` is the number of seconds to wait before writing to the statusFile.
+- `maxProcesses` is the number of processes `lsyncd` is allowed to spawn. Honestly, unless you are running this on a super busy computer, 1 process is enough.
+- In the sync section `default.rsyncssh` says to use rsync over SSH
+- The `source=` is the directory path we are syncing from.
+- The `host=` is our target computer that we are syncing to.
+- The `excludeFrom=` tells `lsyncd` where the exclusions file is. It must exist, but can be empty.
+- The `targetdir=` is the target directory we are sending files to. In most cases this will be equal to the source, but not always.
+- Then we have the `rsync =` section, and these are the options that we are running rsync with.
+- Finally we have the `ssh =` section, and this specifies the SSH port that is listening on the target computer.
 
 If you are adding more than one directory to sync, then you need to repeat the entire "sync" section including all the opening and closing brackets for each directory.
 
 ## The lsyncd.exclude File
 
-As noted earlier, the "excludeFrom" file must exist, so let's create that now:
+As noted earlier, the `excludeFrom` file must exist, so let's create that now:
 
 `touch /etc/lsyncd.exclude`
 
-If you were syncing the /etc folder on our computer, there would be many files and directories that you should exclude. Each excluded file or directory is listed in the file, one per line, like this:
+If you were syncing the `/etc` folder on our computer, there would be many files and directories that you should exclude. Each excluded file or directory is listed in the file, one per line, like this:
 
-```
+```bash
 /etc/hostname
 /etc/hosts
 /etc/networks
@@ -248,7 +249,7 @@ Anytime you are synchronizing a set of files or directories to another computer,
 
 For newbies, *fstab* is the file that is used to configure storage drives on any Linux computer. The disks and labels are almost certainly different. The next time the target computer was rebooted it would likely fail to boot entirely.
 
-# Conclusions And References
+## Conclusions And References
 
 `lsyncd` is a powerful tool for directory synchronization between computers. As you've seen, it is not hard to install, and it is not complex to maintain going forward. You can not ask for more than that.
 

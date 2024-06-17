@@ -1,7 +1,7 @@
 ---
 title: Installing Nerd Fonts
 author: Franco Colussi
-contributors: Steven Spencer
+contributors: Steven Spencer, Ganna Zhyrnova
 tested: 8.6, 9.0
 tags:
     - nvchad
@@ -9,15 +9,15 @@ tags:
     - fonts
 ---
 
-# Nerd Fonts - Fonts for Developers
+# :material-format-font: Nerd Fonts - Fonts for Developers
 
-Installation of Nerd Fonts does not change the function of Neovim or NvChad, but simply adds fonts that are more pleasing to the eye than whatever the standard terminal font is currently. 
+Installation of Nerd Fonts does not change the function of Neovim or NvChad, but simply adds fonts that are more pleasing to the eye than whatever the standard terminal font is currently.
 
 ![Nerd Fonts](images/nerd_fonts_site_small.png){ align=right } Nerd Fonts are a collection of modified fonts aimed at developers. In particular, "iconic fonts" such as Font Awesome, Devicons, Octicons etc. are used to add extra glyphs.
 
 Nerd Fonts takes the most popular programming fonts and modifies them by adding a group of glyphs (icons). A font patcher is also available if the font you'd like to use has not already been edited. A convenient preview is available on the site, allowing you to see how the font should look in the editor. For more information, check the project's main [site](https://www.nerdfonts.com/).
 
-## Download
+## :material-monitor-arrow-down-variant: Download
 
 Fonts are available for download at:
 
@@ -25,34 +25,67 @@ Fonts are available for download at:
 https://www.nerdfonts.com/font-downloads
 ```
 
-## Installation
+### :material-monitor-arrow-down-variant: Installation procedure
 
-The procedure for installing fonts on Rocky Linux is to save the fonts you want to add somewhere, and then install them with the `fc-cache` command. This procedure is not a true installation so much as a registration of the new fonts in the system.
+The installation of Nerd Fonts in Rocky Linux is done entirely from the command line thanks to the implementation of the procedure provided by the project repository [ryanoasis/nerd-fonts](https://github.com/ryanoasis/nerd-fonts), the procedure uses *git* to retrieve the required fonts and *fc-cache* for their configuration.
 
-!!! warning "Creation of compressed packages"
+!!! Note
 
-	The procedure described below is not a standard procedure as each developer has packaged fonts using a custom scheme. So once downloaded and extracted, the contents must be checked to choose the procedure for copying the fonts.
+    This method can be used on all *linux* distributions that use [fontconfig](https://www.freedesktop.org/wiki/Software/fontconfig/) for system font management.
 
-For this guide we will use the `Sauce Code Pro Nerd` font.
-
-Download the package with:
+To begin, retrieve the necessary files from the project repository:
 
 ```bash
-https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/SourceCodePro.zip
+git clone --filter=blob:none --sparse git@github.com:ryanoasis/nerd-fonts
 ```
 
-Next, unzip the contents of the folder and copy the fonts to `~/.local/share/fonts/` with:
+This command downloads only the necessary files omitting the fonts contained in *patched-fonts* so as not to weigh down the local repository with fonts that later will not be used, thus allowing for selective installation.  
+This guide will use the [IBM Plex Mono](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/IBMPlexMono) font, which offers a clean and slightly typographic display, features that make it particularly suitable for writing Markdown documentation.  
+For an overview, with preview, of available fonts you can visit the [dedicated site](https://www.programmingfonts.org/#plex-mono).
+
+Go to the newly created folder and then download the font set with the commands:
 
 ```bash
-mkdir ~/.local/share/fonts
-unzip SourceCodePro.zip -d ~/.local/share/fonts/
-fc-cache ~/.local/share/fonts
+cd ~/nerd-fonts/
+git sparse-checkout add patched-fonts/IBMPlexMono
 ```
 
-## Configuration
+The command will download the fonts to the *patched-fonts* folder and once finished you can install them with the ==install.sh== script provided, type:
+
+```bash
+./install.sh IBMPlexMono
+```
+
+!!! Note "Reserved Name"
+
+    The font during installation is renamed to *BlexMono* to comply with the SIL Open Font License (OFL) and in particular the [reserved name mechanism](http://scripts.sil.org/cms/scripts/page.php?item_id=OFL_web_fonts_and_RFNs#14cbfd4a).
+
+The *install.sh* script copies the fonts to the user folder `~/.local/share/fonts/` and invokes the *fc-cache* program to register them on the system. Once finished the fonts will be available for the terminal emulator, in particular we will find the following fonts installed:
+
+```text title="~/.local/share/fonts/"
+NerdFonts/
+├── BlexMonoNerdFont-BoldItalic.ttf
+├── BlexMonoNerdFont-Bold.ttf
+├── BlexMonoNerdFont-ExtraLightItalic.ttf
+├── BlexMonoNerdFont-ExtraLight.ttf
+├── BlexMonoNerdFont-Italic.ttf
+├── BlexMonoNerdFont-LightItalic.ttf
+├── BlexMonoNerdFont-Light.ttf
+├── BlexMonoNerdFont-MediumItalic.ttf
+├── BlexMonoNerdFont-Medium.ttf
+├── BlexMonoNerdFont-Regular.ttf
+├── BlexMonoNerdFont-SemiBoldItalic.ttf
+├── BlexMonoNerdFont-SemiBold.ttf
+├── BlexMonoNerdFont-TextItalic.ttf
+├── BlexMonoNerdFont-Text.ttf
+├── BlexMonoNerdFont-ThinItalic.ttf
+├── BlexMonoNerdFont-Thin.ttf
+```
+
+## :material-file-cog-outline: Configuration
 
 At this point the Nerd Font of your choice should be available for selection. To actually select it you must refer to the desktop you are using.
 
-![Font Manager](images/font_nerd_view.png) 
+![Font Manager](images/font_nerd_view.png)
 
 If you are using the default Rocky Linux desktop (Gnome), to change the font in the terminal emulator you will just need to open `gnome-terminal`, go to "Preferences", and set the Nerd Font for your profile.
