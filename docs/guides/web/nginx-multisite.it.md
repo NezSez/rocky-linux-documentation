@@ -1,8 +1,8 @@
 ---
 title: Nginx Multisito
 author: Ezequiel Bruni
-contributors: Steven Spencer, Franco Colussi
-tested with: 8.5
+contributors: Steven Spencer, Ganna Zhyrnova
+tested_with: 8.5
 tags:
   - web
   - nginx
@@ -29,30 +29,34 @@ Vi spiegherò *molti* dettagli... ma alla fine, l'intero processo consiste fonda
 
 Questo è tutto ciò di cui hai bisogno:
 
-* Un server Rocky Linux collegato a internet, con Nginx già in esecuzione. Se non siete arrivati a questo punto, potete seguire prima la nostra [guida all'installazione di Nginx](nginx-mainline.md).
-* Una certa familiarità con le operazioni dalla riga di comando e di un editor di testo basato su terminale come `nano`.
+- Un server Rocky Linux collegato a internet, con Nginx già in esecuzione. Se non siete arrivati a questo punto, potete seguire prima la nostra [guida all'installazione di Nginx](nginx-mainline.md).
+- Una certa familiarità con le operazioni dalla riga di comando e di un editor di testo basato su terminale come `nano`.
 
-    !!! hint "In un attimo"
-      ... si potrebbe usare qualcosa come Filezilla o WinSCP - e un normale editor di testo basato su GUI - per replicare la maggior parte di questi passaggi, ma in questo tutorial faremo le cose alla maniera dei nerd.
+    !!! tip "In a pinch"
+  
+        ... si potrebbe usare qualcosa come Filezilla o WinSCP - e un normale editor di testo basato su GUI - per replicare la maggior parte di questi passaggi, ma in questo tutorial faremo le cose alla maniera dei nerd.
 
-* Almeno un dominio puntato sul vostro server per uno dei siti web di prova. È possibile utilizzare un secondo dominio o un sottodominio per l'altro.
+- Almeno un dominio puntato sul vostro server per uno dei siti web di prova. È possibile utilizzare un secondo dominio o un sottodominio per l'altro.
 
     !!! hint "Suggerimento"
-      Se si esegue tutto questo su un server locale, modificare il file hosts come necessario per creare nomi di dominio simulati. Istruzioni qui sotto.
+      Se si esegue tutto questo su un server locale, modificare il file hosts come necessario per creare nomi di dominio simulati.
+  
+        Se si esegue tutto questo su un server locale, modificare il file hosts come necessario per creare nomi di dominio simulati. Istruzioni qui sotto.
 
-* Si presume che Nginx sia in esecuzione su un server bare metal o su un normale VPS e che SELinux sia in esecuzione. Tutte le istruzioni saranno compatibili con SELinux per impostazione predefinita.
-* *Tutti i comandi devono essere eseguiti come root,* sia accedendo come utente root, sia usando `sudo`.
+- Si presume che Nginx sia in esecuzione su un server bare metal o su un normale VPS e che SELinux sia in esecuzione. Tutte le istruzioni saranno compatibili con SELinux per impostazione predefinita.
+- *Tutti i comandi devono essere eseguiti come root,* sia accedendo come utente root, sia usando `sudo`.
 
 ## Impostazione delle Cartelle e dei Siti di Test
 
 ### Le cartelle del sito web
+
 In primo luogo, hai bisogno di un paio di cartelle per i file del tuo sito web. Quando si installa Nginx per la prima volta, tutti i file del sito web "demo" si trovano in `/usr/share/nginx/html`. Questo va bene se state ospitando un solo sito, ma noi ci stiamo sbizzarrendo. Ignorare la cartella `html` per ora e navigare solo nella sua cartella madre:
 
 ```bash
 cd /usr/share/nginx
 ```
 
-I domini di prova per questo tutorial saranno `site1.server.test` e `site2.server.test`, e le cartelle dei siti web verranno nominate di conseguenza. Naturalmente, è necessario cambiare questi domini con quelli che si stanno utilizzando. Tuttavia (e questo è un trucco che ho imparato da Smarter People<sup>TM</sup>), scriveremo i nomi di dominio "al contrario".
+I domini di prova per questo tutorial saranno `site1.server.test` e `site2.server.test`, e le cartelle dei siti web verranno nominate di conseguenza. Naturalmente, è necessario cambiare questi domini con quelli che si stanno utilizzando. Tuttavia (e questo è un trucco che ho imparato da Smarter People^TM^), scriveremo i nomi di dominio "al contrario".
 
 es. "yourwebsite.com" andrebbe in una cartella chiamata `com.yourwebsite`. È chiaro che potete *letteralmente* nominare queste cartelle come volete, ma c'è una buona ragione per questo metodo, che ho illustrato di seguito.
 
@@ -108,9 +112,9 @@ cd /etc/nginx/
 
 Se si esegue il comando `ls` per vedere quali file e cartelle si trovano qui, si vedranno un mucchio di cose diverse, la maggior parte delle quali oggi sono irrilevanti. Quelli da notare sono questi:
 
-* `nginx.conf` è il file che contiene, come avete capito, la configurazione predefinita di Nginx. Lo modificheremo più tardi.
-* `conf.d` è una directory in cui si possono inserire i file di configurazione personalizzati. Si *può* usare per i siti web, ma è meglio usarlo per le impostazioni specifiche che si vogliono per tutti i siti web.
-* `default.d` è una directory in cui si trova la configurazione del sito web *che potrebbe* gestire un solo sito sul server, o se il server ha un sito web "primario". Per ora lasciate stare.
+- `nginx.conf` è il file che contiene, come avete capito, la configurazione predefinita di Nginx. Lo modificheremo più tardi.
+- `conf.d` è una directory in cui si possono inserire i file di configurazione personalizzati. Si *può* usare per i siti web, ma è meglio usarlo per le impostazioni specifiche che si vogliono per tutti i siti web.
+- `default.d` è una directory in cui si trova la configurazione del sito web *che potrebbe* gestire un solo sito sul server, o se il server ha un sito web "primario". Per ora lasciate stare.
 
 Vogliamo creare due nuove cartelle chiamate `sites-available` e `sites-enabled`:
 
@@ -158,21 +162,21 @@ nano nginx.conf
 
 Per prima cosa, trovare la linea che assomiglia a questa:
 
-```
+```bash
 include /etc/nginx/conf.d/*.conf;
 ```
 
 E **aggiungere** questo pezzo appena sotto:
 
-```
+```bash
 include /etc/nginx/sites-enabled/*.conf;
 ```
 
 Questo caricherà i file di configurazione del nostro sito web quando saranno pronti per la messa in funzione.
 
-Ora scendete fino alla sezione che appare come questa e **commentatela** con il segno di hash <kbd>#</kbd>, oppure cancellatela se preferite:
+Ora scendete fino alla sezione che appare come questa e **commentatela** con il segno di hash ++#++, oppure cancellatela se preferite:
 
-```
+```bash
 server {
     listen       80;
     listen       [::]:80;
@@ -194,7 +198,7 @@ server {
 
 Come sarebbe "commentato":
 
-```
+```bash
 #server {
 #    listen       80;
 #    listen       [::]:80;
@@ -234,7 +238,6 @@ Ora rendiamo disponibili i siti web di prova sul server. Come già accennato in 
     
     Tuttavia, se si elimina un collegamento alla destinazione, non succede nulla al file originale. Questo trucco ci permette di mettere i file di configurazione del sito web in una cartella di lavoro (`sites-available`) e poi di "attivarli" collegandosi a quei file da `sites-enabled`.
 
-
 Vi faccio vedere cosa intendo. Creare un file di configurazione per il primo sito web in questo modo:
 
 ```bash
@@ -243,7 +246,7 @@ nano sites-available/test.server.site1.conf
 
 Ora incollate questo codice. Questa è la configurazione di Nginx più semplice che si possa avere e dovrebbe funzionare bene per la maggior parte dei siti web HTML statici:
 
-```
+```bash
 server {
     listen 80;
     listen [::]:80;
@@ -337,14 +340,14 @@ Su Windows, il file hosts si trova in `C:\Windows\system32\drivers\etc\hosts` e 
 
 Quindi, se si lavora su un computer Rocky Linux e si esegue il server Nginx sulla stessa macchina, basta aprire il file e definire i domini/indirizzi IP desiderati. Se la workstation e il server di prova sono in esecuzione sulla stessa macchina, è così:
 
-```
+```bash
 127.0.0.1           site1.server.test
 127.0.0.1           site2.server.test
 ```
 
 Se il server Nginx è in esecuzione su un'altra macchina della rete, è sufficiente utilizzare l'indirizzo di tale macchina, ad es.:
 
-```
+```bash
 192.168.0.45           site1.server.test
 192.168.0.45           site2.server.test
 ```
@@ -361,4 +364,4 @@ Ricordate che la maggior parte delle convenzioni per l'organizzazione e la denom
 
 I file del sito web vero e proprio dovrebbero trovarsi da qualche parte in `/usr/share/nginx/`, e il resto è tutto da scoprire.
 
-Provatelo, fate un po' di Scienza<sup>TM</sup> e non dimenticate di eseguire `nginx -t` prima di riavviare Nginx per assicurarvi di non aver dimenticato un punto e virgola o altro. Vi farà risparmiare molto tempo.
+Provatelo, fate un po' di Scienza^TM^ e non dimenticate di eseguire `nginx -t` prima di riavviare Nginx per assicurarvi di non aver dimenticato un punto e virgola o altro. Vi farà risparmiare molto tempo.

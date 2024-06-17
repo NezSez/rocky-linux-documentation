@@ -1,7 +1,7 @@
 ---
 title: Special Authority
 author: tianci li
-contributors: Serge Croisé
+contributors: Serge, Ganna Zhyrnova
 tags:
   - advanced permissions
   - access control
@@ -41,11 +41,11 @@ Their meanings are as follows:
 |:-----------:|--------------------------------------------------------------------------------------------------------------------------------------------|
 | **-**       | Represents an ordinary file. Including plain text files (ASCII); binary files (binary); data format files (data); various compressed files. |
 | **d**       | Represents a directory file. By default, there is one in every directory `.` and `..`. |
-| **b**       | Block device file. Including all kinds of hard drives, USB drives and so on. | 
+| **b**       | Block device file. Including all kinds of hard drives, USB drives and so on. |
 | **c**       | Character device file. Interface device of serial port, such as mouse, keyboard, etc. |
-| **s**       | Socket file. It is a file specially used for network communication. | 
+| **s**       | Socket file. It is a file specially used for network communication. |
 | **p**       | Pipe file. It is a special file type, the main purpose is to solve the errors caused by multiple programs accessing a file at the same time. FIFO is the abbreviation of first-in-first-out. |
-| **l**       | Soft link files, also called symbolic link files, are similar to shortcuts in Windows. Hard link file, also known as physical link file.| 
+| **l**       | Soft link files, also called symbolic link files, are similar to shortcuts in Windows. Hard link file, also known as physical link file.|
 
 ## The meaning of basic permissions
 
@@ -76,7 +76,7 @@ In GNU/Linux, in addition to the basic permissions mentioned above, there are al
 ### ACL permissions
 
 What is ACL?
-ACL(Access Control List), the purpose is to solve the problem that the three identities under Linux can not meet the needs of resource permission allocation. 
+ACL(Access Control List), the purpose is to solve the problem that the three identities under Linux can not meet the needs of resource permission allocation.
 
 For example, the teacher gives lessons to the students, and the teacher creates a directory under the root directory of OS. Only the students in this class are allowed to upload and download, and others are not allowed. At this point, the permissions for the directory are 770. One day, a student from another school came to listen to the teacher, how should permissions be assigned? If you put this student in the **owner group**, he will have the same permissions as the students in this class - **rwx**. If the student is put into the **other users**, he will not have any permissions. At this time, the basic permission allocation cannot meet the requirements, and you need to use ACL.
 
@@ -144,7 +144,7 @@ Shell > setfacl <option> <FILE_NAME>
 | -k | remove the default ACL  |
 | -R | recurse into subdirectories  |
 
-Use the teacher's teaching example mentioned at the beginning of the article to illustrate the use of ACL.
+Use the teacher's example mentioned at the beginning of the article to illustrate the use of ACL.
 
 ```bash
 # The teacher is the root user
@@ -239,7 +239,7 @@ For ACL permissions, this means that when the parent directory sets ACL permissi
 
 !!! info
 
-    Recursion applies to files/directories that already exist.
+    Recursion is suitable for files/directories that already exist in the directory.
 
 Look at the following example:
 
@@ -295,13 +295,17 @@ default:mask::rwx
 default:other::---
 ```
 
+!!! info
+
+    The default and recursion of using ACL permissions require that the operating object of the command be a directory! If the operation object is a file, an error prompt will be output.
+
 ### SetUID
 
 The role of "SetUID":
 
 * Only executable binaries can set SUID permissions.
 * The executor of the command should have x permission to the program.
-* The executor of the command obtains the identity of the owner of the program file when executing the program. 
+* The executor of the command obtains the identity of the owner of the program file when executing the program.
 * The identity change is only valid during execution, and once the binary program is finished, the executor's identity is restored to the original identity.
 
 Why does GNU/Linux need such strange permissions?
@@ -364,12 +368,12 @@ The role of "SetGID":
 
 * Only executable binaries can set SGID permissions.
 * The executor of the command should have x permission to the program.
-* The executor of the command obtains the identity of the owner group of the program file when executing the program. 
+* The executor of the command obtains the identity of the owner group of the program file when executing the program.
 * The identity change is only valid during execution, and once the binary program is finished, the executor's identity is restored to the original identity.
 
 Take the `locate` command for example:
 
-```
+```bash
 Shell > rpm -ql mlocate
 /usr/bin/locate
 ...
@@ -413,7 +417,7 @@ Shell > chmod g-s FILE_NAME
     -rwxr-S--x  1 root root         0 Jan  14 12:11 sgid
     ```
 
-SGID can be used not only for executable binary file/program, but also for directories, but it is rarely used. 
+SGID can be used not only for executable binary file/program, but also for directories, but it is rarely used.
 
 * Ordinary users must have rwx permissions on the directory.
 * For files created by ordinary users in this directory, the default owner group is the owner group of the directory.
@@ -449,7 +453,7 @@ The role of "Sticky BIT":
 
 SBIT is represented by the number **1**.
 
-Can the file/direcyory have **7755** permission?
+Can the file or directory have **7755** permission?
 No, they are aimed at different objects. SUID is for executable binary files; SGID is used for executable binaries and directories; SBIT is only for directories. That is, you need to set these special permissions according to different objects.
 
 The directory **/tmp** has SBIT permission. The following is an example:
@@ -485,15 +489,15 @@ Usage of the `chattr` command -- `chattr [ -RVf ] [ -v version ] [ -p project ] 
 
 The format of a symbolic mode is +-=[aAcCdDeFijPsStTu].
 
-* "+" means to increase permissions; 
-* "-" means to reduce permissions; 
+* "+" means to increase permissions;
+* "-" means to reduce permissions;
 * "=" means equal to a permission.
 
 The most commonly used permissions (also called attribute) are **a** and **i**.
 
-#### Description of attribute i:
+#### Description of attribute i
 
-|            | Delete | Free modification | Append file content | View | Create file | 
+|            | Delete | Free modification | Append file content | View | Create file |
 |:----------:|:------:|:-----------------:|:-------------------:|:----:|:-----------:|
 | file       |  ×     |       ×           |   ×                 | √    |    -        |
 | directory  |  x <br>(Directory and files under the directory) | √ <br>(Files in the directory) | √ <br>(Files in the directory)  | √ <br>(Files in the directory)  |  x |
@@ -554,12 +558,12 @@ Remove the i attribute from the above example:
 Shell > chattr -i /tmp/filei /tmp/diri
 ```
 
-#### Description of attribute a:
+#### Description of attribute a
 
-|            | Delete | Free modification | Append file content | View | Create file | 
+|            | Delete | Free modification | Append file content | View | Create file |
 |:----------:|:------:|:-----------------:|:-------------------:|:----:|:-----------:|
 | file       |  ×     |       ×           |   √                 | √    |    -        |
-| directory  |  x <br>(Directory and files under the directory) | √ <br>(Files in the directory) | √ <br>(Files in the directory) | √ <br>(Files in the directory) | √  |
+| directory  |  x <br>(Directory and files under the directory) | x<br>(Files in the directory) | √ <br>(Files in the directory) | √ <br>(Files in the directory) | √  |
 
 Examples for files:
 
@@ -590,19 +594,19 @@ Shell > mkdir /etc/dira
 Shell > cd /etc/dira && echo "asdf" > afile
 
 Shell > chattr +a /etc/dira
-Shell > lsattr -a /etc/dira
+Shell > lsattr -ad /etc/dira
 -----a--------e----- /etc/dira/
 
 Shell > rm -rf /etc/dira
 rm: cannot remove '/etc/dira/afile': Operation not permitted
 
-# Allow modification
+# Free modification is not allowed
 Shell > vim /etc/dira/afile
-asdf-bcd
+asdf
 
 Shell > echo "new line" >> /etc/dira/afile
 Shell > cat /etc/dira/afile
-asdf-bcd
+asdf
 new line
 
 # Allow creation of new files

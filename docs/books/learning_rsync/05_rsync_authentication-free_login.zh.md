@@ -1,7 +1,7 @@
 ---
 title: rsync 免密验证登录
 author: tianci li
-contributors: Steven Spencer
+contributors: Steven Spencer, Ganna Zhyrnova
 update: 2021-11-04
 ---
 
@@ -15,7 +15,7 @@ update: 2021-11-04
 
 ## SSH协议的免密验证登录
 
-首先在客户端生成公钥私钥对，键入命令后一直回车即可。 密钥对保存在 <font color=red>/root/.ssh/</font> 目录中
+首先在客户端生成公钥私钥对，键入命令后一直回车即可。 密钥对保存在 <font color=red>/root/.ssh/</font> 目录中。
 
 ```bash
 [root@fedora ~]# ssh-keygen -t rsa -b 2048
