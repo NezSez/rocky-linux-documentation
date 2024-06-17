@@ -1,8 +1,8 @@
 ---
 title: Variables - Use With Logs
 author: Steven Spencer
-contributors: Antoine Le Morvan
-tested with: 8.5
+contributors: Antoine Le Morvan, Ganna Zhyrnova
+tested_with: 8.5
 tags:
   - bash scripting
   - bash

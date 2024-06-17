@@ -2,7 +2,7 @@
 title: bash - Colore della stringa
 author: tianci li
 contributors: Steven Spencer, Franco Colussi
-tested with: 8.6, 9.0
+tested_with: 8.6, 9.0
 tags:
   - bash
   - color
@@ -40,14 +40,14 @@ Quando scarichiamo script bash che sono stati scritti da altri nel nostro lavoro
 
 ## Modalità display
 
-| **codice** |            **descrizione**             |
-|:----------:|:--------------------------------------:|
-|     0      | Impostazioni predefinite del terminale |
-|     1      |               Evidenzia                |
-|     4      |              Sottolineato              |
-|     5      |          Il cursore lampeggia          |
-|     7      |        Visualizzazione inversa         |
-|     8      |                Nascondi                |
+| **code** |            **descrizione**             |
+|:--------:|:--------------------------------------:|
+|    0     | Impostazioni predefinite del terminale |
+|    1     |               Evidenzia                |
+|    4     |              Sottolineato              |
+|    5     |          Il cursore lampeggia          |
+|    7     |        Visualizzazione inversa         |
+|    8     |                Nascondi                |
 
 ## Modalità di esecuzione
 

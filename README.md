@@ -1,66 +1,73 @@
 # Contribution Guide
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-89-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-104-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
-
 
 ## Introduction
 
-_With Rocky Linux emerging as a major RHEL-compatible distribution, this is an exciting time in the open source community. Rocky Linux’s [mission](https://rockylinux.org/community-charter/) is to provide companies and individuals with a **stable foundation of open source software** for their enterprise and HPC needs. We are here to support that mission with excellent documentation._ 
+*With Rocky Linux emerging as a major RHEL-compatible distribution, this is an exciting time in the open source community. Rocky Linux’s [mission](https://rockylinux.org/community-charter/) is to provide companies and individuals with a **stable foundation of open source software** for their enterprise and HPC needs. We are here to support that mission with excellent documentation.*
 
 To us, excellent documentation hits these marks:
 
+- Educate users on how to administer this distribution and its associated programs.
+- Support users of all skill levels with manuals and troubleshooting guides to make the most of this distribution.
+- Apply a consistent standard across all related documents, for ease of reading and translation.
+- Keep documentation up to date (and error free) with current versions.
+- Allow users to contribute Guides, Docs, Gemstones (scripts and favorite code snippets) and more, to enhance Rocky Linux for fellow users.
 
-* Educate users how to admin this distribution and its associated programs.
-* Support users of all skill levels with manuals and troubleshooting guides to make the most of this distribution.
-* Apply a consistent standard across all related documents, for ease of reading and translation.
-* Keep documentation up to date (and error free) with current versions.
-* Allow users to contribute Guides, Docs, Gemstones (scripts and favorite code snippets) and more, to enhance Rocky Linux for fellow users.
+We welcome anyone who wants to be part of this mission. No specific degree, years of experience, or company affiliation is required. Be bold! We promise, you won’t break anything even if you fumble your first attempt.
 
-We welcome anyone who wants to be part of this mission. No specific degree, years of experience, or company affiliation required. Be bold! We promise, you won’t break anything even if you fumble your first attempt.
+## License
 
+Documents written by the *rocky linux documentation team* are published under the Creative Commons-BY-SA license. This means you are free to copy, distribute and transform the works, while respecting the author's rights.
+
+- **BY**: Attribution. You must cite the name of the original author.
+- **SA**: Share Alike.
+
+[Creative Commons-BY-SA license](https://creativecommons.org/licenses/by-sa/4.0/)
+
+The documents and their sources are freely downloadable from:
+
+- <https://docs.rockylinux.org>
+- <https://github.com/rocky-linux/documentation>
+
+Our media sources are hosted at github.com. You'll find the source code repository where the version of this document was created.
 
 ## Technical requirements
 
-_Our standards for Rocky documentation._
+*Our standards for Rocky documentation.*
 
 ### Style Guide
 
-The RL [Style Guide](https://docs.rockylinux.org/guides/contribute/style_guide/) outlines standards for the wording within your document. 
+The RL [Style Guide](https://docs.rockylinux.org/guides/contribute/style_guide/) outlines standards for the wording within your document.
 
 ### GitHub  
 
-Rocky Linux uses GitHub to manage its code and files, including documentation files. Login to GitHub and follow the official [Rocky Linux documentation repository](https://github.com/rocky-linux/documentation). 
-
+Rocky Linux uses GitHub to manage its code and files, including documentation files. Login to GitHub and follow the official [Rocky Linux documentation repository](https://github.com/rocky-linux/documentation).
 
 ### Markdown
 
-Documentation is welcome in whatever format you are used to creating. It does not need to be perfect, just submit what you have and the team will give you feedback to help get it in line with our voice and tone. 
+Documentation is welcome in whatever format you are used to creating. It does not need to be perfect, just submit what you have and the team will give you feedback to help get it in line with our voice and tone.
 
-That said, RL Documentation uses Markdown as the standard. It is easy to learn and use. Run a text converter on your content or start from scratch with this [basic writing and formatting guide](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) by GitHub. 
+That said, RL Documentation uses Markdown as the standard. It is easy to learn and use. Run a text converter on your content or start from scratch with this guide on [writing markdown with proper formatting](https://docs.rockylinux.org/guides/contribute/rockydocs_formatting).
 
 As you become a regular contributor, you’ll need to create a **local repository**. See our [guide](https://docs.rockylinux.org/guides/contribute/beginners) for how to install a Markdown editor and create a local repository on your home computer.
 
-
 ## Contribution Process
 
-_The actual process of reporting an issue, revising, or creating a doc. Please see special notes afterward about translations, links, and meta content._
-
+*The actual process of reporting an issue, revising, or creating a doc. Please see special notes afterward about translations, links, and meta content.*
 
 ### Report an issue
 
 Maybe you’ve found a broken link or incorrect information while exploring the Rocky docs. This is called an **issue**, and we want to know about it. You can mention it on the Mattermost Documentation channel, or visit GitHub and make a proper issue report. GitHub has [a handy guide](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue) for how to create an issue.
 
-
 ### Submit an update
 
-_Add a missing word, correct an error, clarify a confusing bit of text. You won’t break anything because someone will review your contribution before it goes live. Here is the basic process._
+*Add a missing word, correct an error, or clarify a confusing bit of text. You won’t break anything because someone will review your contribution before it goes live. Here is the basic process.*
 
+1. Start on the page you want to update on <https://docs.rockylinux.org/>.
 
-
-1. Start on the page you want to update on [https://docs.rockylinux.org/](https://docs.rockylinux.org/). 
-
-    Click the “Edit” pencil in the upper right corner of the document. You will be taken to the original document stored on GitHub. 
+    Click the “Edit” pencil in the upper right corner of the document. You will be taken to the original document stored on GitHub.
 
     The first time you contribute to the RL repository, you will be prompted with a green button to “**Fork** this **repository** and propose changes.” This creates a duplicate copy of the RL repository where you make your suggested edits. Click the green button and continue.
 
@@ -74,7 +81,7 @@ _Add a missing word, correct an error, clarify a confusing bit of text. You won�
 
     Then click Propose changes, which will **Commit** your changes to a completed document within your forked repository.
 
-4. Review changes 
+4. Review changes
 
     Now you can look at what you’ve done, line by line. If you missed anything, back up to the previous page and correct it again (you’ll have to start over), then click Propose Changes again.
 
@@ -90,9 +97,9 @@ _Add a missing word, correct an error, clarify a confusing bit of text. You won�
 
     Once the RL team reviews your request, they will respond in one of three ways.
 
-    * Accept and merge your PR
-    * Comment with feedback and ask for changes
-    * Deny your PR with explanation
+    - Accept and merge your PR
+    - Comment with feedback and ask for changes
+    - Deny your PR with explanation
 
     If you have to make changes, you will suddenly understand why you need a local repository. The team can [talk you through](https://chat.rockylinux.org/rocky-linux/channels/documentation) what to do next. In good news, it’s still fixable.
 
@@ -100,107 +107,86 @@ Need more in-depth explanation? Here are the [same directions](https://docs.rock
 
 Success? Welcome to the team, you are officially a Rocky Linux documentation contributor. Your profile will be added to the contributor list at the bottom of this document shortly.
 
-
 ### Become a frequent contributor
 
 For more than a word or two of occasional edits, we recommend that you [setup a local repository](https://docs.rockylinux.org/guides/contribute/createnew) on your own machine. From there, you can revise documentation from your clone of the RL repository, Commit it to your online GitHub repository, and then create Pull Requests to merge with the main repository.
 
-Advanced users may wish to create a complete documentation server on your local Linux workstation or VM. We have guides to set that up with [Docker](https://docs.rockylinux.org/guides/contribute/rockydocs_web_dev/) or [LXD](https://docs.rockylinux.org/guides/contribute/mkdocs_lsyncd/). We also have a [fast documentation system](https://docs.rockylinux.org/guides/contribute/local_docs/) with special caveats if you are using Python on the same server.
-
+Advanced users may wish to create a complete documentation server on your local Linux workstation or VM. We have guides to set that up with [Docker](https://docs.rockylinux.org/guides/contribute/localdocs/rockydocs_web_dev/) or [LXD](https://docs.rockylinux.org/guides/contribute/localdocs/mkdocs_lsyncd/). We also have a [fast documentation system](https://docs.rockylinux.org/guides/contribute/localdocs/local_docs/) with special caveats if you are using Python on the same server.
 
 ### Submit a new document
 
-_Rocky Linux documentation includes guides, books, labs, and [gemstones](https://docs.rockylinux.org/gemstones/). Your original contributions are welcome in any of these categories._
-
+*Rocky Linux documentation includes guides, books, labs, and [gemstones](https://docs.rockylinux.org/gemstones/). Your original contributions are welcome in any of these categories.*
 
 #### Meta
 
 Please include the following **meta** information at the top of all new documentation:
 
+```text
 ---
-
-title: Document title 
-
+title: Document title
 author: the author of the source (English) version of the document.
-
 contributors: a comma separated list of contributors to the source document.
-
 tested with: a comma separated list of versions, for example 8.6, 9.0
-
-tags: 
-
-  - displayable tags
-
-  - these are also searchable
-
-  - they are two space indented and start with a "-" as shown here
-
-  - generally, they should be one word
-
+tags:
+- displayable tags
+- these are also searchable
+- they are two space indented and start with a "-" as shown here
+- generally, they should be one word
 ---
-
+```
 
 #### Formatting
 
 To add more advanced elements to your Markdown-formatted document beyond text, visit the [formatting guide](https://docs.rockylinux.org/guides/contribute/rockydocs_formatting/). This covers Admonitions, Tables, Quotes, and more.
 
-
 #### Contribute
 
 The process for [submitting original content](https://docs.rockylinux.org/guides/contribute/createnew)  is similar to updating an existing document from your local repository. Create a new document within your Markdown editor, Commit it to your GitHub repository, then submit a Pull Request to merge into the main branch of the repository. The documentation leads will decide where the new document will live.
 
-
 ## Special Notes
-
 
 ### Links
 
 Links can be internal (other docs within our domain), external (publicly hosted URLs), or lab-based (used as examples within your document).
 
-The format for all links within the documentation is square brackets around the descriptive name or label: 
+The format for all links within the documentation is square brackets around the descriptive name or label:
 
-[our site] followed by your link in parenthesis: (https://example.com)
+[our site] followed by your link in parenthesis: (<https://example.com>)
 
 To help lab-based URLs pass our automatic URL checker, we have created a list of excluded names you may use. You may request that a new exclusion be added. An editor may adjust your lab-based URL, or add an exclusion if they think it is warranted.
 
 Please note the following IEEE recommendation on naming local networks [RFC #8375 Special-Use Domain 'home.arpa.'](https://www.rfc-editor.org/rfc/rfc8375.html) published in May 2018.
 
+- home.arpa
+- example.com
+- site.com
+- site1.com
+- site2.com
+- apache-server
+- nginx-server
+- your-server-ip
+- your-server-hostname
+- localhost
 
-* home.arpa
-* example.com
-* site.com
-* site1.com
-* site2.com
-* apache-server
-* nginx-server
-* your-server-ip
-* your-server-hostname
-* localhost
-
-
-### Translation 
-
+### Translation
 
 #### CrowdIn
 
-We are adding to these docs in new languages at the speed of getting translators on board. Seeking contributors for this area especially. We use [CrowdIn](https://crowdin.com/) for updates. 
-
+We are adding to these docs in new languages at the speed of getting translators on board. Seeking contributors for this area especially. We use [CrowdIn](https://crowdin.com/) for updates.
 
 #### Translation and Meta content
 
-Translators, if you find a word in the source document that does not translate well into your language, or an error that prevents a perfect translation, please fix that in the source document and make a Pull Request. In that case, please add yourself as a contributor in the meta content of that document. 
+Translators, if you find a word in the source document that does not translate well into your language, or an error that prevents a perfect translation, please fix that in the source document and make a Pull Request. In that case, please add yourself as a contributor in the meta content of that document.
 
 However, unless you modify the source document, please do not modify the meta content.
 
-The place where we do want to acknowledge you is in the all-contributors section--at the bottom of this page. This is a list of everyone who has been part of this documentation project, whether creating content, spotting and fixing errors, or translating. Translators, you may add yourself (or [request to be added](https://chat.rockylinux.org/rocky-linux/channels/documentation)) here. We appreciate your contribution! 
-
+The place where we do want to acknowledge you is in the all-contributors section--at the bottom of this page. This is a list of everyone who has been part of this documentation project, whether creating content, spotting and fixing errors, or translating. Translators, you may add yourself (or [request to be added](https://chat.rockylinux.org/rocky-linux/channels/documentation)) here. We appreciate your contribution!
 
 ## Communication channel
 
-_For reporting issues, asking questions, getting support, and getting to know the documentarians._
+*For reporting issues, asking questions, getting support, and getting to know the documentarians.*
 
 For general questions about installing and using the distro, visit our [community forums](https://forums.rockylinux.org). For questions about the behind-the-scenes stuff like documentation, we have other channels.
-
 
 ### Mattermost
 
@@ -226,7 +212,7 @@ Welcome aboard! Meet the rest of our awesome contributors below: ([emoji key](ht
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/justasojourner"><img src="https://avatars.githubusercontent.com/u/66750169?v=4?s=100" width="100px;" alt="justasojourner"/><br /><sub><b>justasojourner</b></sub></a><br /><a href="#content-justasojourner" title="Content">🖋</a> <a href="#ideas-justasojourner" title="Ideas, Planning, & Feedback">🤔</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://shrug.pw/"><img src="https://avatars.githubusercontent.com/u/680198?v=4?s=100" width="100px;" alt="Neil Hanlon"/><br /><sub><b>Neil Hanlon</b></sub></a><br /><a href="#content-NeilHanlon" title="Content">🖋</a> <a href="#maintenance-NeilHanlon" title="Maintenance">🚧</a> <a href="#ideas-NeilHanlon" title="Ideas, Planning, & Feedback">🤔</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/pajamian"><img src="https://avatars.githubusercontent.com/u/92609?v=4?s=100" width="100px;" alt="Peter Ajamian"/><br /><sub><b>Peter Ajamian</b></sub></a><br /><a href="#content-pajamian" title="Content">🖋</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="http://www.flaviosiqueira.com.br/"><img src="https://avatars.githubusercontent.com/u/3700397?v=4?s=100" width="100px;" alt="Flávio Siqueira Prado"/><br /><sub><b>Flávio Siqueira Prado</b></sub></a><br /><a href="#translation-Bakrog" title="Translation">🌍</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://github.com/Bakrog"><img src="https://avatars.githubusercontent.com/u/3700397?v=4?s=100" width="100px;" alt="Flávio Siqueira Prado"/><br /><sub><b>Flávio Siqueira Prado</b></sub></a><br /><a href="#translation-Bakrog" title="Translation">🌍</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Norio4"><img src="https://avatars.githubusercontent.com/u/25744143?v=4?s=100" width="100px;" alt="Norio4"/><br /><sub><b>Norio4</b></sub></a><br /><a href="#translation-Norio4" title="Translation">🌍</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://www.volted.net/"><img src="https://avatars.githubusercontent.com/u/40760290?v=4?s=100" width="100px;" alt="Sébastien Pascal-Poher"/><br /><sub><b>Sébastien Pascal-Poher</b></sub></a><br /><a href="#translation-sjpp" title="Translation">🌍</a></td>
     </tr>
@@ -259,7 +245,7 @@ Welcome aboard! Meet the rest of our awesome contributors below: ([emoji key](ht
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/xpseudonym"><img src="https://avatars.githubusercontent.com/u/5032475?v=4?s=100" width="100px;" alt="Morgan Read"/><br /><sub><b>Morgan Read</b></sub></a><br /><a href="#content-xpseudonym" title="Content">🖋</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://ersei.saggis.com/"><img src="https://avatars.githubusercontent.com/u/17993169?v=4?s=100" width="100px;" alt="9p4"/><br /><sub><b>9p4</b></sub></a><br /><a href="#content-9p4" title="Content">🖋</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/9p4"><img src="https://avatars.githubusercontent.com/u/17993169?v=4?s=100" width="100px;" alt="9p4"/><br /><sub><b>9p4</b></sub></a><br /><a href="#content-9p4" title="Content">🖋</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/liquidspikes"><img src="https://avatars.githubusercontent.com/u/5150291?v=4?s=100" width="100px;" alt="Alex Zimmerman"/><br /><sub><b>Alex Zimmerman</b></sub></a><br /><a href="#content-liquidspikes" title="Content">🖋</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/viscountstyx"><img src="https://avatars.githubusercontent.com/u/46753436?v=4?s=100" width="100px;" alt="Andrew Faulkner"/><br /><sub><b>Andrew Faulkner</b></sub></a><br /><a href="#content-viscountstyx" title="Content">🖋</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/televi"><img src="https://avatars.githubusercontent.com/u/3333248?v=4?s=100" width="100px;" alt="Todd Levi"/><br /><sub><b>Todd Levi</b></sub></a><br /><a href="#content-televi" title="Content">🖋</a></td>
@@ -276,56 +262,75 @@ Welcome aboard! Meet the rest of our awesome contributors below: ([emoji key](ht
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/payagej"><img src="https://avatars.githubusercontent.com/u/20729061?v=4?s=100" width="100px;" alt="jules"/><br /><sub><b>jules</b></sub></a><br /><a href="#content-payagej" title="Content">🖋</a></td>
     </tr>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/brendanfattig"><img src="https://avatars.githubusercontent.com/u/54815652?v=4?s=100" width="100px;" alt="Brendan Fattig"/><br /><sub><b>Brendan Fattig</b></sub></a><br /><a href="#content-brendanfattig" title="Content">🖋</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/bittin"><img src="https://avatars.githubusercontent.com/u/43197?v=4?s=100" width="100px;" alt="bittin"/><br /><sub><b>bittin</b></sub></a><br /><a href="#content-bittin" title="Content">🖋</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://ichibariki.com/"><img src="https://avatars.githubusercontent.com/u/4787502?v=4?s=100" width="100px;" alt="ichibariki"/><br /><sub><b>ichibariki</b></sub></a><br /><a href="#content-ichibariki" title="Content">🖋</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/bernipuig"><img src="https://avatars.githubusercontent.com/u/12746940?v=4?s=100" width="100px;" alt="Bernat Puigdomenech Pascual"/><br /><sub><b>Bernat Puigdomenech Pascual</b></sub></a><br /><a href="#content-bernipuig" title="Content">🖋</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/netzwergehh"><img src="https://avatars.githubusercontent.com/u/79668910?v=4?s=100" width="100px;" alt="Dennis Körner"/><br /><sub><b>Dennis Körner</b></sub></a><br /><a href="#content-netzwergehh" title="Content">🖋</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/bezunartea"><img src="https://avatars.githubusercontent.com/u/13090619?v=4?s=100" width="100px;" alt="Pedro Bezunartea López"/><br /><sub><b>Pedro Bezunartea López</b></sub></a><br /><a href="#translation-bezunartea" title="Translation">🌍</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/danopogac"><img src="https://avatars.githubusercontent.com/u/8373145?v=4?s=100" width="100px;" alt="Daniel Pogac"/><br /><sub><b>Daniel Pogac</b></sub></a><br /><a href="#content-danopogac" title="Content">🖋</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Oats"><img src="https://avatars.githubusercontent.com/u/18314360?v=4?s=100" width="100px;" alt="oats"/><br /><sub><b>oats</b></sub></a><br /><a href="#content-Oats" title="Content">🖋</a></td>
     </tr>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Oats"><img src="https://avatars.githubusercontent.com/u/18314360?v=4?s=100" width="100px;" alt="oats"/><br /><sub><b>oats</b></sub></a><br /><a href="#content-Oats" title="Content">🖋</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://alexharden.org/"><img src="https://avatars.githubusercontent.com/u/8281207?v=4?s=100" width="100px;" alt="Alex Harden"/><br /><sub><b>Alex Harden</b></sub></a><br /><a href="#content-aharden" title="Content">🖋</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://jorp.xyz/"><img src="https://avatars.githubusercontent.com/u/18096435?v=4?s=100" width="100px;" alt="Jordan Pisaniello"/><br /><sub><b>Jordan Pisaniello</b></sub></a><br /><a href="#content-jorp" title="Content">🖋</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://hennig.mse.ufl.edu/"><img src="https://avatars.githubusercontent.com/u/8710634?v=4?s=100" width="100px;" alt="Richard Hennig"/><br /><sub><b>Richard Hennig</b></sub></a><br /><a href="#content-rhennig" title="Content">🖋</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/caffenix"><img src="https://avatars.githubusercontent.com/u/64636709?v=4?s=100" width="100px;" alt="caffenix"/><br /><sub><b>caffenix</b></sub></a><br /><a href="#content-caffenix" title="Content">🖋</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://manickathan.ch/"><img src="https://avatars.githubusercontent.com/u/3255070?v=4?s=100" width="100px;" alt="Lento Manickathan"/><br /><sub><b>Lento Manickathan</b></sub></a><br /><a href="#content-lento234" title="Content">🖋</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://www.depts.ttu.edu/cac/"><img src="https://avatars.githubusercontent.com/u/2364484?v=4?s=100" width="100px;" alt="Alan Sill"/><br /><sub><b>Alan Sill</b></sub></a><br /><a href="#content-alansill" title="Content">🖋</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/eltociear"><img src="https://avatars.githubusercontent.com/u/22633385?v=4?s=100" width="100px;" alt="Ikko Ashimine"/><br /><sub><b>Ikko Ashimine</b></sub></a><br /><a href="#content-eltociear" title="Content">🖋</a></td>
     </tr>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://bandism.net/"><img src="https://avatars.githubusercontent.com/u/22633385?v=4?s=100" width="100px;" alt="Ikko Ashimine"/><br /><sub><b>Ikko Ashimine</b></sub></a><br /><a href="#content-eltociear" title="Content">🖋</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="http://www.williamperron.com"><img src="https://avatars.githubusercontent.com/u/15235219?v=4?s=100" width="100px;" alt="William Perron"/><br /><sub><b>William Perron</b></sub></a><br /><a href="#content-williamperron" title="Content">🖋</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/williamperron"><img src="https://avatars.githubusercontent.com/u/15235219?v=4?s=100" width="100px;" alt="William Perron"/><br /><sub><b>William Perron</b></sub></a><br /><a href="#content-williamperron" title="Content">🖋</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/romh87"><img src="https://avatars.githubusercontent.com/u/81292426?v=4?s=100" width="100px;" alt="Roman Gherta"/><br /><sub><b>Roman Gherta</b></sub></a><br /><a href="#content-romh87" title="Content">🖋</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://cybertrouble.com"><img src="https://avatars.githubusercontent.com/u/12031564?v=4?s=100" width="100px;" alt="Yiğit can BAŞALMA"/><br /><sub><b>Yiğit can BAŞALMA</b></sub></a><br /><a href="#content-yigitbasalma" title="Content">🖋</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/markooff"><img src="https://avatars.githubusercontent.com/u/24265888?v=4?s=100" width="100px;" alt="markooff"/><br /><sub><b>markooff</b></sub></a><br /><a href="#content-markooff" title="Content">🖋</a> <a href="#translation-markooff" title="Translation">🌍</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="http://www.dengwenbin.com"><img src="https://avatars.githubusercontent.com/u/20312281?v=4?s=100" width="100px;" alt="Deng Wenbin"/><br /><sub><b>Deng Wenbin</b></sub></a><br /><a href="#translation-dengwenbin" title="Translation">🌍</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/dengwenbin"><img src="https://avatars.githubusercontent.com/u/20312281?v=4?s=100" width="100px;" alt="Deng Wenbin"/><br /><sub><b>Deng Wenbin</b></sub></a><br /><a href="#translation-dengwenbin" title="Translation">🌍</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/alikates"><img src="https://avatars.githubusercontent.com/u/59802505?v=4?s=100" width="100px;" alt="alikates"/><br /><sub><b>alikates</b></sub></a><br /><a href="#content-alikates" title="Content">🖋</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/hopnux"><img src="https://avatars.githubusercontent.com/u/110078361?v=4?s=100" width="100px;" alt="hopnux"/><br /><sub><b>hopnux</b></sub></a><br /><a href="#translation-hopnux" title="Translation">🌍</a></td>
     </tr>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/hopnux"><img src="https://avatars.githubusercontent.com/u/110078361?v=4?s=100" width="100px;" alt="hopnux"/><br /><sub><b>hopnux</b></sub></a><br /><a href="#translation-hopnux" title="Translation">🌍</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://www.breakingpitt.es"><img src="https://avatars.githubusercontent.com/u/10740572?v=4?s=100" width="100px;" alt="Pedro Garcia Rodriguez"/><br /><sub><b>Pedro Garcia Rodriguez</b></sub></a><br /><a href="#translation-BreakingPitt" title="Translation">🌍</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://laurenzkruty.de"><img src="https://avatars.githubusercontent.com/u/37706897?v=4?s=100" width="100px;" alt="Lau"/><br /><sub><b>Lau</b></sub></a><br /><a href="#content-LauKr" title="Content">🖋</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://www.meteocontrol.cn"><img src="https://avatars.githubusercontent.com/u/11520535?v=4?s=100" width="100px;" alt="Serge Croisé"/><br /><sub><b>Serge Croisé</b></sub></a><br /><a href="#content-SergeCroise" title="Content">🖋</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/bamtests"><img src="https://avatars.githubusercontent.com/u/17178592?v=4?s=100" width="100px;" alt="bamtests"/><br /><sub><b>bamtests</b></sub></a><br /><a href="#content-bamtests" title="Content">🖋</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://social.linux.pizza/@jahway603"><img src="https://avatars.githubusercontent.com/u/64485701?v=4?s=100" width="100px;" alt="jahway603"/><br /><sub><b>jahway603</b></sub></a><br /><a href="#content-jahway603" title="Content">🖋</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/bertronika"><img src="https://avatars.githubusercontent.com/u/42844753?v=4?s=100" width="100px;" alt="Nejc Bertoncelj"/><br /><sub><b>Nejc Bertoncelj</b></sub></a><br /><a href="#content-bertronika" title="Content">🖋</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/bakerds"><img src="https://avatars.githubusercontent.com/u/16193241?v=4?s=100" width="100px;" alt="Dan Baker"/><br /><sub><b>Dan Baker</b></sub></a><br /><a href="#content-bakerds" title="Content">🖋</a></td>
     </tr>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/bakerds"><img src="https://avatars.githubusercontent.com/u/16193241?v=4?s=100" width="100px;" alt="Dan Baker"/><br /><sub><b>Dan Baker</b></sub></a><br /><a href="#content-bakerds" title="Content">🖋</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://git.sr.ht/%7Equartsize/"><img src="https://avatars.githubusercontent.com/u/37243063?v=4?s=100" width="100px;" alt="Laura Hild"/><br /><sub><b>Laura Hild</b></sub></a><br /><a href="#content-quartsize" title="Content">🖋</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Grammaresque"><img src="https://avatars.githubusercontent.com/u/119525559?v=4?s=100" width="100px;" alt="Grammaresque"/><br /><sub><b>Grammaresque</b></sub></a><br /><a href="#content-Grammaresque" title="Content">🖋</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/bdacus01"><img src="https://avatars.githubusercontent.com/u/22330436?v=4?s=100" width="100px;" alt="Brent Dacus"/><br /><sub><b>Brent Dacus</b></sub></a><br /><a href="#content-bdacus01" title="Content">🖋</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="http://sauveur.xyz"><img src="https://avatars.githubusercontent.com/u/7724090?v=4?s=100" width="100px;" alt="Rawk Akani"/><br /><sub><b>Rawk Akani</b></sub></a><br /><a href="#content-rawkakani" title="Content">🖋</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/rawkakani"><img src="https://avatars.githubusercontent.com/u/7724090?v=4?s=100" width="100px;" alt="Rawk Akani"/><br /><sub><b>Rawk Akani</b></sub></a><br /><a href="#content-rawkakani" title="Content">🖋</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/nm583"><img src="https://avatars.githubusercontent.com/u/121867206?v=4?s=100" width="100px;" alt="nm583"/><br /><sub><b>nm583</b></sub></a><br /><a href="#content-nm583" title="Content">🖋</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/MrPaulAR"><img src="https://avatars.githubusercontent.com/u/3765696?v=4?s=100" width="100px;" alt="MrPaulAR"/><br /><sub><b>MrPaulAR</b></sub></a><br /><a href="#content-MrPaulAR" title="Content">🖋</a></td>
-    </tr>
-    <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/cybernet"><img src="https://avatars.githubusercontent.com/u/125879?v=4?s=100" width="100px;" alt="cybernet"/><br /><sub><b>cybernet</b></sub></a><br /><a href="#content-cybernet" title="Content">🖋</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Muph0"><img src="https://avatars.githubusercontent.com/u/10765858?v=4?s=100" width="100px;" alt="Jan Kytka"/><br /><sub><b>Jan Kytka</b></sub></a><br /><a href="#content-Muph0" title="Content">🖋</a></td>
+    </tr>
+    <tr>
       <td align="center" valign="top" width="14.28%"><a href="http://howtotechwriting.com/"><img src="https://avatars.githubusercontent.com/u/38929299?v=4?s=100" width="100px;" alt="Mario"/><br /><sub><b>Mario</b></sub></a><br /><a href="#content-doble-eme" title="Content">🖋</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/gannazhyrnova"><img src="https://avatars.githubusercontent.com/u/112796922?v=4?s=100" width="100px;" alt="Ganna Zhyrnova"/><br /><sub><b>Ganna Zhyrnova</b></sub></a><br /><a href="#translation-gannazhyrnova" title="Translation">🌍</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Demalpheus"><img src="https://avatars.githubusercontent.com/u/28327241?v=4?s=100" width="100px;" alt="Travis W"/><br /><sub><b>Travis W</b></sub></a><br /><a href="#content-Demalpheus" title="Content">🖋</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://g.dev/rana_tej_singh"><img src="https://avatars.githubusercontent.com/u/58101587?v=4?s=100" width="100px;" alt="Tej Singh Rana"/><br /><sub><b>Tej Singh Rana</b></sub></a><br /><a href="#content-Tej-Singh-Rana" title="Content">🖋</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/captain-Arvoy"><img src="https://avatars.githubusercontent.com/u/99230514?v=4?s=100" width="100px;" alt="Aditya Roshan Dash"/><br /><sub><b>Aditya Roshan Dash</b></sub></a><br /><a href="#content-captain-Arvoy" title="Content">🖋</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.qyecst.cn"><img src="https://avatars.githubusercontent.com/u/13901864?v=4?s=100" width="100px;" alt="qyecst"/><br /><sub><b>qyecst</b></sub></a><br /><a href="#content-qyecst" title="Content">🖋</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/msmit5"><img src="https://avatars.githubusercontent.com/u/55892653?v=4?s=100" width="100px;" alt="Matt"/><br /><sub><b>Matt</b></sub></a><br /><a href="#content-msmit5" title="Content">🖋</a></td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/zdover23"><img src="https://avatars.githubusercontent.com/u/1445107?v=4?s=100" width="100px;" alt="zdover23"/><br /><sub><b>zdover23</b></sub></a><br /><a href="#content-zdover23" title="Content">🖋</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/YadlaMani"><img src="https://avatars.githubusercontent.com/u/133841094?v=4?s=100" width="100px;" alt="Mani Yadla"/><br /><sub><b>Mani Yadla</b></sub></a><br /><a href="#content-YadlaMani" title="Content">🖋</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/DavisBarnabas"><img src="https://avatars.githubusercontent.com/u/39591292?v=4?s=100" width="100px;" alt="Dave_Barnabas"/><br /><sub><b>Dave_Barnabas</b></sub></a><br /><a href="#content-DavisBarnabas" title="Content">🖋</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://www.neelc.org/"><img src="https://avatars.githubusercontent.com/u/5403564?v=4?s=100" width="100px;" alt="Neel Chauhan"/><br /><sub><b>Neel Chauhan</b></sub></a><br /><a href="#content-neelchauhan" title="Content">🖋</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/j0eybrinkman"><img src="https://avatars.githubusercontent.com/u/122839775?v=4?s=100" width="100px;" alt="Joey"/><br /><sub><b>Joey</b></sub></a><br /><a href="#content-j0eybrinkman" title="Content">🖋</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://www.camalan.net"><img src="https://avatars.githubusercontent.com/u/610692?v=4?s=100" width="100px;" alt="Emre Çamalan"/><br /><sub><b>Emre Çamalan</b></sub></a><br /><a href="#content-ShyRain" title="Content">🖋</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/yashpandey06"><img src="https://avatars.githubusercontent.com/u/97700473?v=4?s=100" width="100px;" alt="Yash Pandey"/><br /><sub><b>Yash Pandey</b></sub></a><br /><a href="#content-yashpandey06" title="Content">🖋</a></td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="http://sjs.io"><img src="https://avatars.githubusercontent.com/u/1754056?v=4?s=100" width="100px;" alt="Stephen Simpson"/><br /><sub><b>Stephen Simpson</b></sub></a><br /><a href="#content-ssimpson89" title="Content">🖋</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/nishaaaaaant"><img src="https://avatars.githubusercontent.com/u/33195320?v=4?s=100" width="100px;" alt="Srinivas Nishant Viswanadha"/><br /><sub><b>Srinivas Nishant Viswanadha</b></sub></a><br /><a href="#content-nishaaaaaant" title="Content">🖋</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/sastorsl"><img src="https://avatars.githubusercontent.com/u/12235187?v=4?s=100" width="100px;" alt="Stein Arne Storslett"/><br /><sub><b>Stein Arne Storslett</b></sub></a><br /><a href="#content-sastorsl" title="Content">🖋</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://www.extrapepperoni.com/"><img src="https://avatars.githubusercontent.com/u/355322?v=4?s=100" width="100px;" alt="Chris Pepper"/><br /><sub><b>Chris Pepper</b></sub></a><br /><a href="#content-reppep" title="Content">🖋</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/techstacksavvy"><img src="https://avatars.githubusercontent.com/u/84424434?v=4?s=100" width="100px;" alt="Sasheeny Hubbard"/><br /><sub><b>Sasheeny Hubbard</b></sub></a><br /><a href="#content-techstacksavvy" title="Content">🖋</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/ChrSteinert"><img src="https://avatars.githubusercontent.com/u/9868229?v=4?s=100" width="100px;" alt="Christian Steinert"/><br /><sub><b>Christian Steinert</b></sub></a><br /><a href="#content-ChrSteinert" title="Content">🖋</a></td>
     </tr>
   </tbody>
 </table>

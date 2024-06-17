@@ -1,7 +1,7 @@
 ---
 title: rsync 演示01
 author: tianci li
-contributors: Steven Spencer
+contributors: Steven Spencer, Ganna Zhyrnova
 update: 2021-11-04
 ---
 
@@ -90,6 +90,7 @@ total size is 0 speedup is 0.00
 [root@fedora ~]# ls
 aabbcc
 ```
+
 传输成功。
 
 !!! tip "提示"
