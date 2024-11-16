@@ -1,4 +1,9 @@
 ---
 nav:
     - ... | index*.md
+    - Core: core
+    - Networking: network
+    - Scripts: scripts
+    - Containers: containers
+    - Git: git
     - ...

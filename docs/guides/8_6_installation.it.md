@@ -1,10 +1,10 @@
 ---
-Title: Installazione Di Rocky Linux 8.6
+Title: Installazione Di Rocky Linux 8
 author: wale soyinka
-contributors: tianci li, Steven Spencer, Colussi Franco
+contributors: tianci li, Steven Spencer, Ganna Zhyrnova
 ---
 
-# Installazione Di Rocky Linux 8.6
+# Installazione Di Rocky Linux 8
 
 Questa guida mostra nel dettaglio i passaggi per installare una versione a 64 bit della distribuzione Rocky Linux su un sistema stand-alone.  Effettueremo un'installazione di categoria server utilizzando un'immagine di installazione del sistema operativo scaricata dal sito web del progetto Rocky Linux. Passeremo attraverso i passaggi di installazione e personalizzazione nelle sezioni seguenti.
 
@@ -22,7 +22,7 @@ https://www.rockylinux.org/download/
 Per scaricare l'ISO direttamente dalla riga di comando utilizzare il comando `wget`:
 
 ```
-wget https://download.rockylinux.org/pub/rocky/8.6/isos/x86_64/Rocky-8.6-x86_64-minimal.iso
+wget https://download.rockylinux.org/pub/rocky/8.9/isos/x86_64/Rocky-8.9-x86_64-minimal.iso
 ```
 
 Le ISO di Rocky Linux sono denominate seguendo questa convenzione:
@@ -31,11 +31,11 @@ Le ISO di Rocky Linux sono denominate seguendo questa convenzione:
 Rocky-<MAJOR#>.<MINOR#>-<ARCH>-<VARIANT>.iso
 ```
 
-Ad esempio, `Rocky-8.6-x86_64-minimal.iso`
+Ad esempio, `Rocky-8.9-x86_64-minimal.iso`
 
 !!! Note "Nota"
 
-    La pagina web del progetto Rocky ha un elenco di diversi mirrors situati in tutto il mondo. Quando possibile, dovresti scegliere il mirror geograficamente più vicino a te. La lista dei mirror ufficiali può essere trovata [quì](https://mirrors.rockylinux.org/mirrormanager/mirrors).
+    La pagina web del progetto Rocky elenca diversi mirror, situati in tutto il mondo. Scegliete il mirror geograficamente più vicino a voi. La lista dei mirror ufficiali può essere trovata [quì](https://mirrors.rockylinux.org/mirrormanager/mirrors).
 
 ## Verifica del file ISO dell'installazione
 
@@ -44,7 +44,7 @@ Se hai scaricato le ISO di Rocky Linux su una distribuzione Linux esistente, è 
 In primo luogo scaricare il file che contiene i checksum ufficiali per le ISO disponibili. Mentre siete ancora nella cartella che contiene la ISO scaricata di Rocky Linux scaricate il file di checksum per la ISO, digitando:
 
 ```
-wget https://download.rockylinux.org/pub/rocky/8.6/isos/x86_64/CHECKSUM
+wget https://download.rockylinux.org/pub/rocky/8.9/isos/x86_64/CHECKSUM
 ```
 
 Utilizzare l'utilità `sha256sum` per verificare l'integrità del file ISO contro la corruzione e/o la manomissione.
@@ -53,25 +53,25 @@ Utilizzare l'utilità `sha256sum` per verificare l'integrità del file ISO contr
 sha256sum -c CHECKSUM --ignore-missing
 ```
 
-Questo controllerà l'integrità del file ISO scaricato in precedenza, a condizione che sia nella stessa directory. L'output dovrebbe mostrare:
+Questo controllerà l'integrità del file ISO scaricato in precedenza, a condizione che si trovi nella stessa directory. L'output dovrebbe mostrare:
 
 ```
-Rocky-8.6-x86_64-minimal.iso: OK
+Rocky-8.9-x86_64-minimal.iso: OK
 ```
 
 ## L'Installazione
 
 !!! Tip "Suggerimento"
 
-    Prima di avviare correttamente l'installazione, l’Interfaccia Unified Extensible Firmware Interface (UEFI) del sistema o il sistema Basic Input/Output (BIOS) devono essere preconfigurati per avviare dal supporto corretto.
+    Prima dell'installazione, la Unified Extensible Firmware Interface (UEFI) o il Basic Input/Output System (BIOS) del sistema devono essere preconfigurati per l'avvio dal supporto corretto.
 
-Se il computer è configurato per avviarsi dal supporto che ha il file ISO possiamo iniziare il processo di installazione.
+È possibile iniziare il processo di installazione se il computer è impostato per l'avvio dal supporto che contiene il file ISO.
 
 Inserire e avviare dal supporto di installazione (disco ottico, unità flash USB, e così via).
 
 Una volta che il computer si è avviato, vi verrà presentata la schermata di benvenuto di Rocky Linux 8.
 
-![Schermata di avvio dell'installazione Rocky Linux](images/installation_8.5_F01.png)
+![Schermata di avvio dell'installazione Rocky Linux](images/install_8_9_01.png)
 
 Se non si preme alcun tasto il programma di installazione inizierà un conto alla rovescia, dopo il quale il processo di installazione eseguirà automaticamente l'opzione predefinita, evidenziata:
 
@@ -83,7 +83,7 @@ Si procederà ad una rapida verifica dei media. Questo passo di verifica del sup
 
 Dopo che il controllo del supporto viene completato e il supporto viene verificato come corretto per essere utilizzato, il programma di installazione continuerà automaticamente alla schermata successiva.
 
-Seleziona la lingua che vuoi usare per eseguire l'installazione in questa schermata. Per questa guida, selezioniamo _Italiano (Italia)_. Quindi clicca sul pulsante <kbd>Continua</kbd>.
+Selezionare la lingua che si desidera utilizzare per l'installazione in questa schermata. Per questa guida, selezioniamo *English (United States)*. Quindi clicca sul pulsante <kbd>Continue</kbd>.
 
 ## Riepilogo Installazione
 
@@ -99,13 +99,13 @@ Ci soffermeremo su ciascuna di queste sezioni e apporteremo modifiche ove necess
 
 ### Sezione Localizzazione
 
-Questa sezione è utilizzata per personalizzare gli elementi relativi alla localizzazione del sistema. Questo include – tastiera, supporto linguistico, tempo e data.
+Questa sezione è utilizzata per personalizzare le voci relative al locale del sistema. Questo include – tastiera, supporto linguistico, tempo e data.
 
 #### Tastiera
 
 Sul nostro sistema demo in questa guida, modifichiamo il valore predefinito e selezioniamo (_Italiano (Italiana)_) e salviamo le modifiche.
 
-Tuttavia, se è necessario apportare modifiche qui, dalla schermata _Riepilogo Installazione_, clicca sull'opzione <kbd>Tastiera</kbd> per specificare il layout della tastiera del sistema. È possibile aggiungere ulteriori layout della tastiera se è necessario nella successiva schermata e specificare il loro ordine.
+Tuttavia, se è necessario apportare modifiche qui, dalla schermata _Installation Summary_, clicca sull'opzione <kbd>Keyboard</kbd> per specificare il layout della tastiera del sistema. È possibile aggiungere ulteriori layout della tastiera se è necessario nella successiva schermata e specificare il loro ordine.
 
 Clicca <kbd>Fatto</kbd> quando hai finito con questa schermata.
 
@@ -131,14 +131,14 @@ Dal momento che stiamo eseguendo la nostra installazione utilizzando un'immagine
 
 !!! Tip "Suggerimento"
 
-    L'area Installation Source è dove è possibile scegliere di eseguire un'installazione basata sulla rete. Per un'installazione basata sulla rete, è necessario prima assicurarsi che una scheda di rete sul sistema di destinazione sia configurata correttamente, ed sia in grado di raggiungere internet.  Per eseguire un'installazione basata sulla rete, clicca su `Installation Source` e quindi seleziona il pulsante radio `On the network`. Una volta selezionato, scegli il protocollo `https` e digita il seguente URL nel campo di testo `download.rockylinux.org/pub/rocky/8/BaseOS/x86_64/os`.   Clicca su `Fatto`.
+    L'area Installation Source è dove è possibile scegliere di eseguire un'installazione basata sulla rete. Per un'installazione basata sulla rete, è necessario innanzitutto assicurarsi che una scheda di rete sul sistema di destinazione sia configurata correttamente e possa raggiungere Internet. Per eseguire un'installazione basata sulla rete, clicca su `Installation Source` e quindi seleziona il pulsante radio `On the network`. Una volta selezionato, scegli il protocollo `https` e digita il seguente URL nel campo di testo `download.rockylinux.org/pub/rocky/8/BaseOS/x86_64/os`. Clicca su `Fatto`.
 
 #### Selezione Software
 
 Facendo clic sull'opzione <kbd>Selezione Software</kbd> nella schermata principale _Riepilogo Installazione_ ti viene presentata la sezione dell'installazione dove puoi scegliere i pacchetti software esatti che vengono installati sul sistema. L'area di selezione del software è suddivisa in:
 
-- _Ambiente di base_ : Server, Installazione minima, Sistema operativo personalizzato
-- _Software aggiuntivo per l'area Ambiente Selezionata_ : Selezionando un Ambiente Base sul lato sinistro si presenta una varietà di software aggiuntivi correlati che possono essere installati per l'ambiente specificato sul lato destro.
+- _Base Environment_: Server, Installazione minima, Sistema operativo personalizzato
+- _Additional software for Selected Environment area_: Selezionando un Base Environment sul lato sinistro si presenta una varietà di software aggiuntivi correlati che possono essere installati per l'ambiente specificato sul lato destro.
 
 Seleziona invece l'opzione _Installazione minima_ (Funzionalità di base).
 
@@ -168,7 +168,7 @@ L'attività finale della procedura d'installazione riguarda la configurazione de
 
     Dopo aver fatto clic sull'opzione <kbd>Network & Nome Host</kbd>, tutto l'hardware dell'interfaccia di rete correttamente rilevato (come Ethernet, le schede di rete wireless, e così via) saranno elencate nel riquadro sinistro della schermata di configurazione di rete. A seconda della distribuzione Linux e della specifica configurazione hardware, i dispositivi Ethernet in Linux hanno nomi simili a `eth0`, `eth1`, `ens3`, `ens4`, `em1`, `em2`, `p1p1`, `enp0s3`, e così via.
 
-Per ogni interfaccia, è possibile configurarla utilizzando il DHCP o impostando manualmente l'indirizzo IP. Se si sceglie di configurare manualmente, assicurarsi di avere tutte le informazioni pertinenti pronte, come l'indirizzo IP, maschera di rete, e così via.
+È possibile configurare ogni interfaccia tramite DHCP o impostare manualmente l'indirizzo IP. Se si sceglie di configurare manualmente, assicurarsi di avere tutte le informazioni pertinenti pronte, come l'indirizzo IP, maschera di rete, e così via.
 
 Facendo clic sul pulsante <kbd>Network & Nome Host</kbd> nella schermata principale _Riepilogo Installazione_ si apre la corrispondente schermata di configurazione. Tra le altre cose, è possibile configurare il nome host del sistema (il nome predefinito è `localhost.localdomain`).
 
@@ -253,7 +253,7 @@ Infine, completare la procedura facendo clic sul pulsante <kbd>Reboot System</kb
 
 Il sistema è ora configurato e pronto per l'uso. Vedrete la console Rocky Linux.
 
-![Rocky Linux Schermata Di Benvenuto](images/installation_8.5_F02.png)
+![Rocky Linux Schermata Di Benvenuto](images/installation_8_F02.png)
 
 Per accedere al sistema, digita `rockstar` al prompt di accesso e premi <kbd>Invio</kbd>.
 

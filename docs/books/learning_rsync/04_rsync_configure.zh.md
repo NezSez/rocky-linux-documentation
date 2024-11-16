@@ -6,12 +6,12 @@ update: 2021-11-04
 
 # /etc/rsyncd.conf
 
-上一篇 [rsync演示02](03_rsync_demo02.zh.md) 我们介绍了一些基本的参数，本篇是做另外参数的补充。 本篇是做另外参数的补充。
+上一篇 [rsync演示02](03_rsync_demo02.zh.md) 我们介绍了一些基本的参数。 本篇是做另外参数的补充。
 
 | 参数                                  | 说明                                                                                                                                                                 |
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | fake super  = yes                   | yes表示不需要daemon以root运行，就可以存储文件的完整属性。                                                                                                                                |
-| uid =                               |                                                                                                                                                                    |
+| uid =                               | 用户 ID                                                                                                                                                              |
 | gid =                               | 两个参数用来指定当以root身份运行rsync守护进程时，指定传输文件所使用的用户和组，默认都是nobody 默认是nobody                                                                                                   |
 | use chroot  =  yes                  | 传输前是否需要进行根目录的锁定，yes是，no否。 rsync为了增加安全性，默认值为yes。                                                                                                                    |
 | max  connections  =  4              | 允许最大的连接数，默认值为0，表示不做限制                                                                                                                                              |
@@ -28,4 +28,21 @@ update: 2021-11-04
 
 ## 推荐的配置
 
-![ photo ](images/rsync_config.jpg)
+```ini title="/etc/rsyncd.conf"
+uid = nobody
+gid = nobody
+address = 192.168.100.4
+use chroot = yes
+max connections = 10
+syslog facility = daemon
+pid file = /var/run/rsyncd.pid
+log file = /var/log/rsyncd.log
+lock file = /var/run/rsyncd.lock
+[file]
+  comment = rsync
+  path = /rsync/
+  read only = no
+  dont compress = *.gz *.bz2 *.zip
+  auth users = li
+  secrets file = /etc/rsyncd users.db
+```

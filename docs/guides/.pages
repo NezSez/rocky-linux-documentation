@@ -6,18 +6,22 @@ nav:
     - ... | migrate2rocky*.md
     - ... | custom-linux-kernel*.md
     - Contribute: contribute
+    - RSOD: rsod
     - Automation: automation
     - Backup & Sync: backup
     - Content Management: cms
     - Communications: communications
     - Containers: containers
+    - Cloud: cloud
     - Database: database
     - Desktop: desktop
     - DNS: dns
     - Editors: editors
     - Email: email
     - File Sharing Services: file_sharing
+    - Hardware: hardware
     - Interoperability: interoperability
+    - Kernel: kernel
     - Mirror Management: mirror_management
     - Network: network
     - Package Management: package_management

@@ -1,11 +1,12 @@
 ---
 title: rsync 演示02
 author: tianci li
-contributors: Steven Spencer
+contributors: Steven Spencer, Ganna Zhyrnova
 update: 2021-11-04
 ---
 
 # 基于rsync协议的演示
+
 在vsftpd中，有虚拟用户（管理员自定义的模拟用户），原因在于使用匿名用户和本地用户都不太安全。 我们知道基于SSH协议的服务器必须要保证有一个系统的用户， 当有许多的同步需求时，就可能需要创建许多的用户， 这显然不符合GNU/Linux的运维标准(用户数越多，服务器越不安全)，在rsync中，为了安全性考虑，就有了rsync协议验证登录方式。
 
 **具体如何操作？**
@@ -35,7 +36,7 @@ update: 2021-11-04
 
 !!! tip "提示"
 
-    密码文件的权限必须是<font color=red>600</font>
+    密码文件的权限必须是 <font color=red>600</font>。
 
 写入一些文件内容到 <font color=red>/etc/rsyncd.conf</font>，且将用户名与密码写入到 /etc/rsyncd_users.db 中，权限为 600
 

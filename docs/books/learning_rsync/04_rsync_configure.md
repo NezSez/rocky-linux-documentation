@@ -4,14 +4,14 @@ author : tianci li
 update : 2021-11-04
 ---
 
-#  /etc/rsyncd.conf
+# /etc/rsyncd.conf
 
-In the previous article [ rsync demo 02 ](03_rsync_demo02.md) we introduced some basic parameters. This article is to supplement other parameters.
+In the previous article [rsync demo 02](03_rsync_demo02.md) we introduced some basic parameters. This article is to supplement other parameters.
 
 |Parameters|Description|
 |---|---|
 | fake super = yes | yes means that you do not need the daemon to run as root to store the complete attributes of the file. |
-| uid = | |
+| uid = | user id |
 | gid = | Two parameters are used to specify the user and group used to transfer files when running the rsync daemon as root. The default is nobody |
 | use chroot = yes | Whether the root directory needs to be locked before transmission, yes yes, no no. In order to increase security, rsync defaults to yes. |
 | max connections = 4 | The maximum number of connections allowed, the default value is 0, which means that there is no restriction |
@@ -26,6 +26,23 @@ In the previous article [ rsync demo 02 ](03_rsync_demo02.md) we introduced some
 | auth users = li |Enable virtual users, multiple users are separated by commas in English state|
 | syslog facility = daemon | Define the level of system log. These values ​​can be filled in: auth, authpriv, cron, daemon, ftp, kern, lpr, mail, news, security, syslog, user, uucp, local0, local1, local2 local3, local4, local5, local6 and local7. The default value is daemon|
 
-##  Recommended configuration
+## Recommended configuration
 
-![ photo ](images/rsync_config.jpg)
+```ini title="/etc/rsyncd.conf"
+uid = nobody
+gid = nobody
+address = 192.168.100.4
+use chroot = yes
+max connections = 10
+syslog facility = daemon
+pid file = /var/run/rsyncd.pid
+log file = /var/log/rsyncd.log
+lock file = /var/run/rsyncd.lock
+[file]
+  comment = rsync
+  path = /rsync/
+  read only = no
+  dont compress = *.gz *.bz2 *.zip
+  auth users = li
+  secrets file = /etc/rsyncd users.db
+```

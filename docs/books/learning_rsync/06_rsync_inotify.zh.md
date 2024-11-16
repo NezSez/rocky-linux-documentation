@@ -1,7 +1,7 @@
 ---
 title: inotify-tools 安装与使用
 author: tianci li
-contributors: Steven Spencer
+contributors: Steven Spencer, Ganna Zhyrnova
 update: 2021-11-04
 ---
 
@@ -64,8 +64,10 @@ fs.inotify.max_user_watches = 1048576
 ## 相关命令
 
 inotify-tools工具有两个命令，分别是：
-* **inotifywait** - 用于持续监控，实时输出结果。 一般是配合rsync增量备份工具一起使用，因为是文件系统的监控，所以可以搭配脚本一起使用，后面我们会介绍具体的脚本写法。 因为是文件系统的监控，所以可以搭配脚本一起使用。 后面我们会介绍具体的脚本写法。
-* **inotifywatch** - 用于短期监控，任务完成后输出结果。
+
+* **inotifywait**：用于持续监控，实时输出结果。 它通常与 rsync 增量备份工具一起使用。 因为它是对文件系统的监控，所以可以搭配脚本一起使用。 我们稍后将介绍具体的脚本编写。
+
+* **inotifywatch**：用于短期监控，任务完成后输出结果。
 
 inotifywait 主要有以下选项：
 
@@ -93,7 +95,7 @@ inotifywait 主要有以下选项：
 | move_self     | 已移动受监视的文件或目录               |
 | create        | 被监控的目录内有创建的文件或目录           |
 | delete        | 被监控的目录内有文件或目录被删除           |
-| delete_self   | 文件或目录以及删除                  |
+| delete_self   | 文件或目录已经被删除                 |
 | unmount       | 包含已卸载文件或目录的文件系统            |
 
 示例:`[root@Rocky ~]# inotifywait  -mrq  -e  create,delete  /rsync/`

@@ -1,8 +1,8 @@
 ---
 title: 6 Profiles
 author: Steven Spencer
-contributors: Ezequiel Bruni
-tested with: 8.5, 8.6, 9.0
+contributors: Ezequiel Bruni, Ganna Zhyrnova
+tested_with: 8.8, 9.2
 tags:
   - lxd
   - enterprise
@@ -11,39 +11,39 @@ tags:
 
 # Chapter 6: Profiles
 
-Throughout this chapter you will need to execute commands as your unprivileged user ("lxdadmin" if you've been following from the beginning in this book).
+Throughout this chapter you will need to run commands as your unprivileged user ("lxdadmin" if you've been following from the beginning in this book).
 
 You get a default profile when you install LXD, and this profile cannot be removed or modified. That said, you can use the default profile to create new profiles to use with your containers.
 
-If you look at our container listing you will notice that the IP address in each case is assigned from the bridged interface. In a production environment, you may want to use something else. This might be a DHCP assigned address from your LAN interface or even a statically assigned address from your WAN.
+If you examine your container listing, you will notice that the IP address in each case is from the bridged interface. In a production environment, you may want to use something else. This might be a DHCP assigned address from your LAN interface or even a statically assigned address from your WAN.
 
-If you configure your LXD server with two interfaces, and assign each an IP on your WAN and LAN, then it is possible to assign your containers IP addresses based on which interface the container needs to be facing.
+If you configure your LXD server with two interfaces and assign each an IP on your WAN and LAN, it is possible to assign your container's IP addresses based on the interface the container needs to be facing.
 
-As of version 9.0 of Rocky Linux (and really any bug for bug copy of Red Hat Enterprise Linux) the method for assigning IP addresses statically or dynamically using the profiles below, is broken out of the gate.
+As of version 9.0 of Rocky Linux (and really any bug for bug copy of Red Hat Enterprise Linux) the method for assigning IP addresses statically or dynamically with the profiles does not work.
 
-There are ways to get around this, but it is annoying. This appears to have something to do with changes that have been made to Network Manager that affect macvlan. macvlan allows you to create multiple interfaces with different Layer 2 addresses.
+There are ways to get around this, but it is annoying. This appears to have something to do with changes made to Network Manager that affect macvlan. macvlan allows you to create many interfaces with different Layer 2 addresses.
 
-For now, just be aware that what we are going to suggest next has drawbacks when choosing container images based on RHEL.
+For now, just be aware that this has drawbacks when choosing container images based on RHEL.
 
-## Creating A macvlan Profile And Assigning It
+## Creating A macvlan profile and assigning it
 
-To create our macvlan profile, simply use this command:
+To create our macvlan profile, use this command:
 
-```
+```bash
 lxc profile create macvlan
 ```
 
-Keep in mind that if we were on a multi-interface machine and wanted more than one macvlan template based on which network we wanted to reach, we could use "lanmacvlan" or "wanmacvlan" or any other name that we wanted to use to identify the profile. In other words, using "macvlan" in our profile create statement is totally up to you.
+If you were on a multi-interface machine and wanted more than one macvlan template based on the network you wanted to reach, you might use "lanmacvlan" or "wanmacvlan" or any other name that you wanted to use to identify the profile. Using "macvlan" in our profile create statement is totally up to you.
 
-Now we want to modify the macvlan interface, but before we do, we need to know what the parent interface is for our LXD server. This will be the interface that has a LAN (in this case) assigned IP. To determine which interface that is, use:
+You want to change the macvlan interface, but before you do, you need to know what the parent interface is for our LXD server. This will be the interface that has a LAN (in this case) assigned IP. To find what interface that is, use:
 
-```
+```bash
 ip addr
 ```
 
-And then look for the interface with the LAN IP assignment in the 192.168.1.0/24 network:
+Look for the interface with the LAN IP assignment in the 192.168.1.0/24 network:
 
-```
+```bash
 2: enp3s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
     link/ether 40:16:7e:a9:94:85 brd ff:ff:ff:ff:ff:ff
     inet 192.168.1.106/24 brd 192.168.1.255 scope global dynamic noprefixroute enp3s0
@@ -52,26 +52,25 @@ And then look for the interface with the LAN IP assignment in the 192.168.1.0/24
        valid_lft forever preferred_lft forever
 ```
 
-So in this case, the interface would be "enp3s0".
+In this case, the interface is "enp3s0".
 
-Now let's modify the profile:
+Next change the profile:
 
-```
+```bash
 lxc profile device add macvlan eth0 nic nictype=macvlan parent=enp3s0
 ```
 
-This command adds all of the necessary parameters to the macvlan profile so that it can be used.
+This command adds all of the necessary parameters to the macvlan profile required for use.
 
-To take a look at what this command created, use the command:
+Examine what this command created, by using the command:
 
-```
+```bash
 lxc profile show macvlan
 ```
 
 Which will give you output similar to this:
 
-
-```
+```bash
 config: {}
 description: ""
 devices:
@@ -83,51 +82,50 @@ name: macvlan
 used_by: []
 ```
 
-Obviously, you can use profiles for lots of other things, but assigning a static IP to a container, or using your own DHCP server as a source for an address are very common needs.
+You can use profiles for many other things, but assigning a static IP to a container, or by using your own DHCP server are common needs.
 
-To assign the macvlan profile to rockylinux-test-8 we need to do the following:
+To assign the macvlan profile to rockylinux-test-8 you need to do the following:
 
-```
+```bash
 lxc profile assign rockylinux-test-8 default,macvlan
 ```
 
-Let's also do the same thing for rockylinux-test-9:
+Do the same thing for rockylinux-test-9:
 
-```
+```bash
 lxc profile assign rockylinux-test-9 default,macvlan
 ```
 
-This simply says, we want the default profile, and then we want to apply the macvlan profile as well.
+This says, you want the default profile, and to apply the macvlan profile too.
 
 ## Rocky Linux macvlan
 
-The upstream has been playing with the Network Manager implementation to the point of frustration. Early on with Rocky Linux 8, the macvlan profile was broken. With Rocky Linux 8.6, the macvlan profile worked again, and then with 9.0, it was once again broken. Technically, 
-macvlan is part of the kernel, and the profile does assign correctly in 9.0, but an IP address from the LAN interface network is never assigned. There are work arounds to fix this, but none is very pretty-particularly if you are wanting to assign a static IP address. 
+In RHEL distributions and clones, Network Manager has been in a constant state of change. Because of this, the way the `macvlan` profile works does not work (at least in comparison to other distributions), and requires a little additional work to assign IP addresses from DHCP or statically.
 
-Keep in mind that none of this has anything to do with Rocky Linux particularly, but with the upstream package implementation.
+Remember that none of this has anything to do with Rocky Linux particularly, but with the upstream package implementation.
 
-Simply put, if you want to run Rocky Linux containers and use macvlan to assign an IP address from your LAN or WAN networks, then the process is different based on which container version of the OS you are using (8.6 or 9.0).
+If you want to run Rocky Linux containers and use macvlan to assign an IP address from your LAN or WAN networks, the process is different based on the container version of the operating system (8.x or 9.x).
 
-### Rocky Linux 9.0 macvlan - The DHCP Fix
+### Rocky Linux 9.x macvlan - the DHCP fix
 
-First, let's illustrate what happens when we stop and restart the two containers after assigning the macvlan profile.
+First, let us illustrate what happens when stopping and restarting the two containers after assigning the macvlan profile.
 
-Having the profile assigned, however, doesn't change the default configuration, which is set to DHCP by default.
+Having the profile assigned, however, does not change the default configuration, which is DHCP by default.
 
-To test this, simply do the following:
+To test this, do the following:
 
-```
+```bash
 lxc restart rocky-test-8
 lxc restart rocky-test-9
 ```
 
-Now list your containers again and note that the rockylinux-test-9 not have an IP address anymore:
+List your containers again and note that the rockylinux-test-9 does not have an IP address anymore:
 
-```
+```bash
 lxc list
 ```
 
-```
+```bash
 +-------------------+---------+----------------------+------+-----------+-----------+
 |       NAME        |  STATE  |         IPV4         | IPV6 |   TYPE    | SNAPSHOTS |
 +-------------------+---------+----------------------+------+-----------+-----------+
@@ -137,19 +135,19 @@ lxc list
 +-------------------+---------+----------------------+------+-----------+-----------+
 | ubuntu-test       | RUNNING | 10.146.84.181 (eth0) |      | CONTAINER | 0         |
 +-------------------+---------+----------------------+------+-----------+-----------+
-
 ```
-As you can see, our Rocky Linux 8.6 container received the IP address from the LAN interface, whereas the Rocky Linux 9.0 container did not.
 
-To further demonstrate the problem here, we need to execute `dhclient` on the Rocky Linux 9.0 container. This will show us that the macvlan profile, *is* in fact applied:
+As you can see, our Rocky Linux 8.x container received the IP address from the LAN interface, whereas the Rocky Linux 9.x container did not.
 
-```
+To further demonstrate the problem here, you need to run `dhclient` on the Rocky Linux 9.0 container. This will show us that the macvlan profile, *is* in fact applied:
+
+```bash
 lxc exec rockylinux-test-9 dhclient
 ```
 
-A new listing using `lxc list` now shows the following:
+Another container listing now shows the following:
 
-```
+```bash
 +-------------------+---------+----------------------+------+-----------+-----------+
 |       NAME        |  STATE  |         IPV4         | IPV6 |   TYPE    | SNAPSHOTS |
 +-------------------+---------+----------------------+------+-----------+-----------+
@@ -161,58 +159,53 @@ A new listing using `lxc list` now shows the following:
 +-------------------+---------+----------------------+------+-----------+-----------+
 ```
 
-That should have happened with a simple stop and start of the container, but it does not. Assuming that we want to use a DHCP assigned IP address every time, then we can fix this with a simple crontab entry. To do this, we need to gain shell access to the container by enter
-ing:
+That should have happened with a stop and start of the container, but it does not. Assuming that you want to use a DHCP assigned IP address every time, you can fix this with a simple crontab entry. To do this, we need to gain shell access to the container by entering:
 
-```
+```bash
 lxc exec rockylinux-test-9 bash
 ```
 
-Next, lets determine the complete path to `dhclient`. To do this, because this was built on a minimal image, you will need to first install `which`:
+Next, lets determine the path to `dhclient`. To do this, because this container is from a minimal image, you will need to first install `which`:
 
-```
+```bash
 dnf install which
 ```
 
 then run:
 
-```
+```bash
 which dhclient
 ```
 
-which should return:
+which will return:
 
-```
+```bash
 /usr/sbin/dhclient
 ```
 
-Next, let's modify root's crontab:
+Next, change root's crontab:
 
-```
+```bash
 crontab -e
 ```
 
-And add this line:
+Add this line:
 
-```
+```bash
 @reboot    /usr/sbin/dhclient
 ```
 
-The crontab command entered above, uses _vi_ so to save your changes and exit simply use:
+The crontab command entered uses *vi* . To save your changes and exit  use ++shift+colon+"w"+"q"++.
 
-```
-SHIFT:wq!
-```
+Exit the container and restart rockylinux-test-9:
 
-Now exit the container and restart rockylinux-test-9:
-
-```
+```bash
 lxc restart rockylinux-test-9
 ```
 
-A new listing will reveal that the container has been assigned the DHCP address:
+Another listing will reveal that the container has the DHCP address assigned:
 
-```
+```bash
 +-------------------+---------+----------------------+------+-----------+-----------+
 |       NAME        |  STATE  |         IPV4         | IPV6 |   TYPE    | SNAPSHOTS |
 +-------------------+---------+----------------------+------+-----------+-----------+
@@ -225,57 +218,67 @@ A new listing will reveal that the container has been assigned the DHCP address:
 
 ```
 
-### Rocky Linux 9.0 macvlan - The Static IP Fix
+### Rocky Linux 9.x macvlan - The static IP fix
 
-To statically assign an IP address, things get even more convoluted. Since `network-scripts` is now deprecated in Rocky Linux 9.0, the only way to do this is through static assignment, and because of the way the containers use the network, you're not going to be able to set the route with a normal `ip route` statement either. The fix is to allow the container to get a dynamically allocated IP from your router, and then to script the addition of the static IP along with the removal of the dynamically assigned one.  We have already run `dhclient` and have seen the dynamically assigned IP, so we can use this (192.168.1.113) as the IP to delete. IF your router decides to hand out a different IP, the worst that can happen is that your container will end up with two IP's on the same network.
+To statically assign an IP address, things get even more convoluted. Since `network-scripts` is now deprecated in Rocky Linux 9.x, the only way to do this is through static assignment, and because of the way the containers use the network, you are not going to be able to set the route with a normal `ip route` statement. The problem turns out to be that the interface assigned when applying the macvlan profile (eth0 in this case), is not manageable with Network Manager. The fix is to rename the network interface on the container after restart and assign the static IP. You can do this with a script and run (again) within root's crontab. Do this with the `ip` command.
 
-To do this, we need to gain shell access to the container again:
+To do this, you need to gain shell access to the container again:
 
-```
+```bash
 lxc exec rockylinux-test-9 bash
 ```
 
-Next, we are going to create a bash script in `/usr/local/sbin` called "static"
+Next, you are going to create a bash script in `/usr/local/sbin` called "static":
 
-```
+```bash
 vi /usr/local/sbin/static
 ```
 
-The contents of this script are simple:
+The contents of this script are not difficult:
 
-```
+```bash
 #!/usr/bin/env bash
 
-/usr/sbin/dhclient
-sleep 3
-/usr/sbin/ip addr add 192.168.1.151/24 dev eth0
-sleep 3
-/usr/sbin/ip addr del 192.168.1.113/24 dev eth0
+/usr/sbin/ip link set dev eth0 name net0
+/usr/sbin/ip addr add 192.168.1.151/24 dev net0
+/usr/sbin/ip link set dev net0 up
+/usr/sbin/ip route add default via 192.168.1.1
 ```
 
-So what are we doing here? First, we run `dhclient` because we need the route that is created automatically when we do this. Deleting the IP will not delete the route. Second, we assign the new static IP that we have allocated for our container. In this case 192.168.1.151. and last, we delete the ip that was dynamically assigned.  The sleep commands between lines gives each command time to complete before moving on to the next one. It is particularly important that `dhclient` has time to run so that the route will be added before we do the rest of the steps.
+What are we doing here?
 
-Make our script exeutable with
+* you rename eth0 to a new name that we can manage ("net0")
+* you assign the new static IP that we have allocated for our container (192.168.1.151)
+* you bring up the new "net0" interface
+* you need to add the default route for our interface
 
-```
+Make our script executable with:
+
+```bash
 chmod +x /usr/local/sbin/static
 ```
 
-Finally, exit the container and restart it 
+Add this to root's crontab for the container with the @reboot time:
 
+```bash
+@reboot     /usr/local/sbin/static
 ```
+
+Finally, exit the container and restart it:
+
+```bash
 lxc restart rockylinux-test-9
 ```
 
-Wait a few seconds and then list out the containers again:
+Wait a few seconds and list out the containers again:
 
-```
+```bash
 lxc list
 ```
 
-Which should show you success:
+You should see success:
 
-```
+```bash
 +-------------------+---------+----------------------+------+-----------+-----------+
 |       NAME        |  STATE  |         IPV4         | IPV6 |   TYPE    | SNAPSHOTS |
 +-------------------+---------+----------------------+------+-----------+-----------+
@@ -289,23 +292,23 @@ Which should show you success:
 
 ## Ubuntu macvlan
 
-Luckily, In Ubuntu's implementation of Network Manager, the macvlan stack is NOT broken, so it is much easier to deploy!
+Luckily, In Ubuntu's implementation of Network Manager, the macvlan stack is NOT broken. It is much easier to deploy!
 
-First, just like with our rockylinux-test-9 container, we need to assign the template to our container:
+Just like with your rockylinux-test-9 container, you need to assign the profile to our container:
 
+```bash
+lxc profile assign ubuntu-test default,macvlan
 ```
-lxc profile assign ubuntu-test default,macvlan`
-```
 
-That should be all that is necessary to get a DHCP assigned address. To find out, stop and then start the container again:
+To find out if DHCP assigns an address to the container stop and start the container again:
 
-```
+```bash
 lxc restart ubuntu-test
 ```
 
-Then list the containers again:
+List the containers again:
 
-```
+```bash
 +-------------------+---------+----------------------+------+-----------+-----------+
 |       NAME        |  STATE  |         IPV4         | IPV6 |   TYPE    | SNAPSHOTS |
 +-------------------+---------+----------------------+------+-----------+-----------+
@@ -319,15 +322,15 @@ Then list the containers again:
 
 Success!
 
-Configuring the Static IP is just a little different, but not at all hard. We need to modify the .yaml file associated with the container's connection (/10-lxc.yaml). For this static IP, we will use 192.168.1.201:
+Configuring the Static IP is just a little different, but not at all hard. You need to change the .yaml file associated with the container's connection (`10-lxc.yaml`). For this static IP, you will use 192.168.1.201:
 
-```
+```bash
 vi /etc/netplan/10-lxc.yaml
 ```
 
-And change what is there to the following:
+Change what is there to the following:
 
-```
+```bash
 network:
   version: 2
   ethernets:
@@ -339,17 +342,17 @@ network:
         addresses: [8.8.8.8,8.8.4.4]
 ```
 
-Save your changes (`SHFT:wq!`) and exit the container.
+Save your changes and exit the container.
 
-Now restart the container:
+Restart the container:
 
-```
+```bash
 lxc restart ubuntu-test
 ```
 
-When you list your containers again, you should see our new static IP:
+When you list your containers again, you will see your static IP:
 
-```
+```bash
 +-------------------+---------+----------------------+------+-----------+-----------+
 |       NAME        |  STATE  |         IPV4         | IPV6 |   TYPE    | SNAPSHOTS |
 +-------------------+---------+----------------------+------+-----------+-----------+
@@ -364,4 +367,4 @@ When you list your containers again, you should see our new static IP:
 
 Success!
 
-In the examples used in this chapter, we have intentionally chosen a hard container to configure, and two easy ones. There are obviously many more versions of Linux available in the image listing. If you have a favorite, try installing it, assigning the macvlan template, and setting IP's.
+In the examples used in this chapter, a hard container to configure was intentionally chosen, and two less difficult ones. There are many more versions of Linux available in the image listing. If you have a favorite, try installing it, assigning the macvlan template, and setting IPs.

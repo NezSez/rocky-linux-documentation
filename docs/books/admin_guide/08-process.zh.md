@@ -1,103 +1,107 @@
 ---
-title: Process Management
+title: 进程管理
 ---
 
-# Process Management
+# 进程管理
 
-In this chapter you will learn how to work with processes.
+在本章中，您将学习如何使用进程。
 
 ****
 
-**Objectives** : In this chapter, future Linux administrators will learn how to:
+**目标**：在本章中，未来的 Linux 管理员将学习如何：
 
-:heavy_check_mark: Recognize the `PID` and `PPID` of a process;   
-:heavy_check_mark: View and search for processes;   
-:heavy_check_mark: Manage processes.
+:heavy_check_mark: 识别进程的 `PID` 和 `PPID`；  
+:heavy_check_mark: 查看并搜索进程；  
+:heavy_check_mark: 管理进程。
 
-:checkered_flag: **process**, **linux**
+:checkered_flag: **进程**，**linux**
 
-**Knowledge**: :star: :star:   
-**Complexity**: :star:
+**知识性**: :star: :star:  
+**复杂度**: :star:
 
 **阅读时间**: 20 分钟
 
 ****
 
-## 概论
+## 概述
 
-An operating system consists of processes. These processes are executed in a specific order and are related to each other. There are two categories of processes, those focused on the user environment and those focused on the hardware environment.
+操作系统由进程组成。 这些进程以特定的顺序执行并且彼此相关。 有两大类的进程，一类侧重于用户环境，另一类侧重于硬件环境。
 
-When a program runs, the system will create a process by placing the program data and code in memory and creating a **runtime stack**. A process is therefore an instance of a program with an associated processor environment (ordinal counter, registers, etc...) and memory environment.
+当程序运行时，系统将程序数据和代码放入到内存中并创建 **运行栈** 来创建进程。 因此，进程是程序的一个实例，它具有相关联的处理器环境（顺序计数器、寄存器等）和内存环境。
 
-Each process has:
+每个进程都有：
 
-* a _PID_ : _**P**rocess **ID**entifier_, a unique process identifier;
-* a _PPID_ : _**P**arent **P**rocess **ID**entifier_, unique identifier of parent process.
+* *PID*：***P**rocess **ID**entifier*,，唯一的进程标识符
+* *PPID*：***P**arent **P**rocess **ID**entifier*，父进程的唯一标识符
 
-By successive filiations, the `init` process is the father of all processes.
+通过连续的隶属关系，`init` 进程是所有进程之父。
 
-* A process is always created by a parent process;
-* A parent process can have multiple child processes.
+* 一个进程始终由父进程创建
+* 一个父进程可以有多个子进程
 
-There is a parent/child relationship between processes. A child process is the result of the parent process calling the _fork()_ primitive and duplicating its own code to create a child. The _PID_ of the child is returned to the parent process so that it can talk to it. Each child has its parent's identifier, the _PPID_.
+进程之间存在父/子关系。 子进程是父进程调用 *fork()* 原语并复制自己的代码来创建子进程的结果。 子进程的 *PID* 会返回给父进程，以便父进程与之对话。 每个子进程都有父进程的标识符 *PPID* 。
 
-The _PID_ number represents the process at the time of execution. When the process finishes, the number is available again for another process. Running the same command several times will produce a different _PID_ each time.<!-- TODO !\[Parent/child relationship between processes\](images/FON-050-001.png) -->!!! Note Processes are not to be confused with _threads_. Each process has its own memory context (resources and address space), while _threads_ from the same process share this same context.
+*PID* 数字代表执行时的进程。 当进程结束时，该数字可再次用于另一个进程。 多次运行同一命令将每次产生不同的 *PID*。<!-- TODO !\[Parent/child relationship between processes\](images/FON-050-001.png) -->!!! note "说明"
 
-## Viewing processes
+    请不要将进程与 _线程_ 混淆。 每个进程都有自己的内存上下文（资源和地址空间），而来自同一进程的 _线程_ 则 共享相同的上下文。
 
-The `ps` command displays the status of running processes.
-```
+## 查看进程
+
+`ps` 命令显示正在运行的进程的状态。
+
+```bash
 ps [-e] [-f] [-u login]
 ```
 
-Example:
-```
+示例：
+
+```bash
 # ps -fu root
 ```
 
-| Option     | Description                      |
-| ---------- | -------------------------------- |
-| `-e`       | Displays all processes.          |
-| `-f`       | Displays additional information. |
-| `-u` login | Displays the user's processes.   |
+| 选项         | 说明        |
+| ---------- | --------- |
+| `-e`       | 显示所有进程。   |
+| `-f`       | 显示完整格式列表。 |
+| `-u` login | 显示用户的进程。  |
 
-Some additional options:
+一些附加选项：
 
-| Option                | Description                                       |
-| --------------------- | ------------------------------------------------- |
-| `-g`                  | Displays the processes in the group.              |
-| `-t tty`              | Displays the processes running from the terminal. |
-| `-p PID`              | Displays the process information.                 |
-| `-H`                  | Displays the information in a tree structure.     |
-| `-I`                  | Displays additional information.                  |
-| `--sort COL`          | Sort the result according to a column.            |
-| `--headers`           | Displays the header on each page of the terminal. |
-| `--format "%a %b %c"` | Customize the output display format.              |
+| 选项                    | 说明            |
+| --------------------- | ------------- |
+| `-g`                  | 显示组中的进程。      |
+| `-t tty`              | 显示从终端运行的进程。   |
+| `-p PID`              | 显示进程信息。       |
+| `-H`                  | 以树结构显示信息。     |
+| `-l`                  | 以长格式显示。       |
+| `--sort COL`          | 根据列对结果进行排序。   |
+| `--headers`           | 在终端的每一页上显示标题。 |
+| `--format "%a %b %c"` | 自定义输出显示格式。    |
 
-Without an option specified, the `ps` command only displays processes running from the current terminal.
+如果没有指定选项，`ps` 命令仅显示从当前终端运行的进程。
 
-The result is displayed in columns:
+结果以列形式显示：
 
-```
+```bash
 # ps -ef
 UID  PID PPID C STIME  TTY TIME      CMD
 root 1   0    0 Jan01  ?   00:00/03  /sbin/init
 ```
 
-| Column  | Description                 |
-| ------- | --------------------------- |
-| `UID`   | Owner user.                 |
-| `PID`   | Process identifier.         |
-| `PPID`  | Parent process identifier.  |
-| `C`     | Priority of the process.    |
-| `STIME` | Date and time of execution. |
-| `TTY`   | Execution terminal.         |
-| `TIME`  | Processing duration.        |
-| `CMD`   | Command executed.           |
+| 列       | 说明       |
+| ------- | -------- |
+| `UID`   | 所有者用户。   |
+| `PID`   | 进程标识符。   |
+| `PPID`  | 父进程标识符。  |
+| `C`     | 进程的优先级。  |
+| `STIME` | 执行日期和时间。 |
+| `TTY`   | 执行终端。    |
+| `TIME`  | 处理时间。    |
+| `CMD`   | 已执行命令。   |
 
-The behaviour of the control can be fully customized:
+该控件的行为可以完全自定义：
 
-```
+```bash
 # ps -e --format "%P %p %c %n" --sort ppid --headers
  PPID   PID COMMAND          NI
     0     1 systemd           0
@@ -110,151 +114,161 @@ The behaviour of the control can be fully customized:
     1   670 sssd              0
 ```
 
-## Types of processes
+## 进程类型
 
-The user process:
+用户进程：
 
-* is started from a terminal associated with a user;
-* accesses resources via requests or daemons.
+* 从与用户相关联的终端启动
+* 通过请求或守护进程访问资源
 
-The system process (_demon_):
+系统进程（*守护进程*）：
 
-* is started by the system;
-* is not associated with any terminal, and is owned by a system user (often `root`);
-* is loaded at boot time, resides in memory, and is waiting for a call;
-* is usually identified by the letter `d` associated with the process name.
+* 由系统启动
+* 不与任何终端关联，并且由系统用户所有（通常为 `root` ）
+* 在启动时加载并驻留在内存中，正在等待调用
+* 通常用与进程名相关的字母 `d` 来标识
 
-System processes are therefore called daemons (_**D**isk **A**nd **E**xecution **MON**itor_).
+因此，系统进程被称为守护进程（***D**isk **A**nd **E**xecution **MON**itor*）
 
-## Permissions and rights
+## 权限
 
-When a command is executed, the user's credentials are passed to the created process.
+执行命令时，用户的凭据将传递给创建的进程。
 
-By default, the actual `UID` and `GID` (of the process) are therefore identical to the **actual** `UID` and `GID` (the `UID` and `GID` of the user who executed the command).
+因此，在默认情况下，进程的实际 `UID<code> 和 <code>GID` 与 执行命令的用户的 `UID` 和 `GID` 相同。
 
-When a `SUID` (and/or `SGID`) is set on a command, the actual `UID` (and/or `GID`) becomes that of the owner (and/or owner group) of the command and no longer that of the user or user group that issued the command. Effective and real **UIDs** are therefore **different**.
+在命令上设置 `SUID`（和/或 `SGID`）后，实际 `UID`（和/或 `GID`）将变为命令所有者（和/或所属组）的 UID（和/或 GID），而不再是发出命令的用户或用户组的 UID（和/或 GID）。 因此，有效的 **UID** 和真实的 **UID** 是不同的。
 
-Each time a file is accessed, the system checks the rights of the process according to its effective identifiers.
+每次访问文件时，系统都会根据其有效标识符检查进程的权限。
 
-## Process management
+## 进程管理
 
-A process cannot be run indefinitely, as this would be to the detriment of other running processes and would prevent multitasking.
+一个进程不能无限期运行，因为这会损害其他正在运行的进程，并会妨碍多任务处理。
 
-The total processing time available is therefore divided into small ranges, and each process (with a priority) accesses the processor in a sequenced manner. The process will take several states during its life among the states:
+因此，将可用的总处理时间划分为几个小范围，每个具有优先级的进程按顺序访问处理器。 进程在其生命周期中将经历几个状态：
 
-* ready: waiting for the availability of the process;
-* in execution: accesses the processor;
-* suspended: waiting for an I/O (input/output);
-* stopped: waiting for a signal from another process;
-* zombie: request for destruction;
-* dead: the father of the process kills his son.
+* 就绪：等待进程可用
+* 执行中：访问处理器
+* 挂起：等待 I/O（输入/输出）
+* 停止：等待来自另一个进程的信号
+* 僵尸：请求销毁
+* 死亡：父进程结束子进程
 
-The end of process sequencing is as follows:
+进程结束排序如下：
 
-1. Closing of the open files;
-2. Release of the used memory;
-3. Sending a signal to the parent and child processes.
+1. 关闭打开的文件
+2. 释放使用过的内存
+3. 向父进程和子进程发送信号
 
-When a parent process dies, its children are said to be orphans. They are then adopted by the `init` process which will destroy them.
+当父进程死亡时，其子进程被称为孤儿进程。 然后它们被 `init` 进程收养并销毁它们。
 
-### The priority of a process
+### 进程的优先级
 
-The processor works in time sharing with each process occupying a quantity of processor time.
+GNU/Linux 属于分时操作系统家族。 处理器以分时方式工作，每个进程都会占用一些处理器时间。 进程按优先级分类：
 
-The processes are classified by priority whose value varies from **-20** (the highest priority) to **+19** (the lowest priority).
+* 实时进程：优先级为 **0-99** 的进程由实时调度算法进行调度。
+* 普通进程：优先级动态范围为 **100-139** 的进程使用完全公平的调度算法进行调度。
+* nice 值：用于调整普通进程优先级的参数。 范围为 **-20-19**。
 
-The default priority of a process is **0**.
+进程的默认优先级是 **0**。
 
-### Modes of operation
+### 运作方式
 
-Processes can run in two ways:
+进程可以通过两种方式运行：
 
-* **synchronous**: the user loses access to the shell during command execution. The command prompt reappears at the end of the process execution.
-* **asynchronous**: the process is processed in the background. The command prompt is displayed again immediately.
+* **同步**：在执行命令过程中，用户将失去对 shell 的访问权限。 进程执行结束后，命令提示符会重新出现。
+* **异步**：进程在后台进行处理。 命令提示符会立即再次显示。
 
-The constraints of the asynchronous mode:
+异步方式的约束：
 
-* the command or script must not wait for keyboard input;
-* the command or script must not return any result on the screen;
-* quitting the shell ends the process.
+* 命令或脚本不能等待键盘输入
+* 命令或脚本不得在屏幕上返回任何结果
+* 退出 shell 将结束进程
 
-## Process management controls
+## 进程管理控制
 
-### `kill` command
+### `kill` 命令
 
-The `kill` command sends a stop signal to a process.
+`kill` 命令向进程发送停止信号。
 
-```
+```bash
 kill [-signal] PID
 ```
 
-Example:
-```
-$ kill -9 1664
-```
+示例：
 
-| Code | Signal    | Description                          |
-| ---- | --------- | ------------------------------------ |
-| `2`  | _SIGINT_  | Immediate termination of the process |
-| `9`  | _SIGKILL_ | 中断进程(CTRL + D)                       |
-| `15` | _SIGTERM_ | Clean termination of the process     |
-| `18` | _SIGCONT_ | Resume the process                   |
-| `19` | _SIGSTOP_ | Suspend the process                  |
-
-Signals are the means of communication between processes. The `kill` command sends a signal to a process.
-
-!!! Tip The complete list of signals taken into account by the `kill` command is available by typing the command :
-```
-$ man 7 signal
+```bash
+kill -9 1664
 ```
 
-### `nohup` command
+| 代码   | 信号        | 说明                                |
+| ---- | --------- | --------------------------------- |
+| `2`  | *SIGINT*  | 立即终止进程                            |
+| `9`  | *SIGKILL* | 中断进程（++control+"d"++）             |
+| `15` | *SIGTERM* | 优雅地终止进程                           |
+| `18` | *SIGCONT* | 恢复进程。 使用 SIGSTOP 信号的进程可以使用它继续运行。  |
+| `19` | *SIGSTOP* | 挂起进程（暂停进程）。 此信号的效果相当于++ctrl+"z"++ |
 
-`nohup` allows the launching of a process independently of a connection.
+信号是进程之间的通信手段。 `kill` 命令的作用就是向进程发送信号。
 
-```
+!!! Tip "提示"
+
+    `kill` 命令所考虑到的完整信号列表可通过键入以下命令获得：
+
+    ```
+    $ man 7 signal
+    ```
+
+### `nohup` 命令
+
+`nohup` 允许独立于连接之外启动进程。
+
+```bash
 nohup command
 ```
 
-Example:
+示例：
+
+```bash
+nohup myprogram.sh 0</dev/null &
 ```
-$ nohup myprogram.sh 0</dev/null &
-```
 
-`nohup` ignores the `SIGHUP` signal sent when a user logs out.
+`nohup` 命令会忽略用户注销时发送的 `SIGHUP` 信号。
 
-!!! Note "Question" `nohup` handles standard output and error, but not standard input, hence the redirection of this input to `/dev/null`.
+!!! Note "说明"
 
-### [CTRL] + [Z]
+    `nohup` 能处理标准输出和标准错误输出，但不处理标准输入，因此会将标准输入重定向到 `/dev/null`。
 
-By pressing the <kbd>CTRL</kbd> + <kbd>Z</kbd> keys simultaneously, the synchronous process is temporarily suspended. Access to the prompt is restored after displaying the number of the process that has just been suspended.
+### [Ctrl] + [z]
 
-### `&` instruction
+通过同时按下 ++control+"z"++ 键，同步进程将被暂时暂停。 在显示刚刚被暂停进程的编号后，将恢复对提示符的访问。
 
-The `&` statement executes the command asynchronously (the command is then called _job_) and displays the number of _job_. Access to the prompt is then returned.
+### `&` 指令
 
-Example:
-```
+`&` 语句异步执行命令（该命令被称为 *作业*）并显示 *作业* 编号。 然后返回对提示符的访问权限。
+
+示例：
+
+```bash
 $ time ls -lR / > list.ls 2> /dev/null &
 [1] 15430
 $
 ```
 
-The _job_ number is obtained during background processing and is displayed in square brackets, followed by the `PID` number.
+*作业* 编号是在后台处理过程中获得的，显示在方括号中，后面跟着 `PID` 编号。
 
-### `fg` and `bg` commands
+### `fg` 和 `bg` 命令
 
-The `fg` command puts the process in the foreground:
+`fg` 命令将进程置于前台：
 
-```
+```bash
 $ time ls -lR / > list.ls 2>/dev/null &
 $ fg 1
 time ls -lR / > list.ls 2/dev/null
 ```
 
-while the command `bg` places it in the background:
+而命令 `bg` 将其置于后台：
 
-```
+```bash
 [CTRL]+[Z]
 ^Z
 [1]+ Stopped
@@ -263,112 +277,230 @@ $ bg 1
 $
 ```
 
-Whether it was put in the background when it was created with the `&` argument or later with the <kbd>CTRL</kbd> +<kbd>Z</kbd> keys, a process can be brought back to the foreground with the `fg` command and its job number.
+无论是在使用 `&` 参数创建进程时将其置于后台，还是随后使用 ++control+"z"++ 键将其置于后台，都可以使用 `fg` 命令及其作业编号将进程带回前台。
 
-### `jobs` command
+### `jobs` 命令
 
-The `jobs` command displays the list of processes running in the background and specifies their job number.
+`jobs` 命令显示后台运行的进程列表，并指定它们的作业编号。
 
-Example:
-```
+示例：
+
+```bash
 $ jobs
 [1]- Running    sleep 1000
 [2]+ Running    find / > arbo.txt
 ```
 
-The columns represent:
+这些列表示：
 
-1. job number;
-2. the order in which the processes run
-- a `+` : this process is the next process to run by default with `fg` or `bg` ;
-- a `-` : this process is the next process to take the `+` ;
-3.  _Running_ (running process) or _Stopped_ (suspended process).
-4. the command
+1. 作业编号
+2. 进程运行的顺序
 
-### `nice` and `renice` commands
+   * `+`：未指定作业编号时，`fg` 和 `bg` 命令默认选择的进程
+   * `-`：下一个进程选择 `+`
 
-The command `nice` allows the execution of a command by specifying its priority.
+3. *Running*（正在运行的进程）或*Stoped*（已挂起的进程）
+4. 命令
 
-```
+### `nice` 和 `renice` 命令
+
+命令 `nice` 允许通过指定优先级来执行命令。
+
+```bash
 nice priority command
 ```
 
-Example:
+用法示例：
+
+```bash
+nice --adjustment=-5 find / -name "file"
+
+nice -n -5 find / -name "file"
+
+nice --5 find / -name "file"
+
+nice -n 5 find / -name "file"
+
+nice find / -name "file"
 ```
-$ nice -n+15 find / -name "file"
-```
 
-Unlike `root`, a standard user can only reduce the priority of a process. Only values between +0 and +19 will be accepted.
+与 `root` 不同，标准用户只能降低进程的优先级且只接受0到19之间的值。
 
-!!! Tip This last limitation can be lifted on a per-user or per-group basis by modifying the `/etc/security/limits.conf` file.
+如上例所示，前三个命令表示将 Nice 值设置为 "-5"，而第二个命令是我们推荐的用法。 第四个命令指示将 Nice 值设置为 "5"。 对于第五个命令，不键入任何选项意味着 Nice 值设置为 "10"。
 
-The `renice` command allows you to change the priority of a running process.
+!!! Tip "提示"
 
-```
+    "Nice" 是 "niceness" 的缩写。 
+    
+    直接键入`nice` 命令将返回当前 shell 的 Nice 值。 
+    
+    您可以通过修改 `/etc/security/limits.conf` 文件来解除每个用户或组的 Nice 值限制。
+
+使用 `renice` 命令可以更改正在运行中的进程优先级。
+
+```bash
 renice priority [-g GID] [-p PID] [-u UID]
 ```
 
-Example:
-```
-$ renice +15 -p 1664
-```
-| Option | Description                       |
-| ------ | --------------------------------- |
-| `-g`   | `GID` of the process owner group. |
-| `-p`   | `PID` of the process.             |
-| `-u`   | `UID` of the process owner.       |
+示例：
 
-The `renice` command acts on processes already running. It is therefore possible to change the priority of a specific process, but also of several processes belonging to a user or a group.
-
-!!! Tip The `pidof` command, coupled with the `xargs` command (see the Advanced Commands course), allows a new priority to be applied in a single command:
-```
-$ pidof sleep | xargs renice 20
+```bash
+renice -n 15 -p 1664
 ```
 
-### `top` command
+| 选项   | 说明            |
+| ---- | ------------- |
+| `-g` | 进程所属组的 `GID`。 |
+| `-p` | 进程的 `PID`。    |
+| `-u` | 进程所有者的 `UID`。 |
 
-The `top` command displays the processes and their resource consumption.
+`renice` 命令作用于现有进程。 因此，我们可以改变一个特定进程的优先级，也可以改变属于一个用户或一个组的几个进程的优先级。
 
-```
+!!! Tip "提示"
+
+    `pidof` 命令与 `xargs` 命令相结合（请参阅 "高级命令" 课程），可允许在单个命令中应用新的优先级：
+
+    ```
+    $ pidof sleep | xargs renice -n 20
+    ```
+
+为了适应不同的发行版，您应该尽可能多地使用 `nice -n 5` 或 `renice -n 6` 等命令形式。
+
+### `top` 命令
+
+`top` 命令用于显示进程及其资源消耗。
+
+```bash
 $ top
 PID  USER PR NI ... %CPU %MEM  TIME+    COMMAND
 2514 root 20 0       15    5.5 0:01.14   top
 ```
 
-| Column    | Description           |
-| --------- | --------------------- |
-| `PID`     | Process identifier.   |
-| `USER`    | Owner user.           |
-| `PR`      | Process priority.     |
-| `NI`      | Nice value.           |
-| `%CPU`    | Processor load.       |
-| `%MEM`    | Memory load.          |
-| `TIME+`   | Processor usage time. |
-| `COMMAND` | Command executed.     |
+| 列         | 说明       |
+| --------- | -------- |
+| `PID`     | 进程标识符。   |
+| `USER`    | 所有者用户。   |
+| `PR`      | 进程优先级。   |
+| `NI`      | Nice 值。  |
+| `%CPU`    | 处理器负载。   |
+| `%MEM`    | 内存负载。    |
+| `TIME+`   | 处理器使用时间。 |
+| `COMMAND` | 已执行命令。   |
 
-The `top` command allows control of the processes in real time and in interactive mode.
+`top` 命令还允许以交互模式实时控制进程。
 
-### `pgrep` and `pkill` commands
+### `pgrep` 和 `pkill` 命令
 
-The `pgrep` command searches the running processes for a process name and displays the _PID_ matching the selection criteria on the standard output.
+`pgrep` 命令可在运行的进程中搜索进程名，并在标准输出中显示与选择条件匹配的 *PID*。
 
-The `pkill` command will send the specified signal (by default _SIGTERM_) to each process.
+`pkill` 命令将向每个进程发送指定的信号（默认情况下为 *SIGTERM*）。
 
-```
+```bash
 pgrep process
-pkill [-signal] process
+pkill [option] [-signal] process
 ```
 
-Examples:
+示例：
 
-* Get the process number from `sshd`:
+* 从 `sshd` 中获取进程编号：
 
-```
-$ pgrep -u root sshd
+  ```bash
+  pgrep -u root sshd
+  ```
+
+* 结束所有 `tomcat` 进程：
+
+  ```bash
+  pkill tomcat
+  ```
+
+!!! note "说明"
+
+    在终止一个进程之前，最好确切地了解该进程的具体用途，否则可能导致系统崩溃或其他不可预知的问题。
+
+除了向相关进程发送信号外，`pkill` 命令还可以根据终端号结束用户的连接会话，例如：
+
+```bash
+pkill -t pts/1
 ```
 
-* Kill all `tomcat` processes:
+### `killall` 命令
 
+此命令的功能与 `pkill` 命令大致相同。 用法为 - `killall [option] [ -s SIGNAL | -SIGNAL ] NAME`。 默认的信号为 *SIGTERM*。
+
+| 选项   | 说明            |
+|:---- |:------------- |
+| `-l` | 列出所有已知信号名称    |
+| `-i` | 在结束进程前请求确认    |
+| `-I` | 不区分大小写的进程名称匹配 |
+
+示例：
+
+```bash
+killall tomcat
 ```
-$ pkill tomcat
+
+### `pstree` 命令
+
+该命令以树状样式显示进程，其用法为 - `pstree [option]`。
+
+| 选项   | 说明            |
+|:---- |:------------- |
+| `-p` | 显示进程的 PID     |
+| `-n` | 按 PID 对输出进行排序 |
+| `-h` | 亮显示正在运行的进程    |
+| `-u` | 显示 uid 转换     |
+
+```bash
+$ pstree -pnhu
+systemd(1)─┬─systemd-journal(595)
+           ├─systemd-udevd(625)
+           ├─auditd(671)───{auditd}(672)
+           ├─dbus-daemon(714,dbus)
+           ├─NetworkManager(715)─┬─{NetworkManager}(756)
+           │                     └─{NetworkManager}(757)
+           ├─systemd-logind(721)
+           ├─chronyd(737,chrony)
+           ├─sshd(758)───sshd(1398)───sshd(1410)───bash(1411)───pstree(1500)
+           ├─tuned(759)─┬─{tuned}(1376)
+           │            ├─{tuned}(1381)
+           │            ├─{tuned}(1382)
+           │            └─{tuned}(1384)
+           ├─agetty(763)
+           ├─crond(768)
+           ├─polkitd(1375,polkitd)─┬─{polkitd}(1387)
+           │                       ├─{polkitd}(1388)
+           │                       ├─{polkitd}(1389)
+           │                       ├─{polkitd}(1390)
+           │                       └─{polkitd}(1392)
+           └─systemd(1401)───(sd-pam)(1404)
 ```
+
+### 孤儿进程和僵尸进程
+
+**孤儿进程**：当父进程死亡时，其子进程被称为孤儿。 init 进程收养这些特殊状态的进程并完成状态收集，直到它们被销毁。 从概念上讲，孤儿院进程不会造成任何危害。
+
+**僵尸进程**：当子进程完成其工作并被终止后，其父进程需要调用信号处理函数 wait() 或 waitpid() 来获取子进程的终止状态。 如果父进程没有这样做，那么尽管子进程已经退出，但它仍然会在系统进程表中保留一些退出状态信息。 由于父进程无法获取子进程的状态信息，这些进程将持续占用进程表中的资源。 我们将这种状态下的进程称为僵尸。
+
+危害：
+
+* 占用系统资源，导致机器性能下降。
+* 无法生成新的子进程。
+
+如何检查当前系统中是否存在僵尸进程？
+
+```bash
+ps -lef | awk '{print $2}' | grep Z
+```
+
+此列中可能显示以下字符：
+
+* **D** - 不间断的持续睡眠（通常用于 IO）
+* **I** - 空闲内核线程
+* **R** - 正在运行的或可运行的（即在运行队列中）
+* **S** - 可被中断的睡眠（需要等待事件完成）
+* **T** - 因作业控制信号而被停止的进程
+* **t** - 在追踪过程中被调试器停止
+* **W** - 分页（在内核 2.6.xx 版本之后已不再有效）
+* **X** - 死亡（永远不应该被看到）
+* **Z** - 已失效的进程（"僵尸"），已终止但未被其父进程获取

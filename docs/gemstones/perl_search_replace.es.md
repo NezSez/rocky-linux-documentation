@@ -1,6 +1,9 @@
 ---
 title: Perl - Buscar y reemplazar
-author: Steven Spencer
+author: Steven Spencer, Pedro Garcia
+tags:
+  - perl
+  - search
 ---
 
 # `Perl` Buscar y reemplazar

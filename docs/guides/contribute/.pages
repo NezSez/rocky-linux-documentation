@@ -1,8 +1,10 @@
 ---
 nav:
     - ... | README*.md
-    - ... | rockydocs_web_dev*.md
-    - ... | mkdocs_lsyncd*.md
-    - ... | local_docs*.md
+    - ... | beginners*.md
+    - ... | createnew*.md
+    - ... | rockydocs_formatting*.md
+    - Local Documentation: localdocs
     - ... | navigation*.md
-    - ... | rockydocs_formatting*.md 
+    - ... | style_guide*.md
+    - ...

@@ -6,12 +6,12 @@ update: 2021-12-25
 
 # /etc/rsyncd.conf
 
-Nel precedente articolo [ rsync demo 02 ](03_rsync_demo02.md) abbiamo introdotto alcuni parametri di base. Questo articolo è per integrare altri parametri.
+Nel precedente articolo [rsync demo 02](03_rsync_demo02.md) abbiamo introdotto alcuni parametri di base. Questo articolo è per integrare altri parametri.
 
 | Parametri                           | Descrizione                                                                                                                                                                                                                                                                                                                                                                    |
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | fake super = yes                    | sì significa che non è necessario che il demone venga eseguito come root per memorizzare gli attributi completi del file.                                                                                                                                                                                                                                                      |
-| uid =                               |                                                                                                                                                                                                                                                                                                                                                                                |
+| uid =                               | user id                                                                                                                                                                                                                                                                                                                                                                        |
 | gid =                               | Due parametri sono utilizzati per specificare l'utente e il gruppo utilizzati per trasferire i file quando si esegue il demone rsync come root. Il valore predefinito è nobody                                                                                                                                                                                                 |
 | use chroot = yes                    | Se la directory radice deve essere bloccata prima della trasmissione, sì sì, no no. Al fine di aumentare la sicurezza, rsync yes di default.                                                                                                                                                                                                                                   |
 | max connections = 4                 | Il numero massimo di connessioni ammesse, il valore predefinito è 0, il che significa che non ci sono restrizioni                                                                                                                                                                                                                                                              |
@@ -28,4 +28,21 @@ Nel precedente articolo [ rsync demo 02 ](03_rsync_demo02.md) abbiamo introdotto
 
 ## Configurazione raccomandata
 
-![ photo ](images/rsync_config.jpg)
+```ini title="/etc/rsyncd.conf"
+uid = nobody
+gid = nobody
+address = 192.168.100.4
+use chroot = yes
+max connections = 10
+syslog facility = daemon
+pid file = /var/run/rsyncd.pid
+log file = /var/log/rsyncd.log
+lock file = /var/run/rsyncd.lock
+[file]
+  comment = rsync
+  path = /rsync/
+  read only = no
+  dont compress = *.gz *.bz2 *.zip
+  auth users = li
+  secrets file = /etc/rsyncd users.db
+```

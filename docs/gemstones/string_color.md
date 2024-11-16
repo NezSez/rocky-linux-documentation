@@ -1,8 +1,8 @@
 ---
-titie: About the color of the string
+title: bash - String Color
 author: tianci li
 contributors: Steven Spencer
-tested with: 8.6, 9.0
+tested_with: 8.6, 9.0
 tags:
   - bash
   - color
@@ -14,40 +14,40 @@ When we download bash scripts that have been written by others in our daily work
 
 ## Font color
 
-| **color code** | **describe** |
+| **color code** | **description** |
 |    :---:       |    :---:     |
 |  30            |    black     |
 |  31            |     red      |
 |  32            |    green     |
 |  33            |    yellow    |
-|  34            |     blue     | 
+|  34            |     blue     |
 |  35            |     purple   |
-|  36            |   Dark green |
+|  36            |   dark green |
 |  37            |    white     |
 
 ## Background color of font
 
-| **Background color code** | **describe** |
+| **background color code** | **description** |
 |    :---:       |    :---:     |
 |     40         |    black     |
-|     41         |    Crimson   |
+|     41         |    crimson   |
 |     42         |    green     |
 |     43         |    yellow    |
 |     44         |    blue      |
 |     45         |    purple    |
-|     46         |  Dark green  |
+|     46         |  dark green  |
 |     47         |   white      |
 
 ## Display mode
 
-| **code** | **describe** |
+| **code** | **description** |
 |  :---:   |    :---:     |
 |    0     |Terminal default settings|
 |    1     |Highlight|
 |    4     |Underline|
-|    5     |Currsor blinks|
+|    5     |Cursor blinks|
 |    7     |Reverse display|
-|    8     | hide |
+|    8     |Hide |
 
 ## Mode of execution
 

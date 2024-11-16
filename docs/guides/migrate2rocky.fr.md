@@ -2,14 +2,14 @@
 title: Migrer vers Rocky Linux
 author: Ezequiel Bruni
 contributors: Tianci Li, Steven Spencer, Sébastien Poher
-update: 06-30-2022
+update: 2023-05-19
 ---
 
 # Comment migrer vers Rocky Linux depuis CentOS Stream, CentOS, Alma Linux, RHEL ou Oracle Linux
 
-## Prérequis & postulats
+## Prérequis
 
-* CentOS Stream, CentOS, Alma Linux, RHEL ou Oracle Linux fonctionnant correctement sur un serveur physique ou virtuel (VPS) ; La version actuellement prise en charge pour chacun d'eux est la 8.5.
+* CentOS Stream, CentOS, Alma Linux, RHEL ou Oracle Linux fonctionnant correctement sur un serveur physique ou virtuel (VPS) ; La version actuellement prise en charge pour chacun d'eux est la 8.7.
 * Une bonne connaissance de la ligne de commande.
 * être à l'aise avec l'usage de SSH dans le cas de machines distantes ;
 * Une capacité à accepter les risques.
@@ -68,11 +68,11 @@ git clone https://github.com/rocky-linux/rocky-tools.git
 
 Remarque : cette méthode téléchargera tous les scripts et fichiers du dépôt rocky-tools.
 
-### La méthode simple mais légèrement moins sécurisée
+### La manière simple
 
-D'accord, ce n'est pas forcément la meilleure chose à faire, côté sécurité. Mais c'est le moyen le plus simple de récupérer le script.
+C'est surement la façon la plus facile pour obtenir le script. Vous aurez seulement besoin d'un client HTTP (curl, wget, lynx, etc.) installé sur le serveur.
 
-Exécutez cette commande pour télécharger le script dans le répertoire dans lequel vous vous trouvez :
+En estimant que vous avez l'utilitaire `curl` d'installé, exécutez cette commande pour télécharger le script dans le répertoire courant :
 
 ```
 curl https://raw.githubusercontent.com/rocky-linux/rocky-tools/main/migrate2rocky/migrate2rocky.sh -o migrate2rocky.sh

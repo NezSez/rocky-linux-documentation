@@ -1,8 +1,8 @@
 ---
 title: DISA STIG Su Rocky Linux 8 - Parte 1
 author: Scott Shinn
-contributors: Steven Spencer, Franco Colussi
-tested with: 8.6
+contributors: Steven Spencer, Ganna Zhyrnova
+tested_with: 8.6
 tags:
   - DISA
   - STIG
@@ -24,7 +24,7 @@ tags:
 
 In questa guida verrà illustrato come applicare la [DISA STIG per RHEL8](https://www.stigviewer.com/stig/red_hat_enterprise_linux_8/) per una nuova installazione di Rocky Linux. Come serie in più parti, tratteremo anche come testare la conformità STIG, adattare le impostazioni STIG e applicare altri contenuti STIG in questo ambiente.
 
-Rocky Linux è un derivato bug per bug di RHEL 8 e come tale il contenuto pubblicato per il DISA RHEL8 STIG è in comune per entrambi i sistemi operativi.  Una notizia ancora migliore è che l'applicazione delle impostazioni STIG è integrata nel programma di installazione di Rocky Linux 8 anaconda, sotto la voce Profili di Sicurezza.  Il tutto è gestito da uno strumento chiamato [OpenSCAP](https://www.open-scap.org/), che consente sia di configurare il sistema in modo che sia conforme alla DISA STIG (velocemente!), sia di testare la conformità del sistema dopo l'installazione.
+Rocky Linux è un derivato bug per bug di RHEL e come tale il contenuto pubblicato per il DISA RHEL8 STIG è in parità per entrambi i sistemi operativi.  Una notizia ancora migliore è che l'applicazione delle impostazioni STIG è integrata nel programma di installazione di Rocky Linux 8 anaconda, sotto la voce Profili di Sicurezza.  Il tutto è gestito da uno strumento chiamato [OpenSCAP](https://www.open-scap.org/), che consente sia di configurare il sistema in modo che sia conforme alla DISA STIG (velocemente!), sia di testare la conformità del sistema dopo l'installazione.
 
 Lo farò su una macchina virtuale nel mio ambiente, ma tutto ciò che è riportato qui si applica esattamente allo stesso modo su una macchina reale.
 
@@ -92,7 +92,7 @@ Schema di partizionamento DISA STIG per un disco 30G. Il mio caso d'uso è un se
 
 ![Accetta Modifiche](images/disa_stig_pt1_img9.jpg)
 
-### Passo 5: Configura il software per il tuo ambiente: Installazione del Server senza una GUI.
+### Fase 5: Configurazione del software per l'ambiente: Installazione del server senza interfaccia grafica
 
 Questo avrà importanza in **Fase 6**, quindi se si utilizza un'interfaccia utente o una configurazione di workstation il profilo di sicurezza sarà diverso.
 
@@ -132,7 +132,7 @@ Nelle esercitazioni successive potremo unire il tutto a una configurazione azien
 
 ![Reboot](images/disa_stig_pt1_img18.jpg)
 
-### Fase 11: Accedere al sistema Rocky Linux 8 STIG!
+### Passo 11: Accesso al sistema Rocky Linux 8 STIG
 
 ![Avvertimento DoD](images/disa_stig_pt1_img19.jpg)
 
