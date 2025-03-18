@@ -31,8 +31,8 @@ When a program runs, the system will create a process by placing the program dat
 
 Each process has:
 
-* a *PID*: ***P**rocess **ID**entifier*, a unique process identifier
-* a *PPID*: ***P**arent **P**rocess **ID**entifier*, unique identifier of parent process
+* a *PID*: _**P**rocess **ID**entifier_, a unique process identifier
+* a *PPID*: _**P**arent **P**rocess **ID**entifier_, unique identifier of parent process
 
 By successive filiations, the `init` process is the father of all processes.
 
@@ -66,7 +66,7 @@ Example:
 |  Option    |  Description                     |
 |------------|----------------------------------|
 | `-e`       | Displays all processes.          |
-| `-f`       | Displays additional information. |
+| `-f`       | Displays full format list.        |
 | `-u` login | Displays the user's processes.   |
 
 Some additional options:
@@ -77,7 +77,7 @@ Some additional options:
 | `-t tty`              | Displays the processes running from the terminal. |
 | `-p PID`              | Displays the process information.                 |
 | `-H`                  | Displays the information in a tree structure.     |
-| `-I`                  | Displays additional information.                  |
+| `-l`                  | Displays in long format.                           |
 | `--sort COL`          | Sort the result according to a column.            |
 | `--headers`           | Displays the header on each terminal page. |
 | `--format "%a %b %c"` | Customize the output display format.              |
@@ -207,10 +207,10 @@ kill -9 1664
 | Code | Signal    | Description                                            |
 |------|-----------|--------------------------------------------------------|
 | `2`  | *SIGINT*  | Immediate termination of the process                   |
-| `9`  | *SIGKILL* | Interrupt the process (++control+d++) |
+| `9`  | *SIGKILL* | Interrupts the process (++control+"d"++)                |
 | `15` | *SIGTERM* | Clean termination of the process                       |
-| `18` | *SIGCONT* | Resume the process                                     |
-| `19` | *SIGSTOP* | Suspend the process                                    |
+| `18` | *SIGCONT* | Resumes the process. Processes that use the SIGSTOP signal can use it to continue running |
+| `19` | *SIGSTOP* | Suspends the process (Stops process). The effect of this signal is equivalent to ++ctrl+"z"++ |
 
 Signals are the means of communication between processes. The `kill` command sends a signal to a process.
 
@@ -242,9 +242,9 @@ nohup myprogram.sh 0</dev/null &
 
     `nohup` handles standard output and error but not standard input, hence the redirection of this input to `/dev/null`.
 
-### [CTRL] + [Z]
+### [Ctrl] + [z]
 
-By pressing the ++control+z++ keys simultaneously, the synchronous process is temporarily suspended. Access to the prompt is restored after displaying the number of the process that has just been suspended.
+The synchronous process is temporarily suspended by pressing the ++control+"z"++ keys simultaneously. Access to the prompt is restored after displaying the number of the process that has just been suspended.
 
 ### `&` instruction
 
@@ -281,7 +281,7 @@ $ bg 1
 $
 ```
 
-Whether it was put in the background when it was created with the `&` argument or later with the ++control+z++ keys, a process can be brought back to the foreground with the `fg` command and its job number.
+Whether it was put in the background when it was created with the `&` argument or later with the ++control+"z"++ keys, a process can be brought back to the foreground with the `fg` command and its job number.
 
 ### `jobs` command
 
@@ -314,17 +314,31 @@ The command `nice` allows the execution of a command by specifying its priority.
 nice priority command
 ```
 
-Example:
+Usage example:
 
 ```bash
-nice -n+15 find / -name "file"
+nice --adjustment=-5 find / -name "file"
+
+nice -n -5 find / -name "file"
+
+nice --5 find / -name "file"
+
+nice -n 5 find / -name "file"
+
+nice find / -name "file"
 ```
 
-Unlike `root`, a standard user can only reduce the priority of a process. Only values between +0 and +19 will be accepted.
+Unlike `root`, a standard user can only reduce the priority of a process and only values between 0 and 19 will be accepted.
+
+As shown in the example above, the first three commands indicate setting the Nice value to "-5", while the second command is our recommended usage. The fourth command indicates setting the Nice value to "5". For the fifth command, not typing any options means that the Nice value is set to "10".
 
 !!! Tip
 
-    This last limitation can be lifted per-user or per-group by modifying the `/etc/security/limits.conf` file.
+    "Nice" is the abbreviation for "niceness". 
+    
+    Directly typing the `nice` command will return the Nice value of the current shell. 
+    
+    You can lift the Nice value limit for each user or group by modifying the `/etc/security/limits.conf` file.
 
 The `renice` command allows you to change the priority of a running process.
 
@@ -335,7 +349,7 @@ renice priority [-g GID] [-p PID] [-u UID]
 Example:
 
 ```bash
-renice +15 -p 1664
+renice -n 15 -p 1664
 ```
 
 | Option | Description                       |
@@ -344,15 +358,17 @@ renice +15 -p 1664
 | `-p`   | `PID` of the process.             |
 | `-u`   | `UID` of the process owner.       |
 
-The `renice` command acts on processes already running. It is therefore possible to change the priority of a specific process and several processes belonging to a user or a group.
+The `renice` command acts on existing processes. Therefore, it is possible to change the priority of a specific process and several processes belonging to a user or a group.
 
 !!! Tip
 
     The `pidof` command, coupled with the `xargs` command (see the Advanced Commands course), allows a new priority to be applied in a single command:
 
     ```
-    $ pidof sleep | xargs renice 20
+    $ pidof sleep | xargs renice -n 20
     ```
+
+To adapt to different distributions, you should try to use command forms such as `nice -n 5` or `renice -n 6` as much as possible.
 
 ### `top` command
 

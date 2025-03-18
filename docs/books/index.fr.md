@@ -4,7 +4,7 @@ author: Steven Spencer
 contributors: '@fromoz, Ganna Zhyrnova'
 ---
 
-# Livres d'instruction Rocky Linux
+# Tutoriels Rocky Linux
 
 Vous avez trouvé la section **Livres** de la documentation. C'est là que la documentation de forme plus longue est conservée. Ces documents sont répartis en sections ou en **_chapitres_** afin de vous faciliter le travail, à votre rythme, et de suivre vos progrès. Ces documents ont été créés par des gens comme vous, avec une passion pour certains sujets.
 
@@ -54,6 +54,9 @@ Nos livres au format PDF peuvent être téléchargés pour une lecture hors-lign
 * [Anglais](https://rocky-linux.github.io/documentation/RockyLinuxMiddlewaresGuide.pdf)
 * [Italien](https://rocky-linux.github.io/documentation/RockyLinuxMiddlewaresGuide.it.pdf)
 
+### Services Web Rocky Linux (LAMP ou LEMP)
+
+* [Anglais](https://rocky-linux.github.io/documentation/RockyLinuxWebServicesGuide.pdf)
 ### Tutoriel RSync
 
 * [Anglais](https://rocky-linux.github.io/documentation/learning_rsync_rocky_linux.pdf)

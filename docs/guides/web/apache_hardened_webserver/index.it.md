@@ -1,6 +1,6 @@
 ---
 title: Server web Apache Protetto
-author: Steven Spencer, Franco Colussi
+author: Steven Spencer
 contributors: Ezequiel Bruni, Ganna Zhyrnova
 tested_with: 8.8, 9.2
 tags:
@@ -26,14 +26,13 @@ Che si tratti dell'hosting di molti siti web per i clienti o di un singolo sito 
 
 Con molti siti web caricati dai vostri clienti, uno di loro probabilmente caricherà un sistema di gestione dei contenuti (CMS) con la possibilità di vulnerabilità. La maggior parte dei clienti si concentra sulla facilità d'uso, non sulla sicurezza, e ciò che accade è che l'aggiornamento del proprio CMS diventa un processo che esce completamente dall'elenco delle priorità.
 
-
 Se per un'azienda con un grande staff IT è possibile notificare ai clienti le vulnerabilità del loro CMS, per un piccolo team IT questo potrebbe non essere realistico. La migliore difesa è un server Web protetto.
 
 L'hardening dei server Web può assumere molte forme, tra cui uno o tutti gli strumenti qui descritti ed eventualmente altri non definiti.
 
 Potreste utilizzare un paio di questi strumenti e non gli altri. Per chiarezza e leggibilità, questo documento è suddiviso in documenti separati per ogni strumento. L'eccezione sarà il firewall basato sui pacchetti`(firewalld`) di cui al presente documento principale.
 
-* Un buon firewall con filtro dei pacchetti basato sulle porte (iptables, firewalld, o firewall hardware - utilizzaremo `firewalld` per i nostri esempi) [procedura`firewalld`](#iptablesstart)
+* Un buon firewall con filtro dei pacchetti basato sulle porte (iptables, firewalld o firewall hardware - per gli esempi utilizzeremo `firewalld`).  Vedere la procedura di `firewalld` più avanti in questo documento.
 * Un sistema di rilevamento delle intrusioni basato su host (HIDS), in questo caso _ossec-hids_ [Apache Hardened Web Server - ossec-hids](ossec-hids.md)
 * Un firewall per applicazioni basate sul Web (WAF), con regole `mod_security` [Apache Hardened Web Server - mod_security](modsecurity.md)
 * Rootkit Hunter`(rkhunter`): Uno strumento di scansione che controlla il malware Linux [Apache Hardened Web Server - rkhunter](rkhunter.md)
@@ -72,9 +71,9 @@ Il diagramma mostra la nostra disposizione generale. Il `firewalld`, basato sui 
 
 In ogni sezione del pacchetto sono elencati i file di installazione necessari e le procedure di configurazione.
 
-## <a name="iptablesstart"></a>Configurazione di `firewalld`
+## Configurazione di `firewalld`
 
-```
+```bash
 firewall-cmd --zone=trusted --add-source=192.168.1.2 --permanent
 firewall-cmd --zone=trusted --add-service=ssh --permanent
 firewall-cmd --zone=public --remove-service=ssh --permanent
@@ -85,6 +84,7 @@ firewall-cmd --zone=public --add-port=20/tcp --permanent
 firewall-cmd --zone=public --add-port=7000-7500/tcp --permanent
 firewall-cmd --reload
 ```
+
 Ecco cosa sta succedendo:
 
 * impostare la nostra zona fidata sull'indirizzo IP del firewall hardware

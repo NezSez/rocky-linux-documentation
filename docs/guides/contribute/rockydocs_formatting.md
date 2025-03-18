@@ -7,11 +7,11 @@ tags:
   - formatting
 ---
 
-# Introduction
+## Introduction
 
 This guide highlights our more advanced formatting options, including admonitions, numbered lists, tables, and more.
 
-A document may or may not need to contain any of these elements. However, if you feel your document will benefit from special formatting, this guide should help.
+A document might or might not need to contain any of these elements. However, if you feel your document will benefit from special formatting, this guide should help.
 
 !!! note "A Note About Headings"
 
@@ -33,6 +33,19 @@ A document may or may not need to contain any of these elements. However, if you
 
     The key here is that you can use as many of the 2 through 6 headings as necessary, but only **ONE** level 1 heading. While the document will appear correct with more than one level 1 heading, the automatically generated table of contents for the document that appears on the right-hand side will **NOT** display correctly (or sometimes at all) with more than one. Keep this in mind when writing your documents.
 
+    Another important note about the Level 1 heading: If the `title:` meta is in use, then this will be the default Level 1 heading. You should not add another one. An example is that this document's title meta is:
+
+    ```
+    ---
+    title: Document Formatting
+    ```
+
+    The very first heading added, then, is "Introduction" at Level 2.
+
+    ```
+    ## Introduction
+    ```
+
 !!! warning "A note about supported HTML elements"
 
     There are HTML elements that are technically supported in markdown. Some of these are described in this document, and no markdown syntax exists to replace them. These supported HTML tags should be used rarely, because markdown linters will complain about them in a document. For example:
@@ -41,26 +54,46 @@ A document may or may not need to contain any of these elements. However, if you
 
     If you need to use a supported HTML element, see if you can find another way to write your document that will not use these elements. If you must use them, it is still allowed.
 
+!!! info "A Note About Links"
+
+    Links are not special formatting, but standard methods of referencing other documents (internal links) or external web pages. However, there is one particular type of link that you should not use when composing documents for Rocky Linux, and it is an anchor, or link to a spot in the same document.
+
+    Anchors work in the source language for Rocky Linux (English), but as soon as they are translated by our Crowdin interface, they break in those languages. This happens because an acceptable anchor in markdown that does not contain HTML elements, uses the header to create the link:
+
+    ```
+    ## A Header
+
+    Some text
+
+    A Link to [that header](#-a-header)
+    ```
+
+    This link is found by hovering your mouse over the permalink in a created document, but is essentially the header with the "#" plus the header in lower-case separated by a dash (-).
+
+    When the document is translated, though, the header is translated BUT the link is outside of what Crowdin allows to be translated, so it remains in its original (English) state.
+
+    If you find yourself in need of using an anchor, take a look at your document and see if reorganization of the content will make that anchor unnecessary. Just know that if you use an anchor in a newly composed document, that anchor will break once translation of that document occurs.
+
 ## Admonitions
 
-Admonitions are special visual "boxes" that allow you to call attention to important facts and highlight them. The following are types of admonitions:
+Admonitions are special visual "boxes" that call attention to important facts and highlight them. The following are types of admonitions:
 
-| type      | Description                                               |
-|-----------|-----------------------------------------------------------|
-| note      | displays text in a blue box                                   |
-| abstract  | displays text in a light blue box                             |
-| info      | displays text in a blue-green box                             |
-| tip       | displays text in a blue-green box (icon slightly greener)     |
-| success   | displays text in a green box                                  |
-| question  | displays text in a light green box                            |
-| warning   | displays text in an orange box                                |
-| failure   | displays text in a light red box                              |
-| danger    | displays text in a red box                                    |
-| bug       | displays text in a red box                                    |
-| example   | displays text in a purple box                                 |
-| quote     | displays text in a grey box                                   |
-| custom ^1^ | always displays text in a blue box                  |
-| custom ^2^ | displays text in the color of the box of the chosen type |
+| type       | Description                                               |
+|------------|-----------------------------------------------------------|
+| note       | displays text in a blue box                               |
+| abstract   | displays text in a light blue box                         |
+| info       | displays text in a blue-green box                         |
+| tip        | displays text in a blue-green box (icon slightly greener) |
+| success    | displays text in a green box                              |
+| question   | displays text in a light green box                        |
+| warning    | displays text in an orange box                            |
+| failure    | displays text in a light red box                          |
+| danger     | displays text in a red box                                |
+| bug        | displays text in a red box                                |
+| example    | displays text in a purple box                             |
+| quote      | displays text in a gray box                               |
+| custom ^1^ | always displays text in a blue box                        |
+| custom ^2^ | displays text in the color of the box of the chosen type  |
 
 As noted in custom <sub>1</sub> above, admonitions are limitless. Add a custom title to any admonition type to get the box color you want for a specific admonition, as noted in custom <sub>2</sub> above.
 
@@ -142,7 +175,7 @@ Which looks like this in your editor:
 
 ## Tabbed content within a document
 
-Formatting tabbed content is similar to admonitions. Instead of three exclamation marks or question marks, it begins with three equal signs. All the admonition formatting (4 spaces and so on) applies to this content. For example, a document might need a different procedure for a different Rocky Linux version. When using tabbed content for versions, the most recent release of Rocky Linux should come first. At the time of this writing, that was 9.0:
+Formatting tabbed content is similar to admonitions. Instead of three exclamation marks or question marks, it begins with three equal signs. All the admonition formatting (4 spaces and so on) applies to this content. For example, a document might need a different procedure for a different Rocky Linux version. When using tabbed content for versions, the most recent release of Rocky Linux should come first. At the time of this writing, it was 9.0:
 
 === "9.0"
 
@@ -216,25 +249,25 @@ And here is how that looks as raw text:
 
 ## Tables
 
-In the above case, tables help us lay out command options or admonition types and descriptions. Here is how the table in the Admonitions section was entered:
+In the above case, tables help us lay out command options or admonition types and descriptions. This shows the entry of the table in the Admonitions section:
 
 ```text
-| type      | Description                                               |
-|-----------|-----------------------------------------------------------|
-| note      | displays text in a blue box                                   |
-| abstract  | displays text in a light blue box                             |
-| info      | displays text in a blue-green box                             |
-| tip       | displays text in a  blue-green box (icon slightly greener)    |
-| success   | displays text in a  green box                                 |
-| question  | displays text in a light green box                            |
-| warning   | displays text in an orange box                                 |
-| failure   | displays text in a light red box                              |
-| danger    | displays text in a  red box                                   |
-| bug       | displays text in a red box                                    |
-| example   | displays text in a purple box                                 |
-| quote     | displays text in a grey box                                   |
-| custom^1^ | always displays text in a blue box                  |
-| custom^2^ | displays text in a box with the color of the chosen type |
+| type      | Description                                                |
+|-----------|------------------------------------------------------------|
+| note      | displays text in a blue box                                |
+| abstract  | displays text in a light blue box                          |
+| info      | displays text in a blue-green box                          |
+| tip       | displays text in a  blue-green box (icon slightly greener) |
+| success   | displays text in a  green box                              |
+| question  | displays text in a light green box                         |
+| warning   | displays text in an orange box                             |
+| failure   | displays text in a light red box                           |
+| danger    | displays text in a  red box                                |
+| bug       | displays text in a red box                                 |
+| example   | displays text in a purple box                              |
+| quote     | displays text in a gray box                                |
+| custom^1^ | always displays text in a blue box                         |
+| custom^2^ | displays text in a box with the color of the chosen type   |
 
 ```
 
@@ -242,7 +275,7 @@ Note that it is not necessary to have each column broken down by size (as we hav
 
 ## Block quotes
 
-Block quotes are designed for quoting text from other sources to include in your documentation. Examples of block quotes in markdown would be:
+Block quotes are for quoting text from other sources to include in your documentation. Examples of block quotes in markdown would be:
 
 ```text
 > **an item** - A description of that item
@@ -290,7 +323,7 @@ sudo dnf install the-kitchen-sink
 ````
 `````
 
-And yes, the code block you just saw used five backticks at the beginning and end to make it render correctly.
+Yes, the code block you just saw used five backticks at the beginning and end to make it render correctly.
 
 ### Suppressing the displayed prompt and automatic line feed
 
@@ -326,6 +359,13 @@ A list of accepted keyboard commands [in this document](https://facelessuser.git
 
     These keyboard shortcuts are always entered in lower case except where a custom keyboard command is used within the quotes.
 
+## Forcing line breaks
+
+There are times when a simple ++enter++ on the keyboard will not give you a new line in markdown. This sometimes occurs when bulleted items use a lot of formatting characters. You may want to add a line break to better format text as well. In cases like these, you need to add two spaces to the end of the line where you want a new line.  Since spaces will not be visible in some markdown editors, this example shows the spaces being entered:
+
+* **A bullet item with extra formatting** ++space+space++
+* **Another item**
+
 ## Superscript, subscript and special symbols
 
 Superscript and subscript notation are supported in Rocky Linux documentation by use of the `^` for superscript and `~` for subscript. Superscript places text entered between the tags slightly above the normal text, while subscript places the text slightly below. Superscript is by far the more commonly used of these two in writing. Some special characters already appear in superscript without adding the tags, but you can also combine the tag to change the orientation of those characters as seen with the copyright symbol below. You can use superscript to:
@@ -354,7 +394,7 @@ Enter subscript by surrounding your text with the `~` tag (H~2~0 is `H~2~0`) and
 
 Some of you may need to reference outside sources when writing documentation. If you only have a single source, you can include it in your conclusion as a single link, but if you have multiples^1^, you can use superscript to note them in your text^2^ and then list them at the end of your document. Note that the positioning of references should come after the "Conclusion" section.
 
-Following the conclusion, you can have your notations in a numbered list to match the superscript or enter them as links. Both examples are shown here:
+Following the conclusion, you can have your notations in a numbered list to match the superscript or enter them as links. Shown here are both examples:
 
 1. "How Multiples Are Used In Text" by Wordy W. McWords [https://site1.com](https://site1.com)
 2. "Using Superscript In Text" by Sam B. Supersecret [https://site2.com](https://site2.com)
@@ -364,7 +404,7 @@ or
 [1](https://site1.com) "How Multiples Are Used In Text" by Wordy W. McWords  
 [2](https://site2.com) "Using Superscript In Text" by Sam B. Supersecret  
 
-And here is what that all looks like in your editor:
+Here is what that all looks like in your editor:
 
 ```text
 1. "How Multiples Are Used In Text" by Wordy W. McWords [https://site1.com](https://site1.com)
@@ -379,17 +419,17 @@ or
 
 ## Highlighting text
 
-Another possible way to enhance documentation is with ==highlighting==. Highlighting is handled by surrounding the text with `==`.
+Another possible way to enhance documentation is with ==highlighting==. You can use highlighting by surrounding the text with `==`.
 
 This looks like this in your editor:
 
 ```bash
-Another possible way to enhance documentation is with ==highlighting==. Highlighting is handled by surrounding the text with `==`. 
+Another possible way to enhance documentation is with ==highlighting==. You can use highlighting by surrounding the text with `==`. 
 ```
 
 ## Grouping different formatting types
 
-Rocky documentation offers some elegant formatting options when combining multiple elements within another element. For instance, an admonition with a numbered list:
+Rocky documentation offers some elegant formatting options when combining multiple elements within another element. For example, an admonition with a numbered list:
 
 !!! note
 
@@ -476,9 +516,57 @@ You can even embed a table or block quote (literally any formatting item type) w
 3. Many examples exist, but the above illustrates that it is possible to nest everything within. Just remember the four (4) magic spaces.
 ```
 
+## Non-displaying characters
+
+There are some characters in markdown that will not display properly. Sometimes it is because these characters are HTML or other tag types (links for example). There might be times when writing documentation that you **need** to display these characters to get your point across. The rule to display these characters is to escape them. Here is a table of these non-displaying characters followed by a code block that shows the table code.
+
+| symbol      | description                                       |
+|-------------|---------------------------------------------------|
+| \\          | backslash (used for escaping)                     |
+| \`          | backtick (used for code blocks)                   |
+| \*          | asterisk (used for bullets)                       |
+| \_          | underscore                                        |
+| \{ \}       | curly braces                                      |
+| \[ \]       | brackets (used for link titles)                   |
+| &#60; &#62; | angle brackets (used for direct HTML)             |
+| \( \)       | parentheses (used for link content)               |
+| \#          | pound sign (used for markdown headers)            |
+| &#124;      | pipe (used in tables)                             |
+| &#43;       | plus sign (used in tables)                        |
+| &#45;       | minus sign or hyphen (used in tables and bullets) |
+| &#33;       | exclamation (used in admonitions and tables)      |
+
+That table in code is:
+
+```table
+| symbol      | description                                       |
+|-------------|---------------------------------------------------|
+| \\          | backslash (used for escaping)                     |
+| \`          | backtick (used for code blocks)                   |
+| \*          | asterisk (used for bullets)                       |
+| \_          | underscore                                        |
+| \{ \}       | curly braces                                      |
+| \[ \]       | brackets (used for link titles)                   |
+| &#60; &#62; | angle brackets (used for direct HTML)             |
+| \( \)       | parentheses (used for link content)               |
+| \#          | pound sign (used for markdown headers)            |
+| &#124;      | pipe (used in tables)                             |
+| &#43;       | plus sign (used in tables)                        |
+| &#45;       | minus sign or hyphen (used in tables and bullets) |
+| &#33;       | exclamation (used in admonitions and tables)      |
+```
+
+The last code shows that certain characters require their HTML character code if used in a table.  
+
+In actual text, you would escape the character. For example, `\|` will show the pipe symbol, `\>` will show the angle bracket symbol, `\+` will show the plus sign, `\-` will show the minus sign, and `\!` will show the exclamation mark.
+
+You can see that if we get rid of the backticks in this sentence:
+
+In actual text, you would escape the character. For example, \| will show the pipe symbol, \> will show the angle bracket symbol, \+ will show the plus sign, \- will show the minus sign, and \! will show the exclamation mark.
+
 ## One final item - comments
 
-From time to time, you may want to add a comment to your markdown that will not display when rendered. Many reasons exist for this. For instance, if you want to add a placeholder for something that will be added later, you could use a comment to mark your spot.
+From time to time, you might want to add a comment to your markdown that will not display when rendered. Many reasons exist for this. If you want to add a placeholder for something that you are adding later, you could use a comment to mark your spot.
 
 The best way to add a comment to your markdown is to use the square brackets "[]" around two forward slashes "//" followed by a colon and the content. This would look like this:
 
@@ -504,6 +592,6 @@ A comment should have a blank line before and after the comment.
 
 Document formatting with headings, admonitions, tables, numbered lists, and block quotes can add clarity to your document. When using admonitions, take care to pick the correct type. This can make it easier to visually see the importance of the particular admonition.
 
-You do not *have* to use advanced formatting options. Overuse of special elements can add clutter where none is needed. Learning to use these formatting items conservatively and well can be very helpful to get your point across in a document.
+You do not *have* to use advanced formatting options. Overuse of special elements can add clutter. Learning to use these formatting items conservatively and well can be very helpful to get your point across in a document.
 
 Lastly, to make formatting easier, consider changing your markdown editor's TAB value to four (4) spaces.

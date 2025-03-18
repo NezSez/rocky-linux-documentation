@@ -6,13 +6,13 @@ contributors: Ganna Zhyrnova
 
 ## Einleitung
 
-Von der Webseite des Projekts:
+Zitat aus der Webseite des Projekts:
 
 > Flatpak ist ein Framework zur Verteilung von Desktop-Anwendungen auf verschiedene Linux-Distributionen. Es wurde von Entwicklern erstellt, die über langjährige Erfahrung in der Arbeit am Linux-Desktop verfügen, und wird als unabhängiges Open-Source-Projekt betrieben.
 
-Flatpak wird standardmäßig installiert, wenn Rocky Linux mit Software-Selektierungen installiert wird, die GNOME enthalten („Server mit GUI“ oder „Workstation“). Manuelle Installation ist auch möglich. (siehe beigefügtes Verfahren) Es ist eine hervorragende Möglichkeit, Ihre Desktop-Umgebung mit den Tools zu füllen, die Sie verwenden möchten.
+Flatpak wird standardmäßig installiert, wenn Rocky Linux mit einer Software-Auswahl installiert wird, die GNOME enthält („Server mit GUI“ oder „Workstation“). Eine manuelle Installation ist auch möglich (siehe beigefügtes Verfahren). Es ist eine hervorragende Möglichkeit, Ihre Desktop-Umgebung mit den Tools zu füllen, die Sie verwenden möchten.
 
-## Installation in Handarbeit
+## Manuelle Installation
 
 !!! note "Anmerkung"
 
@@ -127,10 +127,10 @@ Application Options:
 
 Es ist nicht notwendig, sich die Liste der Befehle zu merken, es ist aber eine gute Idee, zu wissen, wie man zu der Liste gelangt und die Option `--help` zu verwenden ist.
 
-!!! warning "Warnhinweis"
+!!! warning "Rocky Linux 8.x und `flatpak search`"
 
 ````
-If you are on a version of Rocky Linux 9.x, you will experience this bug. When running the command:
+If you are on a Rocky Linux 8.x version, you will experience this bug. When running the command:
 
 ```bash
 flatpak search [packagename]
@@ -154,7 +154,7 @@ There is no workaround for this. To avoid the error, use the Flathub resource in
 
 Flathub ist eine Webressource zum Abrufen oder Senden von Desktop-Paketen.
 
-Besuchen Sie https://flathub.org/, um Flathub zu durchsuchen. Hier gibt es eine riesige Liste kuratierter Desktop-Pakete, die übersichtlich in Kategorien unterteilt sind.
+Besuchen Sie <https://flathub.org/>, um Flathub zu durchsuchen. Hier gibt es eine riesige Liste kuratierter Desktop-Pakete, die übersichtlich in Kategorien unterteilt sind.
 
 ## Verwendung von Flathub zusammen mit Flatpak
 
@@ -166,51 +166,51 @@ Der Installationsprozess für OBS Studio sieht beispielsweise wie folgt aus:
 
 3. Klicken Sie auf den Abwärtspfeil neben der Schaltfläche „Installieren“
 
-   ![flathub\_install\_1](images/01_flatpak.png)
+ ![flathub_install_1](images/01_flatpak.png)
 
-   ![flathub\_install\_2](images/02_flatpak.png)
+ ![flathub_install_2](images/02_flatpak.png)
 
 4. Stellen Sie sicher, dass Sie alle Installationsvoraussetzungen für Rocky Linux erfüllt haben (Nummer 1 im zweiten Bild, das oben bereits abgeschlossen ist), kopieren Sie dann den Befehl (Nummer 2 im zweiten Bild) und fügen Sie ihn in ein Terminal ein
 
-   ```bash
-   flatpak install flathub com.obsproject.Studio
-   Looking for matches…
-   Required runtime for com.obsproject.Studio/x86_64/stable (runtime/org.kde.Platform/x86_64/6.6) found in remote flathub
-   Do you want to install it? [Y/n]: Y
-   ```
+ ```bash
+ flatpak install flathub com.obsproject.Studio
+ Looking for matches…
+ Required runtime for com.obsproject.Studio/x86_64/stable (runtime/org.kde.Platform/x86_64/6.6) found in remote flathub
+ Do you want to install it? [Y/n]: Y
+ ```
 
 5. Wenn Sie mit „Y“ antworten und ++enter++ drücken, wird Folgendes angezeigt:
 
-   ```bash
-   com.obsproject.Studio permissions:
-   ipc                             network         pulseaudio              wayland
-   x11                             devices         file access [1]         dbus access [2]
-   system dbus access [3]
+ ```bash
+ com.obsproject.Studio permissions:
+ ipc                             network         pulseaudio              wayland
+ x11                             devices         file access [1]         dbus access [2]
+ system dbus access [3]
 
-   [1] host, xdg-config/kdeglobals:ro, xdg-run/pipewire-0
-   [2] com.canonical.AppMenu.Registrar, org.a11y.Bus, org.freedesktop.Flatpak, org.freedesktop.Notifications,
-       org.kde.KGlobalSettings, org.kde.StatusNotifierWatcher, org.kde.kconfig.notify
-   [3] org.freedesktop.Avahi
+ [1] host, xdg-config/kdeglobals:ro, xdg-run/pipewire-0
+ [2] com.canonical.AppMenu.Registrar, org.a11y.Bus, org.freedesktop.Flatpak, org.freedesktop.Notifications,
+     org.kde.KGlobalSettings, org.kde.StatusNotifierWatcher, org.kde.kconfig.notify
+ [3] org.freedesktop.Avahi
 
-       ID                                                    Branch         Op         Remote          Download
-   1.     com.obsproject.Studio.Locale                          stable         i          flathub          < 47.0 kB (partial)
-   2.     org.kde.KStyle.Adwaita                                6.6            i          flathub           < 8.0 MB
-   3.     org.kde.Platform.Locale                               6.6            i          flathub         < 380.6 MB (partial)
-   4.     org.kde.PlatformTheme.QGnomePlatform                  6.6            i          flathub           < 9.7 MB
-   5.     org.kde.WaylandDecoration.QAdwaitaDecorations         6.6            i          flathub           < 1.2 MB
-   6.     org.kde.Platform                                      6.6            i          flathub         < 325.0 MB
-   7.     com.obsproject.Studio                                 stable         i          flathub         < 207.7 MB
+     ID                                                    Branch         Op         Remote          Download
+ 1.     com.obsproject.Studio.Locale                          stable         i          flathub          < 47.0 kB (partial)
+ 2.     org.kde.KStyle.Adwaita                                6.6            i          flathub           < 8.0 MB
+ 3.     org.kde.Platform.Locale                               6.6            i          flathub         < 380.6 MB (partial)
+ 4.     org.kde.PlatformTheme.QGnomePlatform                  6.6            i          flathub           < 9.7 MB
+ 5.     org.kde.WaylandDecoration.QAdwaitaDecorations         6.6            i          flathub           < 1.2 MB
+ 6.     org.kde.Platform                                      6.6            i          flathub         < 325.0 MB
+ 7.     com.obsproject.Studio                                 stable         i          flathub         < 207.7 MB
 
-   Proceed with these changes to the system installation? [Y/n]:
-   ```
+ Proceed with these changes to the system installation? [Y/n]:
+ ```
 
 6. Wenn Sie mit „Y“ antworten und ++enter++ drücken, werden die Systemberechtigungen wie angegeben geändert und die Anwendung installiert.
 
-7. Wenn alles gut geht, sollten Sie Folgendes erhalten:
+7. Wenn alles gut geht, sollten Sie folgende Meldung erhalten:
 
-   ```text
-   Installation complete.
-   ```
+ ```text
+ Installation complete.
+ ```
 
 8. Im Menü „Aktivities“ können Sie nun nach OBS Studio suchen und es ausführen.
 
@@ -262,6 +262,6 @@ Um ein Paket zu deinstallieren, verwenden Sie die „Anwendungs-ID“ aus der Au
 flatpak uninstall com.obsproject.Studio
 ```
 
-## Conclusion
+## Zusammenfassung
 
-Sie können Flathub und Flatpak verwenden, um Ihren GNOME-Desktop ganz einfach mit Anwendungen zu füllen, von Spielen bis hin zu Produktivitätstools.
+Sie können `Flathub` und `Flatpak` verwenden, um Ihren GNOME-Desktop ganz einfach mit Anwendungen zu füllen, von Spielen bis hin zu Produktivitätstools.

@@ -2,7 +2,7 @@
 title: Метод Python VENV
 author: Franco Colussi
 contributors: Steven Spencer, Ganna Zhyrnova
-tested_with: 8.7, 9.1
+tested_with: 8.7, 9.1, 9.4
 tags:
   - mkdocs
   - тестування
@@ -276,6 +276,34 @@ INFO     -  [22:32:41] Serving on http://127.0.0.1:8000/
 (env) [rocky_user@rl9 env]$
 (env) [rocky_user@rl9 env]$ deactivate
 [rocky_user@rl9 env]$
+```
+
+### Створіть псевдонім для методу venv
+
+Ви можете створити псевдонім bash, щоб пришвидшити процес обслуговування mkdocs за допомогою методу venv.
+
+Виконайте наведену нижче команду, щоб додати псевдонім `venv` до вашого `.bash_profile`:
+
+```bash
+printf "# mkdocs alias\nalias venv='source $HOME/lab/rockydocs/env/bin/activate && mkdocs serve -f $HOME/lab/rockydocs/docs.rockylinux.org/mkdocs.yml'" >> ~/.bash_profile
+```
+
+Оновіть середовище оболонки за допомогою свого щойно створеного псевдоніма:
+
+```bash
+source ~/.bash_profile
+```
+
+Тепер ви можете запустити `venv`, щоб створити локальний сайт розробки з mkdocs за допомогою методу venv:
+
+```bash
+venv
+```
+
+Щоб вийти з віртуального середовища, все одно потрібно виконати `deactivate`:
+
+```bash
+deactivate
 ```
 
 ## Висновки та заключні думки

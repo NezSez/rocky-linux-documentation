@@ -381,7 +381,7 @@ sudo useradd -D -g 1000 -b /home -s /bin/bash
 | Option         | Description                                                                      |
 | -------------- | -------------------------------------------------------------------------------- |
 | `-D`           | Sets the default values for user creation.                                       |
-| `-b directory` | Sets the default login directory.                                                |
+| `-b base_directory` | Defines the base directory for the user's home directory. If you do not specify this option, use the HOME variable in the /etc/default/useradd file or /home/  |
 | `-g group`     | Sets the default group.                                                          |
 | `-s shell`     | Sets the default shell.                                                          |
 | `-f`           | Sets the number of days after the password expires before disabling the account. |
@@ -655,7 +655,7 @@ Re-enter new password:
 
 !!! note
 
-    In addition to using `gpasswd -a` to add users to a group, you can also use the `usermod -G` or `usermod -AG` mentioned earlier.
+    In addition to using `gpasswd -a` to add users to a group, you can also use the `usermod -G` or `usermod -aG` mentioned earlier.
 
 ### `id` command
 
@@ -766,9 +766,9 @@ sudo passwd alain
 
 !!! Note
 
-    Users can use the `passwd` command to change their passwords (the old password is requested). The administrator can change the passwords of all users without restriction.
+    Users logged in to the system can use the `passwd` command to change their passwords (this process requires requesting the user's old password). The root(uid=0) user can change the password of any user. 
 
-They will have to comply with the security restrictions.
+Changing passwords requires compliance with prescribed security policies, which involves **PAM (Pluggable Authentication Modules)** knowledge.
 
 When managing user accounts by shell script, setting a default password after creating the user may be useful.
 
@@ -872,6 +872,13 @@ Shell > useradd -N test2
 Shell > id test2
 uid=1001(test2) gid=100(users) groups=100(users)
 ```
+
+!!! note
+
+    GNU/Linux has two group mechanisms:
+
+    1. Public group, its primary group is GID=100
+    2. Private group, that is, when adding users, a group with the same name is created as its primary group. This group mechanism is commonly used by RHEL and related downstream distributions.
 
 ### `/etc/login.defs` file
 

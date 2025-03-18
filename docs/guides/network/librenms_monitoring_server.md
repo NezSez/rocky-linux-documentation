@@ -46,10 +46,17 @@ The version of the repository you install will depend on the version of Rocky Li
 dnf install http://rpms.remirepo.net/enterprise/remi-release-9.rpm
 ```
 
+Then set the dnf to use remi packages instead of the regular packages
+
+```bash
+dnf module reset php
+dnf module enable php:8.1
+```
+
 Once both the EPEL and REMI repositories are installed, it is time to install the packages:
 
 ```bash
-dnf install bash-completion cronie fping git httpd ImageMagick mariadb-server mtr net-snmp net-snmp-utils nmap php81-php-fpm php81-php-cli php81-php-common php81-php-curl php81-php-gd php81-php-json php81-php-mbstring php81-php-process php81-php-snmp php81-php-xml php81-php-zip php81-php-mysqlnd python3 python3-PyMySQL python3-redis python3-memcached python3-pip python3-systemd rrdtool unzip wget
+dnf install bash-completion cronie fping git httpd ImageMagick mariadb-server mtr net-snmp net-snmp-utils nmap php-fpm php-cli php-common php-curl php-gd php-gmp php-json php-mbstring php-process php-snmp php-xml php-zip php-mysqlnd python3 python3-PyMySQL python3-redis python3-memcached python3-pip python3-systemd rrdtool unzip wget
 ```
 
 All of these packages represent some portion of the LibreNMS feature set.
@@ -118,7 +125,7 @@ LibreNMS documentation says that the above procedure might fail when you are beh
 You need to ensure the correct setting for the system and PHP. You can find a list of [valid timezone settings for PHP here](https://php.net/manual/en/timezones.php). For instance, for the Central timezone, a common entry is "America/Chicago". Start by editing the `php.ini` file:
 
 ```bash
-vi /etc/opt/remi/php81/php.ini
+vi /etc/php.ini
 ```
 
 Find the `date.timezone` line and modify it. Note that it is remarked out, so remove the ";" from the beginning of the line and add your timezone after the "=" sign. For the Central timezone example use:
@@ -180,14 +187,11 @@ Enter "exit" to exit out of `mariadb`.
 
 This not changed from the official documentation except for the path to the files. First, copy the `www.conf`:
 
-```bash
-cp /etc/opt/remi/php81/php-fpm.d/www.conf /etc/opt/remi/php81/php-fpm.d/librenms.conf
-```
-
 Change the `librenms.conf` file:
 
 ```bash
-vi /etc/opt/remi/php81/php-fpm.d/librenms.conf
+cp /etc/php-fpm.d/www.conf /etc/php-fpm.d/librenms.conf
+vi /etc/php-fpm.d/librenms.conf
 ```
 
 Change "[www]" to ["librenms]"
@@ -208,7 +212,7 @@ listen = /run/php-fpm-librenms.sock
 Save your changes and exit the file. If this is the only web service that will be running on this machine, you can remove the old <www.conf> file you copied:
 
 ```bash
-rm -f /etc/opt/remi/php81/php-fpm.d/www.conf
+rm -f /etc/php-fpm.d/www.conf
 ```
 
 ## Configure `httpd`
@@ -254,7 +258,7 @@ Enable  `httpd` and `php-fpm`:
 
 ```bash
 systemctl enable --now httpd
-systemctl enable --now php81-php-fpm
+systemctl enable --now php-fpm
 ```
 
 ## SELinux

@@ -6,7 +6,7 @@ update: 2021-11-04
 
 # /etc/rsyncd.conf
 
-上一篇 [rsync演示02](03_rsync_demo02.zh.md) 我们介绍了一些基本的参数，本篇是做另外参数的补充。 本篇是做另外参数的补充。
+上一篇 [rsync演示02](03_rsync_demo02.zh.md) 我们介绍了一些基本的参数。 本篇是做另外参数的补充。
 
 | 参数                                  | 说明                                                                                                                                                                 |
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -28,4 +28,21 @@ update: 2021-11-04
 
 ## 推荐的配置
 
-![ photo ](images/rsync_config.jpg)
+```ini title="/etc/rsyncd.conf"
+uid = nobody
+gid = nobody
+address = 192.168.100.4
+use chroot = yes
+max connections = 10
+syslog facility = daemon
+pid file = /var/run/rsyncd.pid
+log file = /var/log/rsyncd.log
+lock file = /var/run/rsyncd.lock
+[file]
+  comment = rsync
+  path = /rsync/
+  read only = no
+  dont compress = *.gz *.bz2 *.zip
+  auth users = li
+  secrets file = /etc/rsyncd users.db
+```

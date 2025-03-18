@@ -17,7 +17,7 @@ Cette procédure vous permettra d'utiliser MATE sur Rocky Linux.
 ## Prérequis
 
 * Un ordinateur (ordinateur portable ou station de travail) avec écran et tout.
-* Un désir d'exécuter l'environement de bureau MATE au lieu de GNOME, celui par défaut.
+* Un désir d'exécuter l'environnement de bureau MATE au lieu de GNOME, celui par défaut.
 
 === "9"
 
@@ -29,20 +29,20 @@ Cette procédure vous permettra d'utiliser MATE sur Rocky Linux.
     
     ### 9: obtenir, vérifier et enregistrer la l'image live MATE
     
-    Avant l'installation, la première étape consiste à télécharger l'image live et à l'écrire sur un DVD ou une clé USB. Comme indiqué précédemment, l'image autonome sera amorçable, tout comme tout autre support d'installation pour Linux. Vous trouverez la dernière image live pour MATE dans la section téléchargement pour Rocky Linux 9 [images live](https://dl.rockylinux.org/pub/rocky/9.3/live/x86_64/). Notez que ce lien particulier suppose que x86_64 est votre architecture, et au moment de la rédaction de cet article, qui est la seule architecture pour laquelle cette image d'installation autonome est disponible. Téléchargez à la fois l'image live et les fichiers de vérification correspondants. 
+    Avant l'installation, la première étape consiste à télécharger l'image live et à l'écrire sur un DVD ou une clé USB. Comme indiqué précédemment, l'image autonome sera amorçable, tout comme tout autre support d'installation pour Linux. Vous trouverez la dernière image live pour MATE dans la section `Download` pour Rocky Linux 9 [images live](https://dl.rockylinux.org/pub/rocky/9.5/live/x86_64/). Notez que ce lien particulier suppose que x86_64 est votre architecture, et au moment de la rédaction de cet article, qui est la seule architecture pour laquelle cette image d'installation autonome est disponible. Téléchargez à la fois l'image live et les fichiers de vérification correspondants. 
     
     Maintenant vérifiez l'image avec le fichier CHECKSUM en utilisant la commande
     suivante (notez qu'il s'agit d'un exemple ! Assurez-vous que le nom de votre image et les fichiers CHECKSUM correspondent) :
 
     ```
-    sha256sum -c CHECKSUM --ignore-missing Rocky-9.x-MATE-x86_64-yyyymmdd.0.iso.CHECKSUM
+    sha256sum -c CHECKSUM --ignore-missing Rocky-9.5-MATE-x86_64-20221124.0.iso.CHECKSUM
     ```
 
 
     Si tout se passe bien, vous devriez obtenir ce message :
 
     ```
-    Rocky-9.x-MATE-x86_64-yyyyMMdd.y.iso: OK
+    Rocky-9.5-MATE-x86_64-20221124.0.iso: OK
     ```
 
 
@@ -135,7 +135,7 @@ Cette procédure vous permettra d'utiliser MATE sur Rocky Linux.
 
     ### 9: Étapes Finales
 
-    Si votre système a été installé avec Gnome ou un autre interface de bureau avant d'installer MATE, vous devriez vous préparer à redémarrer le système. Si aucune interface de bureau n'a été installée, vous devrez utiliser la commande suivante pour définir la cible graphique :
+    Si votre système a été installé avec GNOME ou un autre interface de bureau avant d'installer MATE, vous devriez vous préparer à redémarrer le système. Si aucune interface de bureau n'a été installée, vous devrez utiliser la commande suivante pour définir la cible graphique :
 
     ```
     sudo systemctl set-default graphical.target

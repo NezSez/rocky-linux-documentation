@@ -101,7 +101,7 @@ This first exercise walks through some common tools for managing the computer ho
 
 The first critical step you need to complete before going on to the other exercises in this network lab will be creating a special virtual network interface known as a MACVTAP device.
 
-MACVTAP devices are virtual devices that combine the properties of a softwarei-only interface known as a TAP device as well as the properties of the MACVLAN driver.
+MACVTAP devices are virtual devices that combine the properties of a software-only interface known as a TAP device as well as the properties of the MACVLAN driver.
 
 Creating and working with these MACVTAP devices will allow you to safely test, change, and configure various network configuration-related tasks. These virtual network interfaces will be used in various exercises without disrupting the existing network configuration.
 
@@ -254,12 +254,6 @@ Now that you have set up the `macvtap` interfaces, you safely perform the variou
 
     ```bash
      ip -6 address add 2001:db8::1/64 dev macvtap1
-    ```
-
-2. Next for `macvtap1` assign the 2001:db8::2/64 IPv6 address by running:
-
-    ```bash
-    # ip -6 address add 2001:db8::2/64 dev macvtap1
     ```
 
 3. Verify the IPv6 address assignments, type:

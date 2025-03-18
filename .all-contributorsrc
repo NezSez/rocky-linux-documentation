@@ -134,15 +134,6 @@
       ]
     },
     {
-      "login": "sjpp",
-      "name": "Sébastien Pascal-Poher",
-      "avatar_url": "https://avatars.githubusercontent.com/u/40760290?v=4",
-      "profile": "https://www.volted.net/",
-      "contributions": [
-        "translation"
-      ]
-    },
-    {
       "login": "ltrecanao",
       "name": "Lucas Trecanao",
       "avatar_url": "https://avatars.githubusercontent.com/u/76416245?v=4",
@@ -661,7 +652,7 @@
       "login": "LauKr",
       "name": "Lau",
       "avatar_url": "https://avatars.githubusercontent.com/u/37706897?v=4",
-      "profile": "http://laurenzkruty.de",
+      "profile": "https://github.com/laukr",
       "contributions": [
         "content"
       ]
@@ -670,7 +661,7 @@
       "login": "SergeCroise",
       "name": "Serge Croisé",
       "avatar_url": "https://avatars.githubusercontent.com/u/11520535?v=4",
-      "profile": "http://www.meteocontrol.cn",
+      "profile": "https://github.com/sergecroise",
       "contributions": [
         "content"
       ]
@@ -820,15 +811,6 @@
       ]
     },
     {
-      "login": "qyecst",
-      "name": "qyecst",
-      "avatar_url": "https://avatars.githubusercontent.com/u/13901864?v=4",
-      "profile": "https://www.qyecst.cn",
-      "contributions": [
-        "content"
-      ]
-    },
-    {
       "login": "msmit5",
       "name": "Matt",
       "avatar_url": "https://avatars.githubusercontent.com/u/55892653?v=4",
@@ -950,6 +932,114 @@
       "name": "Christian Steinert",
       "avatar_url": "https://avatars.githubusercontent.com/u/9868229?v=4",
       "profile": "https://github.com/ChrSteinert",
+      "contributions": [
+        "content"
+      ]
+    },
+    {
+      "login": "hs303",
+      "name": "hs303",
+      "avatar_url": "https://avatars.githubusercontent.com/u/84558934?v=4",
+      "profile": "https://github.com/hs303",
+      "contributions": [
+        "content"
+      ]
+    },
+    {
+      "login": "MarlonJMejia",
+      "name": "MarlonJMejia",
+      "avatar_url": "https://avatars.githubusercontent.com/u/58282236?v=4",
+      "profile": "https://github.com/MarlonJMejia",
+      "contributions": [
+        "content"
+      ]
+    },
+    {
+      "login": "Atroskelis",
+      "name": "Atroskelis",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6087274?v=4",
+      "profile": "https://github.com/Atroskelis",
+      "contributions": [
+        "content"
+      ]
+    },
+    {
+      "login": "CBID2",
+      "name": "Christine Belzie",
+      "avatar_url": "https://avatars.githubusercontent.com/u/105683440?v=4",
+      "profile": "https://christinebelzie.carrd.co/",
+      "contributions": [
+        "content"
+      ]
+    },
+    {
+      "login": "cyrilbois",
+      "name": "cyril",
+      "avatar_url": "https://avatars.githubusercontent.com/u/38669260?v=4",
+      "profile": "https://extendsclass.com/",
+      "contributions": [
+        "content"
+      ]
+    },
+    {
+      "login": "singraber",
+      "name": "Andreas Singraber",
+      "avatar_url": "https://avatars.githubusercontent.com/u/26900609?v=4",
+      "profile": "https://github.com/singraber",
+      "contributions": [
+        "content"
+      ]
+    },
+    {
+      "login": "andcscott",
+      "name": "Andrew Scott",
+      "avatar_url": "https://avatars.githubusercontent.com/u/91222421?v=4",
+      "profile": "https://andyscott.me",
+      "contributions": [
+        "content"
+      ]
+    },
+    {
+      "login": "CracktheDom",
+      "name": "CracktheDom",
+      "avatar_url": "https://avatars.githubusercontent.com/u/85846263?v=4",
+      "profile": "https://github.com/CracktheDom",
+      "contributions": [
+        "content"
+      ]
+    },
+    {
+      "login": "webgtx",
+      "name": "Alex Zolotarov",
+      "avatar_url": "https://avatars.githubusercontent.com/u/62614322?v=4",
+      "profile": "https://github.com/webgtx",
+      "contributions": [
+        "content"
+      ]
+    },
+    {
+      "login": "KronwarsCZ",
+      "name": "Petr Budai",
+      "avatar_url": "https://avatars.githubusercontent.com/u/39410042?v=4",
+      "profile": "https://github.com/KronwarsCZ",
+      "contributions": [
+        "content"
+      ]
+    },
+    {
+      "login": "metalllinux",
+      "name": "Howard",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87049949?v=4",
+      "profile": "https://github.com/metalllinux",
+      "contributions": [
+        "content"
+      ]
+    },
+    {
+      "login": "rjys365",
+      "name": "rjys365",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11705106?v=4",
+      "profile": "https://github.com/rjys365",
       "contributions": [
         "content"
       ]

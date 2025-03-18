@@ -8,7 +8,7 @@ contributors: Steven Spencer, Ganna Zhyrnova
 
 ## Introduction
 
-A long time ago, I was a little newbie computer user who heard that having a firewall was *supposed* to be super good. It would let me decide what got in and out of my computer, right?? But it mostly seemed to stop my video games from accessing the internet; I was *not* a happy.
+A long time ago, I was a little newbie computer user who heard that having a firewall was *supposed* to be super good. It would let me decide what got in and out of my computer, right?? But it mostly seemed to stop my video games from accessing the internet; I was *not* happy.
 
 Of course, if you're here, you probably have a better idea what a firewall is and what it does than I did. But if your firewall experience amounts to telling Windows Defender that your new app is allowed to use the internet, don't worry. As indicated in this document title, this guide is for you (and other beginners)!
 
@@ -49,7 +49,7 @@ You'll need:
 systemctl enable --now firewalld
 ```
 
-The `--now` flag starts the service as soon as it is enabled and let's you skip the `systemctl start firewalld` step.
+The `--now` flag starts the service as soon as it is enabled and lets you skip the `systemctl start firewalld` step.
 
 As with all services on Rocky Linux, you can check if the firewall is running with:
 

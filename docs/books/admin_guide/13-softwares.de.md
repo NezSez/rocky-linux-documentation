@@ -90,7 +90,7 @@ rpm -qf /path/to/file
 | `-f`             | Zeigt den Namen des Pakets, das die angegebene Datei enthält.                                                           |
 | `--last`         | Die Liste der Pakete wird nach dem Installationsdatum sortiert (die letzten installierten Pakete erscheinen als Erste). |
 
-!!! warning "Warnung"
+!!! warning "Warnhinweis"
 
     Nach der `-q` Option muss der Paketname genau sein. Platzhalter (wildcards) werden nicht unterstützt.
 
@@ -894,7 +894,7 @@ Installed size: 214 k
 Is this ok [y/N]:
 ```
 
-### Conclusion
+### Zusammenfassung
 
 EPEL ist kein offizielles Repository für RHEL, aber es kann nützlich für Administratoren und Entwickler sein, die mit RHEL oder Derivaten arbeiten und einige Hilfsprogramme benötigen, die für RHEL aus einer vertrauenswürdigen Quelle erstellt wurden.
 

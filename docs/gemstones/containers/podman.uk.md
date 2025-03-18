@@ -40,7 +40,7 @@ podman run -d -p 8080:80 nextcloud
 
 ### Використання `quadlet`
 
-Починаючи з версії 4.4 Podman постачається з [Quadlet](https://docs.podman.io/en/latest/markdown/podman-systemd.unit.5.html) – генератором systemd. Його можна використовувати для генерації файлів модулів для безкорінних і кореневих системних служб.
+Починаючи з версії 4.4, Podman постачається з [Quadlet](https://docs.podman.io/en/latest/markdown/podman-systemd.unit.5.html), генератором systemd, який може генерувати файли модулів rootless та rootful systemd.
 
 Можна розміщувати файли квадлетів для кореневих служб в
 
@@ -53,7 +53,7 @@ podman run -d -p 8080:80 nextcloud
 - `/etc/containers/systemd/users/$(UID)`
 - `/etc/containers/systemd/users/`
 
-Хоча файли окремих контейнерів, pod, image, network, volume і kube також підтримуються, давайте зосередимося на нашому прикладі Nextcloud. Створіть новий файл ~/.config/containers/systemd/nextcloud.cotainer із таким вмістом:
+Хоча окремі контейнери, модулі, зображення, мережі, томи та файли kube підтримуються, давайте зосередимося на нашому прикладі Nextcloud. Створіть новий файл ~/.config/containers/systemd/nextcloud.cotainer із таким вмістом:
 
 ```systemd
 [Container]
@@ -88,12 +88,7 @@ systemctl --user start nextcloud.service
 WantedBy=default.target
 ```
 
-Потім знову запустіть генератор і ввімкніть службу:
-
-```bash
-systemctl --user daemon-reload;
-systemctl --user enable nextcloud.service;
-```
+Оскільки згенеровані службові файли вважаються тимчасовими, їх не можна ввімкнути за допомогою systemd. Щоб пом’якшити це, генератор вручну застосовує встановлення під час створення. Це фактично також активує ці файли служб.
 
 Підтримуються інші типи файлів: pod, том, мережа, зображення та kube. [Pods](https://docs.podman.io/en/latest/markdown/podman-systemd.unit.5.html#pod-units-pod), наприклад, можна використовувати для групування контейнерів – згенерованого systemd служби та їхні залежності (створити pod перед контейнерами) автоматично керуються systemd.
 

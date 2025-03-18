@@ -771,7 +771,7 @@ These are the pipe (*pipes*) and the *socket* files.
 
 #### Link files
 
-These files allow the possibility of giving several logical names to the same physical file. A new access point to the file is therefore created.
+These files allow the possibility of giving several logical names to the same physical file, creating a new access point to the file.
 
 There are two types of link files:
 
@@ -782,8 +782,8 @@ Their main features are:
 
 | Link types     | Description                                                                                                                                                                                                                                                                |
 | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| soft link file | Represents a shortcut similar to Windows. It has permission of 777 and points to the original file. When the original file is deleted, the linked file and the original file are displayed in red.                                                                         |
-| Hard link file | Represents the original file. It has the same *inode* number as the hard-linked file. They can be updated synchronously, including the contents of the file and when it was modified. Cannot cross partitions, cannot cross file systems. Cannot be used for directories. |
+| Soft link file | This file is similar to a shortcut for Windows. It has permission of 0777 and points to the original file. When the original file is deleted, you can use `ls -l` to view the output information of the soft link file. In the output information, the file name of the soft link appears in red, and the pointed original file appears in red with a flashing prompt.  |
+| Hard link file | This file represents different mappings occupying the same *inode* number. They can be updated synchronously (including file content, modification time, owner, group affiliation, access time, etc.). Hard-linked files cannot span partitions and file systems and cannot be used in directories. |
 
 Specific examples are as follows:
 
@@ -844,7 +844,7 @@ The description of **directory permissions** is as follows:
 | :-------------------: | ----------------------------------------------------------------------------------------------------------------------------------------- |
 |           r           | Read. Allows reading the contents of a directory (`ls -R`).                                                                               |
 |           w           | Write. Allows you to create, and delete files/directories in this directory, such as commands `mkdir`, `rmdir`, `rm`, `touch`, and so on. |
-|           x           | Execute. Allows descending in the directory (`cd`).                                                                                       |
+|           x           | Execute. Allows entry into directory (`cd`).                                                                                              |
 |           -           | No right                                                                                                                                  |
 
 !!! info
@@ -861,7 +861,7 @@ The description of **directory permissions** is as follows:
 
 !!! info
 
-    In some commands, it is possible to designate everyone with **a** (_all_). **a = ugo**.
+    In some commands, you can use *a* (_all_) to represent *ugo*. For example: `chmod a+x FileName` is equivalent to `chmod u+x,g+x,o+x FileName` or `chmod ugo+x FileName`.
 
 ### Attribute management
 
@@ -1018,7 +1018,7 @@ $ ls -la  umask_025
 
 !!! Note
 
-    `umask` modifies the mask until the disconnection.
+    In the above example, using commands to modify masks applies only to the currently connected session.
 
 !!! info
 

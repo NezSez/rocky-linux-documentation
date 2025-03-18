@@ -28,7 +28,7 @@ Let us run a [Nextcloud](https://nextcloud.com/) self-hosted cloud platform as a
 podman run -d -p 8080:80 nextcloud
 ```
 
-You will receive a prompt to select the container registry to download from. In our example, we will use `docker.io/library/nextcloud:latest`.
+You will receive a prompt to select the container registry from which to download. In our example, we will use `docker.io/library/nextcloud:latest`.
 
 Once you have downloaded the Nextcloud container, it will run.
 
@@ -53,7 +53,7 @@ while rootless files can be placed in either of
 - `/etc/containers/systemd/users/$(UID)`
 - `/etc/containers/systemd/users/`
 
-While single containers, pod, image, network, volume, and kube files are also supported, let's focus on our Nextcloud example. Create a new file `~/.config/containers/systemd/nextcloud.cotainer` with the following content:
+While single containers, pods, images, networks, volumes, and kube files are supported, let's focus on our Nextcloud example. Create a new file `~/.config/containers/systemd/nextcloud.container` with the following content:
 
 ```systemd
 [Container]
@@ -86,12 +86,7 @@ To automatically run the container upon system start or user login, you can add 
 WantedBy=default.target
 ```
 
-Then let the generator run again and enable your service:
-
-```bash
-systemctl --user daemon-reload;
-systemctl --user enable nextcloud.service;
-```
+As the generated service files are considered transient, they cannot be enabled by systemd. To mitigate this, the generator manually applies installs during generation. This effectively also enables those services files.
 
 Other file types are supported: pod, volume, network, image, and kube. [Pods](https://docs.podman.io/en/latest/markdown/podman-systemd.unit.5.html#pod-units-pod), for instance, can be used to group containers – the generated systemd services and their dependencies (create the pod before the containers) are automatically managed by systemd.
 

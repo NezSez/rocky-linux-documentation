@@ -4,7 +4,7 @@ title: Backup e Ripristino
 
 # Backup e ripristino
 
-In questo capitolo imparerai come eseguire il backup e ripristinare i tuoi dati con Linux.
+In questo capitolo si apprenderà come eseguire il backup e il ripristino dei dati utilizzando Linux.
 
 ****
 
@@ -25,9 +25,9 @@ In questo capitolo imparerai come eseguire il backup e ripristinare i tuoi dati 
 
 !!! Note "Nota"
 
-    In tutto questo capitolo le strutture di comando usano "device" per specificare sia la posizione di destinazione per il backup, sia la posizione di origine durante il ripristino. Il dispositivo può essere un supporto esterno o un file locale. Dovresti sviluppare una certa confidenza con questo concetto durante lo svolgimento del capitolo, ma puoi sempre ritornare a questa nota per chiarimenti se ne hai bisogno.
+    In questo capitolo, le strutture dei comandi utilizzano “device” per specificare sia una posizione di destinazione per il backup sia la posizione di origine per il ripristino. Il device può essere un supporto esterno o un file locale. Dovresti sviluppare una certa confidenza con questo concetto durante lo svolgimento del capitolo, ma puoi sempre ritornare a questa nota per chiarimenti se ne hai bisogno.
 
-Il backup risponde a una necessità di conservare e ripristinare i dati in modo sicuro ed efficace.
+Il backup risponde all'esigenza di conservare e ripristinare i dati in modo efficace.
 
 Il backup consente di proteggersi dai seguenti problemi:
 
@@ -35,7 +35,7 @@ Il backup consente di proteggersi dai seguenti problemi:
 * **Cancellazione**: volontaria o involontaria. Umana o tecnica. Virus, ...
 * **Integrità** : i dati diventano inutilizzabili.
 
-Nessun sistema è infallibile, nessun umano è infallibile, quindi per evitare di perdere dati, questi devono essere salvati per poi essere in grado di ripristinarli dopo un problema.
+Nessun sistema è infallibile e nessun essere umano è infallibile, quindi per evitare di perdere i dati è necessario eseguire un backup per ripristinarli dopo un problema.
 
 Il supporto di backup dovrebbe essere tenuto in un'altra stanza (o edificio) rispetto al server in modo che un disastro non distrugga il server e i backup.
 
@@ -43,16 +43,16 @@ Inoltre, l'amministratore deve controllare regolarmente che i supporti siano anc
 
 ## Generalità
 
-Ci sono due principi, il **backup** e l'**archivio**.
+Esistono due principi: il <strong x-id=“1”>backup</strong> e l'<strong x-id=“1”>archivio</strong>.
 
 * L'archivio distrugge la fonte delle informazioni dopo l'operazione.
 * Il backup conserva la fonte delle informazioni dopo l'operazione.
 
-Queste operazioni consistono nel salvare informazioni in un file, su un supporto periferico o supportato (nastri, dischi, ...).
+Queste operazioni consistono nel salvare le informazioni in un file, su una periferica o su un supporto (nastri, dischi e così via).
 
 ### Il processo
 
-I backup richiedono molta disciplina e rigore da parte dell'amministratore di sistema. È necessario porsi le seguenti domande:
+I backup richiedono molta disciplina e rigore da parte dell'amministratore di sistema. Gli amministratori di sistema devono considerare i seguenti aspetti prima di eseguire le operazioni di backup:
 
 * Qual è il mezzo appropriato?
 * Cosa dovrebbe essere salvato?
@@ -63,45 +63,53 @@ I backup richiedono molta disciplina e rigore da parte dell'amministratore di si
 * Automatico o manuale?
 * Dove conservarlo?
 * Quanto tempo sarà conservato?
+* C'è una questione di costi da considerare?
+
+Oltre a questi aspetti, gli amministratori di sistema devono considerare anche fattori quali le prestazioni, l'importanza dei dati, il consumo di larghezza di banda e la complessità della manutenzione in base alle situazioni reali.
 
 ### Metodi di backup
 
-* **Completo**: uno o più **filesystems** sono salvati (kernel, dati, utilità, ...).
-* **Parziale**: uno o più  **files** sono salvati (configurazioni, directories, ...).
-* **Differenziale**: solo i file modificati dall'ultimo backup **completo** sono salvati.
-* **Incrementale**: solo i file modificati dall'ultimo backup sono salvati.
+* <strong x-id=“1”>Backup completo</strong>: Si riferisce a una copia unica di tutti i file, le cartelle o i dati presenti nel disco rigido o nel database.
+* <strong x-id=“1”>Backup incrementale</strong>: Si riferisce al backup dei dati aggiornati dopo l'ultimo backup completo o incrementale.
+* <strong x-id=“1”>Backup differenziale</strong>: Si riferisce al backup dei file modificati dopo il backup completo.
+* <strong x-id=“1”>Backup selettivo (backup parziale)</strong>: Si riferisce al backup di una parte del sistema.
+* <strong x-id=“1”>Backup a freddo</strong>: Si riferisce al backup quando il sistema è in stato di arresto o di manutenzione.  Durante questa fase i dati di backup e i dati presenti nel sistema sono esattamente gli stessi.
+* <strong x-id=“1”>Backup a caldo</strong>: Si riferisce al backup quando il sistema è in funzionamento normale.  Poiché i dati del sistema vengono aggiornati in qualsiasi momento, i dati di backup hanno un certo ritardo rispetto ai dati reali del sistema.
+* <strong x-id=“1”>Backup remoto</strong>: Si riferisce al backup dei dati in un'altra località geografica per evitare la perdita di dati e l'interruzione del servizio causati da incendi, disastri naturali, furti, ecc.
 
-### Periodicità
+### Frequenza dei backup
 
-* **Pre-corrente** : in un dato momento (prima di un aggiornamento del sistema, ...).
-* **Periodica**: Ogni giorno, settimana, mese, ...
+* <strong x-id=“1”>Periodico</strong>: Eseguire il backup in un periodo specifico prima di un aggiornamento importante del sistema (di solito durante le ore non di punta)
+* <strong x-id=“1”>ciclico</strong>: backup in unità di giorni, settimane, mesi, ecc
 
 !!! Tip "Suggerimento"
 
-    Prima di una modifica del sistema, può essere utile fare un backup. Tuttavia, non ha senso eseguire il backup dei dati ogni giorno se vengono modificati solo ogni mese.
+    Prima di una modifica del sistema, può essere utile fare un backup. Tuttavia, non ha senso eseguire ogni giorno il backup di dati che cambiano solo ogni mese.
 
 ### Metodi di ripristino
 
-A seconda delle utilità disponibili, sarà possibile eseguire diversi tipi di ripristini.
+A seconda delle utilità disponibili, sarà possibile eseguire diversi tipi di ripristino.
 
-* **Ripristino Completo**: alberi delle directory, ...
-* **Ripristino Selettivo**: parte dell'albero, files, ...
+In alcuni sistemi di gestione di database relazionali, le operazioni corrispondenti di “recupero” (a volte nella documentazione si usa “recovery”) e “ripristino” sono diverse, per cui è necessario consultare la documentazione ufficiale per ulteriori informazioni. Per ulteriori informazioni consultare la documentazione ufficiale. Questo documento di base non entrerà troppo nel dettaglio di questa parte degli RDBMS.
 
-È possibile ripristinare un intero backup ma è anche possibile ripristinarne solo una parte. Tuttavia, quando si ripristina una directory, i file creati dopo il backup non vengono eliminati.
+* <strong x-id=“1”>Ripristino completo</strong>: Ripristino dei dati basato sul backup completo o sul “backup completo + backup incrementale” o sul “backup completo + backup differenziale”.
+* <strong x-id=“1”>Ripristino selettivo</strong>: Ripristino dei dati basato su un backup selettivo (backup parziale).
+
+Non è consigliabile eliminare direttamente directory o file nel sistema operativo attualmente attivo prima di eseguire un'operazione di ripristino (a meno che non si sappia cosa succederà dopo l'eliminazione). Se non si è sicuri di cosa accadrà, è possibile eseguire un'operazione di “snapshot” sul sistema operativo corrente.
 
 !!! Tip "Suggerimento"
 
-    Per ripristinare una directory come era al momento del backup, è necessario eliminare completamente il suo contenuto prima di avviare il ripristino.
+    Per motivi di sicurezza, si consiglia di memorizzare la directory o il file ripristinato nella directory /tmp prima di eseguire l'operazione di ripristino, per evitare situazioni in cui i vecchi file (vecchia directory) sovrascrivono i nuovi file (nuova directory).
 
-### Gli strumenti
+### Gli strumenti e le relative tecnologie
 
-Ci sono molte utilità per fare il backup.
+Esistono molte utilità per eseguire i backup.
 
 * **strumenti di editor** ;
 * **strumenti grafici**;
 * **strumenti da riga di comando**: `tar`, `cpio`, `pax`, `dd`, `dump`, ...
 
-I comandi che useremo qui sono `tar` e `cpio`.
+I comandi che utilizzeremo qui sono `tar` e `cpio`. Per informazioni sullo strumento `dump`, consultare <a href=“../../guides/backup/dump_restore.md”>questo documento</a>.
 
 * `tar`:
 
@@ -113,15 +121,17 @@ I comandi che useremo qui sono `tar` e `cpio`.
   1. conserva i proprietari;
   2. conserva gruppi, date e permessi;
   3. salta i file danneggiati;
-  4. file system completo.
+  4. può essere usato per l'intero file system.
 
 !!! Note "Nota"
 
     Questi comandi salvano in un formato proprietario e standardizzato.
 
+**Replication**: Una tecnologia di backup che copia un insieme di dati da un'origine dati a un'altra o a più origini dati, principalmente suddivisa in **Replica Sincrona** e **Replica Asincrona**. Si tratta di una parte di backup avanzato per gli amministratori di sistema meno esperti, pertanto questo documento di base non approfondirà questi contenuti.
+
 ### Convenzione di denominazione
 
-L'uso di una convenzione di denominazione consente di indirizzare rapidamente il contenuto di un file di backup ed evitare così ripristini pericolosi.
+L'uso di una convenzione di denominazione consente di individuare rapidamente il contenuto di un file di backup ed evitare così ripristini pericolosi.
 
 * nome della directory;
 * utilità utilizzata;
@@ -130,33 +140,27 @@ L'uso di una convenzione di denominazione consente di indirizzare rapidamente il
 
 !!! Tip "Suggerimento"
 
-    Il nome del backup deve essere un nome esplicito.
+    Il nome del backup deve essere esplicito.
 
 !!! Note "Nota"
 
-    La nozione di estensione in Linux non esiste. In altre parole, il nostro uso delle estensioni qui è per l'operatore umano. Se l'amministratore di sistema vede un file `.tar.gz` o `.tgz`, per esempio, sa come gestire il file.
+    Nel mondo Linux, a parte alcune eccezioni in ambienti GUI (come .jpg, .mp4, .gif), la maggior parte dei file non ha il concetto di estensione. In altre parole, la maggior parte delle estensioni dei file non è richiesta. L'aggiunta artificiale di suffissi ha lo scopo di facilitare il riconoscimento da parte degli utenti umani. Se l'amministratore di sistema trova un file con estensione `.tar.gz' o `.tgz', ad esempio, sa come gestire il file.
 
-### Contenuto di un backup
+### Proprietà del file di backup
 
-Un backup contiene in genere i seguenti elementi:
+Un singolo file di backup può includere le seguenti proprietà:
 
-* il file;
-* il nome;
-* il proprietario;
-* la dimensione;
-* le autorizzazioni;
-* data di accesso.
-
-!!! Note "Nota"
-
-    Manca il numero `inode`.
+* nome del file (compresi i suffissi aggiunti manualmente);
+* backup di atime, ctime, mtime, btime (crtime) del file stesso;
+* dimensione del file di backup stesso;
+* le proprietà o caratteristiche di file o directory nel file di backup saranno parzialmente conservate. Ad esempio, mtime per i file o directory sarà salvato, ma il numero `inode` no.
 
 ### Modalità di archiviazione
 
-Esistono due diverse modalità di archiviazione:
+Ci sono due modalità di archiviazione:
 
-* file su disco;
-* dispositivo.
+* Interna: Archiviare i file di backup sull'attuale disco di lavoro.
+* Esterno: Archiviare i file di backup su dispositivi esterni. Dispositivi esterni possono essere: unità USB, CD, dischi rigidi, server o NAS, e altro ancora.
 
 ## Tape ArchiveR - `tar`
 
@@ -164,7 +168,7 @@ Il comando `tar` consente di salvare su più supporti successivi (opzioni multi-
 
 È possibile estrarre tutto o parte di un backup.
 
-`tar` esegue implicitamente il backup in modalità relativa anche se il percorso delle informazioni di cui eseguire il backup è menzionato in modalità assoluta. Tuttavia, sono possibili backup e ripristini in modalità assoluta.
+`tar` esegue implicitamente il backup in modalità relativa anche se il percorso delle informazioni di cui eseguire il backup è indicato in modalità assoluta. Tuttavia, è possibile eseguire backup e ripristini in modalità assoluta. Se si vuole vedere un esempio separato dell'uso di `tar`, si faccia riferimento a <a href=“../../guide/backup/tar.md”>questo documento</a>.
 
 ### Linee guida per il ripristino
 
@@ -176,7 +180,7 @@ Le domande giuste da porsi sono:
 
 !!! Warning "Attenzione"
 
-    Prima di un ripristino, è importante prendere del tempo per pensare e determinare il metodo più appropriato per evitare errori.
+    Prima di un ripristino, è importante considerare e determinare il metodo più appropriato per evitare errori.
 
 I ripristini vengono solitamente eseguiti dopo che si è verificato un problema che deve essere risolto rapidamente. Un ripristino scadente può, in alcuni casi, peggiorare la situazione.
 
@@ -184,7 +188,7 @@ I ripristini vengono solitamente eseguiti dopo che si è verificato un problema 
 
 L'utilità predefinita per la creazione di backup su sistemi UNIX è il comando `tar`. Questi backup possono essere compressi con `bzip2`, `xz`, `lzip`, `lzma`, `lzop`, `gzip`, `compress` o `zstd`.
 
-`tar` consente di estrarre un singolo file o una directory da un backup, visualizzarne il contenuto o convalidarne l'integrità.
+`tar` consente di estrarre un singolo file o una directory da un backup, visualizzarne il contenuto o di convalidarne l'integrità.
 
 #### Stimare le dimensioni di un backup
 
@@ -199,13 +203,13 @@ $ tar cjf - /directory/to/backup/ | wc -c
 428
 ```
 
-!!! Warning "Attenzione"
+!!! warning "Attenzione"
 
     Attenzione, la presenza di "-" nella riga di comando disturba `zsh`. Passa a `bash`!
 
 #### Convenzione di denominazione per un backup `tar`
 
-Ecco un esempio di convenzione di denominazione per un backup `tar`, sapendo che la data deve essere aggiunta al nome.
+Ecco un esempio di convenzione di denominazione per un backup `tar`, sapendo che la data verrà aggiunta al nome.
 
 | chiavi  | Files   | Suffisso         | Funzionalità                                      |
 | ------- | ------- | ---------------- | ------------------------------------------------- |
@@ -241,7 +245,7 @@ Esempio:
 
 !!! Tip "Suggerimento"
 
-    Il trattino (-) davanti alle opzioni di 'tar' non è necessario!
+    Il trattino (-) davanti alle opzioni di 'tar' è opzionale!
 
 ##### Creare un backup in modalità assoluta
 
@@ -261,7 +265,7 @@ Esempio:
 | ------- | ------------------------------------ |
 | `P`     | Crea un backup in modalità assoluta. |
 
-!!! Warning "Attenzione"
+!!! warning "Attenzione"
 
     Con la chiave `P`, il percorso dei file su cui eseguire il backup deve essere inserito come **assoluto**. Se le due condizioni (chiave `P` e percorso **assoluto**) non sono indicate, il backup è in modalità relativa.
 
@@ -285,9 +289,9 @@ tar cvzf backup.tar.gz dirname/
 
     Mantenere le chiavi `cvf` (`tvf` o `xvf`) invariate per tutte le operazioni di backup e aggiungere semplicemente la chiave di compressione alla fine delle chiavi rende il comando più facile da capire (ad esempio, `cvfz` o `cvfj`, ecc.).
 
-##### Creazione di un backup compresso con `bzip`
+##### Creazione di un backup compresso con `bzip2`
 
-La creazione di un backup compresso con `bzip` viene eseguita con le opzioni `cvfj`:
+La creazione di un backup compresso con `bzip2` viene eseguita con le opzioni `cvfj`:
 
 ```bash
 tar cvfj backup.tar.bz2 dirname/
@@ -301,9 +305,9 @@ tar cvfj backup.tar.bz2 dirname/
 
     Le estensioni `.tbz` e `.tb2` sono equivalenti alle estensioni `.tar.bz2`.
 
-##### Compressione `compress`, `gzip`, `bzip2`, `lzip` e `xz`
+##### Confronto dell'efficienza di compressione
 
-La compressione, e di conseguenza la decompressione, avrà un impatto sul consumo di risorse (tempo e utilizzo della CPU).
+La compressione e la conseguente decompressione hanno un impatto sul consumo di risorse (tempo e utilizzo della CPU).
 
 Ecco una classifica della compressione di un insieme di file di testo, dal meno al più efficiente:
 
@@ -327,16 +331,16 @@ Per aggiungere `/etc/passwd` al backup `/backups/home.133.tar`:
 [root]# tar rvf /backups/home.133.tar /etc/passwd
 ```
 
-L'aggiunta di una directory è simile. Qui aggiungi `dirtoadd` a `backup_name.tar`:
+L'aggiunta di una directory è simile. Qui aggiungiamo `dirtoadd` a `backup_name.tar`:
 
 ```bash
 tar rvf backup_name.tar dirtoadd
 ```
 
-| Opzione | Descrizione                                                                                     |
-| ------- | ----------------------------------------------------------------------------------------------- |
-| `r`     | Aggiunge uno o più file alla fine di un backup multimediale ad accesso diretto (disco rigido).  |
-| `A`     | Aggiunge uno o più file al termine di un backup su un supporto di accesso sequenziale (nastro). |
+| Opzione | Descrizione                                                          |
+| ------- | -------------------------------------------------------------------- |
+| `r`     | Aggiunge i file o le directory alla fine dell'archivio.              |
+| `A`     | Aggiunge tutti i file di un archivio alla fine di un altro archivio. |
 
 !!! Note "Nota"
 
@@ -374,7 +378,7 @@ tar tvfz backup.tar.gz
 tar tvfj backup.tar.bz2
 ```
 
-Quando il numero di file in un backup diventa grande, è possibile inviare in *pipe* il risultato del comando `tar` ad un *impaginatore* (`more`, `less`, `most`, ecc.):
+Quando il numero di file nel backup aumenta, è possibile utilizzare i caratteri pipe (`|`) e alcuni comandi (`less`, `more`, `most`, e altri) per ottenere l'effetto della visualizzazione a paginazione:
 
 ```bash
 tar tvf backup.tar | less
@@ -382,11 +386,11 @@ tar tvf backup.tar | less
 
 !!! Tip "Suggerimento"
 
-    Per elencare o recuperare il contenuto di un backup, non è necessario menzionare l'algoritmo di compressione utilizzato quando è stato creato il backup. Cioè, un `tar tvf` è equivalente a `tar tvfj`, per leggere il contenuto, e un `tar xvf` è equivalente a `tar xvfj`, per estrarre.
+    Per elencare o recuperare il contenuto di un backup, non è necessario menzionare l'algoritmo di compressione utilizzato quando è stato creato il backup. Cioè, un `tar tvf` è equivalente a `tar tvfj`, per leggere il contenuto. Il tipo o l'algoritmo di compressione deve essere selezionato solo quando si crea un backup compresso.
 
 !!! Tip "Suggerimento"
 
-    Controlla sempre il contenuto di un backup.
+    È sempre consigliabile controllare e visualizzare il contenuto del file di backup prima di eseguire un'operazione di ripristino.
 
 #### Verificare l'integrità di un backup
 
@@ -428,7 +432,7 @@ Verify 1/file2
 Verify 1/file3
 ```
 
-La verifica con l'opzione `W` non può essere eseguita con un archivio compresso. Deve essere utilizzata l'opzione ++d++:
+Non è possibile verificare l'archivio compresso con il chiave `W`. Si deve invece utilizzare la chiave `d`.
 
 ```bash
 tar dfz file_name.tgz
@@ -437,7 +441,7 @@ tar dfj file_name.tar.bz2
 
 #### Estrarre (*untar*) un backup
 
-L'estrazione di un backup (*untar*) `*.tar` viene eseguito con le opzioni `xvf`:
+L'estrazione di un backup (*untar*) `*.tar` viene eseguita con le opzioni `xvf`:
 
 Estrarre il file `etc/exports` dal backup `/savings/etc.133.tar` nella cartella `etc` della directory corrente:
 
@@ -457,15 +461,15 @@ Estrarre tutti i file dal backup `/backups/etc.133.P.tar` nella loro directory o
 tar xvfP /backups/etc.133.P.tar
 ```
 
-!!! Warning "Attenzione"
+!!! warning "Attenzione"
 
-    Vai nel posto giusto.
+    Per motivi di sicurezza, è necessario prestare attenzione quando si estraggono file di backup salvati in modalità assoluta.
     
-    Controlla il contenuto del backup.
+    Ancora una volta, prima di eseguire operazioni di estrazione, è necessario controllare sempre il contenuto dei file di backup (in particolare quelli salvati in modalità assoluta).
 
 | Opzione | Descrizione                                   |
 | ------- | --------------------------------------------- |
-| `x`     | Estrarre i file dal backup, compressi o meno. |
+| `x`     | Estrarre i file dai backup (compressi o meno) |
 
 L'estrazione di un backup *tar-gzipped* (`*.tar.gz`) viene eseguita con le opzioni `xvfz`:
 
@@ -483,7 +487,7 @@ tar xvfj backup.tar.bz2
 
     Per estrarre o elencare il contenuto di un backup, non è necessario menzionare l'algoritmo di compressione utilizzato per creare il backup. Cioè, un `tar xvf` è equivalente a `tar xvfj`, per estrarre il contenuto, e un `tar tvf` è equivalente a `tar tvfj`, per elencare.
 
-!!! Warning "Attenzione"
+!!! warning "Attenzione"
 
     Per ripristinare i file nella loro cartella originale (chiave `P` di un `tar xvf`), devi aver generato il backup con il percorso assoluto. Cioè, con la chiave `P` di un `tar cvf`.
 
@@ -518,9 +522,9 @@ tar xvfz backup.tar.gz /path/to/dir1/ /path/to/dir2/
 tar xvfj backup.tar.bz2 /path/to/dir1/ /path/to/dir2/
 ```
 
-##### Estrarre un gruppo di file da un backup *tar* utilizzando espressioni regolari (_regex_)
+##### Estrarre un gruppo di file da un <em x-id=“3”>tar</em> di backup usando i caratteri jolly
 
-Specificate un (*regex*) per estrarre i file corrispondenti al modello di selezione specificato.
+Specificare un carattere jolly per estrarre i file che corrispondono al modello di selezione specificato.
 
 Ad esempio, per estrarre tutti i file con l'estensione `.conf` :
 
@@ -532,34 +536,57 @@ chiavi :
 
 * `--wildcards *.conf` corrisponde ai file con estensione `.conf`.
 
+!!! tip "Approfondimento"
+
+    Sebbene i caratteri wildcard e le regular expressions abbiano solitamente gli stessi simboloi o stili, gli oggetti a cui corrispondono sono completamente diversi, per cui spesso vengono confusi.
+    
+    **wildcard (wildcard character)**: utilizzato per associare i nomi di file o directory. 
+    **regular expression**: utilizzata per individuare il contenuto di un file.
+    
+    È possibile vedere un'introduzione con maggiori dettagli in [questo documento](../sed_awk_grep/1_espressioni_regolari_vs_wildcards.md).
+
 ## *CoPy Input Output* - `cpio`
 
 Il comando `cpio` consente di salvare su più supporti successivi senza specificare alcuna opzione.
 
 È possibile estrarre tutto o parte di un backup.
 
-Non c'è alcuna opzione, a differenza del comando `tar`, per eseguire il backup e comprimere allo stesso tempo. Quindi è fatto in due passaggi: backup e compressione.
+A differenza del comando `tar`, non esiste un'opzione per eseguire il backup e la compressione contemporaneamente. Quindi è fatto in due passaggi: backup e compressione.
 
-Per eseguire un backup con `cpio`, è necessario specificare un elenco di file di cui eseguire il backup.
+`cpio` ha tre modalità operative, ciascuna corrispondente a una funzione diversa:
 
-Questo elenco è fornito con i comandi `find`, `ls` o `cat`.
+1. **copy-out mode** - Crea un backup (archivio). È possibile attivare questa modalità mediante l'opzione `-o` o `--create`. In questa modalità, è necessario generare un elenco di file con un comando specifico (`find`, `ls` o `cat`) e passarlo a cpio.
 
-* `find` : naviga in un albero, ricorsivo o meno;
-* `ls` : elencare una directory, ricorsiva o meno;
-* `cat` : legge un file contenente gli alberi delle directory o i file da salvare.
+   * `find` : naviga in un albero, ricorsivo o meno;
+   * `ls` : elencare una directory, ricorsiva o meno;
+   * `cat` : legge un file contenente gli alberi delle directory o i file da salvare.
 
-!!! Note "Nota"
+    !!! Note "Nota"
 
-    `ls` non può essere usato con `-l` (dettagli) o `-R` (ricorsivo).
-    
-    Richiede un semplice elenco di nomi.
+        `ls` non può essere usato con `-l` (dettagli) o `-R` (ricorsivo).
 
-### Creare un backup con il comando `cpio`
+        Richiede un semplice elenco di nomi.
+
+2. **copy-in mode** – estrae i file da un archivio. È possibile attivare questa modalità tramite l'opzione `-i`.
+3. **copy-pass mode** – copia i file da una directory a un'altra. È possibile attivare questa modalità attraverso le opzioni `-p` o `--pass-through`.
+
+Come per il comando `tar`, gli utenti devono prestare attenzione a come viene salvato l'elenco dei file (**percorso assoluto** o <strong x-id=“1”>percorso relativo</strong>) quando si crea un archivio.
+
+Funzione secondaria:
+
+1. `-t` - Stampa un indice del contenuto dell'input.
+2. `-A` - Aggiunge a un archivio esistente. Funziona solo in modalità copy-in.
+
+!!! note "Nota"
+
+    Alcune opzioni di `cpio` devono essere combinate con la modalità operativa corretta per funzionare correttamente. Vedere `man 1 cpio`
+
+### modalità copy-out
 
 Sintassi del comando `cpio`:
 
 ```bash
-[files command |] cpio {-o| --create} [-options] [<file-list] [>device]
+[files command |] cpio {-o| --create} [-options] [< file-list] [> device]
 ```
 
 Esempio:
@@ -570,23 +597,23 @@ Con un reindirizzamento dell'output di `cpio`:
 find /etc | cpio -ov > /backups/etc.cpio
 ```
 
-Utilizzo del nome di un supporto di backup:
+Utilizzando il nome di un supporto di backup:
 
 ```bash
 find /etc | cpio -ovF /backups/etc.cpio
 ```
 
-Il risultato del comando `find` viene inviato come input al comando `cpio` tramite una *pipe* (carattere `|`, ++alt-graph+6++).
+Il risultato del comando `find` viene inviato come input al comando `cpio` tramite una <em x-id=“3”>pipe</em> (carattere `|`, ++left-shift+backslash++).
 
-Qui, il comando `find /etc` restituisce un elenco di file corrispondenti al contenuto della directory `/etc` (ricorsivamente) al comando `cpio`, che esegue il backup.
+In questo caso, il comando `find /etc` restituisce un elenco di file corrispondenti al contenuto della directory `/etc` (in modo ricorsivo) al comando `cpio`, che esegue il backup.
 
-Non dimenticare il segno `>` durante il salvataggio o l'opzione `F save_name_cpio`.
+Non dimenticare il segno `>` quando si salva o il comando `F save_name_cpio`.
 
-| Opzioni | Descrizione                              |
-| ------- | ---------------------------------------- |
-| `-o`    | Crea un backup (*output*).               |
-| `-v`    | Visualizza il nome dei file elaborati.   |
-| `-F`    | Indica il backup da modificare (medium). |
+| Opzioni | Descrizione                                                                                                            |
+| ------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `-o`    | Creare un backup attraverso la modalità <em x-id=“4”>cp-out</em>.                                                      |
+| `-v`    | Visualizza il nome dei file elaborati.                                                                                 |
+| `-F`    | Backup su supporti specifici, che può sostituire lo standard input (“<”) e lo standard output (“>”) nel comando `cpio` |
 
 Backup su un supporto:
 
@@ -599,31 +626,27 @@ Il supporto può essere di vari tipi:
 * unità nastro: `/dev/rmt0`  ;
 * una partizione: `/dev/sda5`, `/dev/hda5`, etc.
 
-### Tipo di backup
-
-#### Backup con percorso relativo
+#### Percorsi relativi e assoluti dell'elenco file
 
 ```bash
 cd /
 find etc | cpio -o > /backups/etc.cpio
 ```
 
-#### Backup con percorso assoluto
-
 ```bash
 find /etc | cpio -o > /backups/etc.A.cpio
 ```
 
-!!! Warning "Attenzione"
+!!! warning "Attenzione"
 
-    Se il percorso specificato nel comando `find` è **assoluto** il backup verrà eseguito in **assoluto**.
+    Se il percorso specificato nel comando `find` è **assoluto** il backup verrà eseguito come **assoluto**.
     
-    Se il percorso indicato nel comando `find` è **relativo** il backup verrà eseguito in **relativo**.
+    Se il percorso indicato nel comando `find` è **relativo** il backup verrà eseguito come **relativo**.
 
-### Aggiungere a un backup
+#### Aggiungere file ai backup esistenti
 
 ```bash
-[files command |] cpio {-o| --create} -A [-options] [<fic-list] {F|>device}
+[files command |] cpio {-o| --create} -A [-options] [< fic-list] {F| > device}
 ```
 
 Esempio:
@@ -632,14 +655,14 @@ Esempio:
 find /etc/shadow | cpio -o -AF SystemFiles.A.cpio
 ```
 
-L'aggiunta di file è possibile solo su supporti ad accesso diretto.
+L'aggiunta di file è possibile solo sui supporti ad accesso diretto.
 
 | Opzione | Descrizione                                   |
 | ------- | --------------------------------------------- |
 | `-A`    | Aggiunge uno o più file a un backup su disco. |
 | `-F`    | Indica il backup da modificare.               |
 
-### Compressione di un backup
+#### Comprimere un backup
 
 * Salva **poi** comprimi
 
@@ -656,11 +679,11 @@ $ ls /backups/etc.A.cpio*
 find /etc | cpio –o | gzip > /backups/etc.A.cpio.gz
 ```
 
-Non c'è alcuna opzione, a differenza del comando `tar`, per salvare e comprimere allo stesso tempo. Quindi è fatto in due passaggi: salvataggio e compressione.
+A differenza del comando `tar`, non esiste un'opzione per salvare e comprimere contemporaneamente. Quindi, si procede in due fasi: salvataggio e compressione.
 
-La sintassi del primo metodo è più facile da capire e ricordare, perché viene eseguita in due passaggi.
+La sintassi del primo metodo è più facile da capire e ricordare perché si svolge in due fasi.
 
-Per il primo metodo, il file di backup viene automaticamente rinominato dall'utilità `gzip` che aggiunge `.gz` alla fine del nome del file. Allo stesso modo l'utilità `bzip2` aggiunge automaticamente `.bz2`.
+Con il primo metodo, il file di backup viene rinominato automaticamente dall'utilità `gzip`, che aggiunge `.gz` alla fine del nome del file. Allo stesso modo l'utilità `bzip2` aggiunge automaticamente `.bz2`.
 
 ### Leggere il contenuto di un backup
 
@@ -673,7 +696,7 @@ cpio -t [-options] [<fic-list]
 Esempio:
 
 ```bash
-cpio -tv </backups/etc.152.cpio | less
+cpio -tv < /backups/etc.152.cpio | less
 ```
 
 | Opzioni | Descrizione                        |
@@ -681,16 +704,16 @@ cpio -tv </backups/etc.152.cpio | less
 | `-t`    | Legge un backup.                   |
 | `-v`    | Visualizza gli attributi del file. |
 
-Dopo aver eseguito un backup, è necessario leggerne il contenuto per essere sicuri che non ci siano stati errori.
+Dopo aver eseguito un backup, è necessario leggerne il contenuto per verificare che non vi siano errori.
 
 Allo stesso modo, prima di eseguire un ripristino, è necessario leggere il contenuto del backup che verrà utilizzato.
 
-### Ripristinare un backup
+### modalità copy-in
 
 Sintassi del comando `cpio` per ripristinare un backup:
 
 ```bash
-cpio {-i| --extract} [-E file] [-options] [<device]
+cpio {-i| --extract} [-E file] [-options] [< device]
 ```
 
 Esempio:
@@ -707,11 +730,11 @@ cpio -iv /backups/etc.152.cpio | less
 | `-u`                        | Sostituisce tutti i file anche se esistono.                                          |
 | `--no-absolute-filenames`   | Permette di ripristinare un backup effettuato in modalità assoluta in modo relativo. |
 
-!!! Warning "Attenzione"
+!!! warning "Attenzione"
 
-    Per impostazione predefinita, al momento del ripristino, i file sul disco la cui ultima data di modifica è più recente o uguale alla data del backup non vengono ripristinati (per evitare di sovrascrivere le informazioni recenti con informazioni più vecchie).
+    Per impostazione predefinita, al momento del ripristino, i file sul disco la cui data di ultima modifica è più recente o uguale alla data del backup non vengono ripristinati (per evitare di sovrascrivere informazioni recenti con informazioni più vecchie).
     
-    L'opzione `u`, d'altra parte, consente di ripristinare le versioni precedenti dei file.
+    D'altra parte, l'opzione `u` consente di ripristinare le versioni precedenti dei file.
 
 Esempi:
 
@@ -731,7 +754,7 @@ cpio –iuvF home.A.cpio
 
 * Ripristinare un backup assoluto in modalità relativa
 
-L'opzione lunga `no-absolute-filenames` consente un ripristino in modalità relativa. Infatti la `/` all'inizio del percorso verrà rimossa.
+L'opzione lunga `no-absolute-filenames` consente un ripristino in modalità relativa. Infatti, la `/` all'inizio del percorso verrà rimossa.
 
 ```bash
 cpio --no-absolute-filenames -divuF home.A.cpio
@@ -739,17 +762,17 @@ cpio --no-absolute-filenames -divuF home.A.cpio
 
 !!! Tip "Suggerimento"
 
-    La creazione di directory è forse necessaria, quindi l'utilizzo dell'opzione `d`
+    La creazione di directory è forse necessaria, da qui l'uso dell'opzione `d`
 
 * Ripristinare un backup relativo
 
 ```bash
-cpio –iv etc.cpio
+cpio –iv < etc.cpio
 ```
 
 * Ripristino in modalità assoluta di un file o di una directory
 
-Il ripristino di un particolare file o directory richiede la creazione di un file di elenco che deve poi essere eliminato.
+Il ripristino di un particolare file o directory richiede la creazione di un file di elenco che deve essere poi cancellato.
 
 ```bash
 echo "/etc/passwd" > tmp
@@ -759,14 +782,14 @@ rm -f tmp
 
 ## Utilità di Compressione - decompressione
 
-L'utilizzo della compressione al momento di un backup può avere una serie di inconvenienti:
+L'uso della compressione al momento del backup può presentare una serie di inconvenienti:
 
 * Allunga il tempo di backup e il tempo di ripristino.
 * Rende impossibile aggiungere file al backup.
 
 !!! Note "Nota"
 
-    È quindi meglio fare un backup e comprimerlo piuttosto che comprimerlo durante il backup.
+    Pertanto, è meglio eseguire un backup e comprimerlo piuttosto che comprimerlo durante il backup.
 
 ### Compressione con `gzip`
 
@@ -810,7 +833,7 @@ usr.cpio.bz2
 
 Al nome del file viene assegnata l'estensione `.bz2`.
 
-La compressione con `bzip2` è migliore della compressione con `gzip` ma ci vuole più tempo per eseguirla.
+La compressione con `bzip2` è migliore di quella con `gzip`, ma l'esecuzione richiede più tempo.
 
 ### Decompressione con `gunzip`
 
@@ -837,6 +860,7 @@ Il nome del file viene troncato da `gunzip` e l'estensione `.gz` viene rimossa.
 * `.z` ;
 * `-z` ;
 * `_z` .
+* `-gz` ;
 
 ### Decompressione con `bunzip2`
 

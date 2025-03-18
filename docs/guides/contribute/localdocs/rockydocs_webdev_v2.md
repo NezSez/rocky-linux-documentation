@@ -5,17 +5,45 @@ contributors: Ganna Zhyrnova
 update: 13-Feb-2023
 ---
 
+!!! warning "Possible failure ahead!"
+
+    People who attempted recent builds with this procedure reported failures. Please proceed at your own risk. Updating or archiving this procedure is likely in the future.
+
 # Running the docs.rockylinux.org website locally for web development | Podman
 
-This document walks through how to recreate and run a local copy of the entire docs.rockylinux.org website on your local machine.
+This document walks you through recreating and running a local copy of the entire docs.rockylinux.org website on your local machine.
 Running a local copy of the documentation website might be useful in the following scenarios:
 
 - You are interested in learning about and contributing to the web development aspects of the docs.rockylinux.org website
-- You are an author and you'd like to see how your documents will render/look on the docs website before contributing them
+- You are an author, and you'd like to see how your documents will render/look on the docs website before contributing them
+
+## Setup the prerequisites
+
+Install and set up Podman and other tools by running:
+
+```bash
+sudo dnf -y install podman podman-docker git
+
+sudo systemctl enable --now  podman.socket
+```
+
+Install docker-compose and make it executable. Type:
+
+```bash
+curl -SL https://github.com/docker/compose/releases/download/v2.16.0/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+
+chmod 755 /usr/local/bin/docker-compose
+```
+
+Fix permissions on docker socket. Type:
+
+```bash
+sudo chmod 666 /var/run/docker.sock
+```
 
 ## Create the content environment
 
-1. Ensure that the prerequisites are satisfied. If not please skip to the "[Setup the prerequisites](#setup-the-prerequisites)" section and then return here.
+1. Ensure that the prerequisites are satisfied.
 
 2. Change the current working directory on your local system to a folder where you intend to do your writing.
   We will refer to this directory as
@@ -47,7 +75,7 @@ You will now have a `$ROCKYDOCS/docs.rockylinux.org` folder. This folder is wher
 
 ## Create and Start the RockyDocs web development environment
 
-1. Ensure you have Podman up and running on your local machine (you can check with `systemctl`). Test by running:
+1. Ensure Podman is up and running on your local machine (you can check with `systemctl`). Test by running:
 
     ```bash
     systemctl  enable --now podman.socket
@@ -119,31 +147,7 @@ If you have a firewall running on your Rocky Linux system, ensure that port 8001
 
   <http://SERVER_IP:8001>
 
-## Setup the prerequisites
-
-Install and setup Podman and other tools by running:
-
-```bash
-sudo dnf -y install podman podman-docker git
-
-sudo systemctl enable --now  podman.socket
-```
-
-Install docker-compose and make it executable. Type:
-
-```bash
-curl -SL https://github.com/docker/compose/releases/download/v2.16.0/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
-
-chmod 755 /usr/local/bin/docker-compose
-```
-
-Fix permissions on docker socket. Type:
-
-```bash
-sudo chmod 666 /var/run/docker.sock
-```
-
-### Notes
+## Notes
 
 - The instructions in this guide are **NOT** a prerequisite for Rocky documentation authors or content contributors
 - The entire environment runs in a Podman container and so you will need Podman properly setup on your local machine
